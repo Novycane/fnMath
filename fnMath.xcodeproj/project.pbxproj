@@ -7,16 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE219DD21E43BF78008CED63 /* BinaryTree.cpp */; };
+		BE219DD51E43BF78008CED63 /* BinaryTree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE219DD31E43BF78008CED63 /* BinaryTree.hpp */; };
+		BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE5FAF021E42BF1A008B9451 /* LU.cpp */; };
+		BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE5FAF031E42BF1A008B9451 /* LU.hpp */; };
 		BED557261E428AB6006E5F59 /* fnMath.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BED557251E428AB6006E5F59 /* fnMath.hpp */; };
-		BED557281E428AB6006E5F59 /* fnMathPriv.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BED557271E428AB6006E5F59 /* fnMathPriv.hpp */; };
-		BED5572A1E428AB6006E5F59 /* fnMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED557291E428AB6006E5F59 /* fnMath.cpp */; };
+		BED557331E428DD1006E5F59 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BED557311E428DD1006E5F59 /* Matrix.cpp */; };
+		BED557341E428DD1006E5F59 /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BED557321E428DD1006E5F59 /* Matrix.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE219DD21E43BF78008CED63 /* BinaryTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTree.cpp; sourceTree = "<group>"; };
+		BE219DD31E43BF78008CED63 /* BinaryTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryTree.hpp; sourceTree = "<group>"; };
+		BE5FAF011E42A686008B9451 /* Error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
+		BE5FAF021E42BF1A008B9451 /* LU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LU.cpp; sourceTree = "<group>"; };
+		BE5FAF031E42BF1A008B9451 /* LU.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LU.hpp; sourceTree = "<group>"; };
 		BED557221E428AB6006E5F59 /* libfnMath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfnMath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED557251E428AB6006E5F59 /* fnMath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fnMath.hpp; sourceTree = "<group>"; };
-		BED557271E428AB6006E5F59 /* fnMathPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fnMathPriv.hpp; sourceTree = "<group>"; };
-		BED557291E428AB6006E5F59 /* fnMath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fnMath.cpp; sourceTree = "<group>"; };
+		BED557311E428DD1006E5F59 /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		BED557321E428DD1006E5F59 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE219DCD1E43BDB4008CED63 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				BE219DD31E43BF78008CED63 /* BinaryTree.hpp */,
+				BE219DD21E43BF78008CED63 /* BinaryTree.cpp */,
+			);
+			name = "Data Structures";
+			sourceTree = "<group>";
+		};
 		BED557191E428AB6006E5F59 = {
 			isa = PBXGroup;
 			children = (
@@ -49,11 +67,31 @@
 		BED557241E428AB6006E5F59 /* fnMath */ = {
 			isa = PBXGroup;
 			children = (
+				BE219DCD1E43BDB4008CED63 /* Data Structures */,
+				BED557521E42A5D5006E5F59 /* General */,
+				BED557301E428DBD006E5F59 /* LinAlg */,
 				BED557251E428AB6006E5F59 /* fnMath.hpp */,
-				BED557271E428AB6006E5F59 /* fnMathPriv.hpp */,
-				BED557291E428AB6006E5F59 /* fnMath.cpp */,
 			);
 			path = fnMath;
+			sourceTree = "<group>";
+		};
+		BED557301E428DBD006E5F59 /* LinAlg */ = {
+			isa = PBXGroup;
+			children = (
+				BED557321E428DD1006E5F59 /* Matrix.hpp */,
+				BED557311E428DD1006E5F59 /* Matrix.cpp */,
+				BE5FAF031E42BF1A008B9451 /* LU.hpp */,
+				BE5FAF021E42BF1A008B9451 /* LU.cpp */,
+			);
+			name = LinAlg;
+			sourceTree = "<group>";
+		};
+		BED557521E42A5D5006E5F59 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				BE5FAF011E42A686008B9451 /* Error.hpp */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -64,7 +102,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED557261E428AB6006E5F59 /* fnMath.hpp in Headers */,
-				BED557281E428AB6006E5F59 /* fnMathPriv.hpp in Headers */,
+				BE219DD51E43BF78008CED63 /* BinaryTree.hpp in Headers */,
+				BED557341E428DD1006E5F59 /* Matrix.hpp in Headers */,
+				BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +166,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BED5572A1E428AB6006E5F59 /* fnMath.cpp in Sources */,
+				BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */,
+				BED557331E428DD1006E5F59 /* Matrix.cpp in Sources */,
+				BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +303,7 @@
 				BED5572F1E428AB6006E5F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

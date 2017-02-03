@@ -10,14 +10,17 @@
 #ifndef fnMath_
 #define fnMath_
 
+
+#include "Matrix.hpp"
+#include "Matrix.cpp"
+#include "LU.hpp"
+#include "LU.cpp"
+
+#include "BinaryTree.hpp"
+#include "BinaryTree.cpp"
+
 /* The classes below are exported */
 #pragma GCC visibility push(default)
-
-class fnMath
-{
-    public:
-    void HelloWorld(const char *);
-};
 
 #pragma GCC visibility pop
 #endif
