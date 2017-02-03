@@ -25,7 +25,7 @@ public:
 class Rhomberg
 {
 public:
-    double Integrate(Function* F, double start, double end, double steps);
+    double Integrate(Function* F, double start, double end);
     void setError(double error);
     void setMaxIterations(int maxIterations);
     int getMaxIterations() const;

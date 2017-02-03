@@ -32,7 +32,7 @@ double Trapezoidal::Integrate(Function* F, double start, double end, int steps)
 // ----------------------------------------
 // ---------------------------------------- Rhomberg
 // ----------------------------------------
-double Rhomberg::Integrate(Function* F, double start, double end, double err)
+double Rhomberg::Integrate(Function* F, double start, double end)
 {
     double x = start;
     double h = (end - start);
@@ -54,7 +54,7 @@ double Rhomberg::Integrate(Function* F, double start, double end, double err)
     
     for(int iterations=1; iterations <= MAXITER; iterations++)
     {
-        cout << "Iteration #" << iterations << " Sum= " << lastEvaluation [iterations-1] << endl;
+        //cout << "Iteration #" << iterations << " Sum= " << lastEvaluation [iterations-1] << endl;
         
         h/=2;
         for(int i=1; i<=maxIndex; i++)
@@ -84,11 +84,6 @@ double Rhomberg::Integrate(Function* F, double start, double end, double err)
         std::swap(lastEvaluation, thisEvaluation);
         
     }
-    
-    /*
-    for(int i=0; i<arraySize; i++)
-        cout << evaluations[i] << endl;
-    */
     
     return lastEvaluation[MAXITER];
 }
