@@ -19,6 +19,11 @@
 #include "BinaryTree.hpp"
 #include "BinaryTree.cpp"
 
+#include "Function.hpp"
+#include "Factorial.hpp"
+
+#include "Integral.hpp"
+
 /* The classes below are exported */
 #pragma GCC visibility push(default)
 
