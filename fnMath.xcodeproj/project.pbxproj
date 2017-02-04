@@ -12,6 +12,8 @@
 		BE00721D1E44124D0015D211 /* Factorial.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE00721B1E44124D0015D211 /* Factorial.hpp */; };
 		BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE219DD21E43BF78008CED63 /* BinaryTree.cpp */; };
 		BE219DD51E43BF78008CED63 /* BinaryTree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE219DD31E43BF78008CED63 /* BinaryTree.hpp */; };
+		BE3D37C71E457E3B00A2CAA3 /* Derivative.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3D37C51E457E3B00A2CAA3 /* Derivative.cpp */; };
+		BE3D37C81E457E3B00A2CAA3 /* Derivative.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE3D37C61E457E3B00A2CAA3 /* Derivative.hpp */; };
 		BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE5FAF021E42BF1A008B9451 /* LU.cpp */; };
 		BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE5FAF031E42BF1A008B9451 /* LU.hpp */; };
 		BE9AA19B1E442404008DC7E7 /* Integral.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE9AA1991E442404008DC7E7 /* Integral.cpp */; };
@@ -27,6 +29,8 @@
 		BE00721B1E44124D0015D211 /* Factorial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Factorial.hpp; sourceTree = "<group>"; };
 		BE219DD21E43BF78008CED63 /* BinaryTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTree.cpp; sourceTree = "<group>"; };
 		BE219DD31E43BF78008CED63 /* BinaryTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryTree.hpp; sourceTree = "<group>"; };
+		BE3D37C51E457E3B00A2CAA3 /* Derivative.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Derivative.cpp; sourceTree = "<group>"; };
+		BE3D37C61E457E3B00A2CAA3 /* Derivative.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Derivative.hpp; sourceTree = "<group>"; };
 		BE5FAF011E42A686008B9451 /* Error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
 		BE5FAF021E42BF1A008B9451 /* LU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LU.cpp; sourceTree = "<group>"; };
 		BE5FAF031E42BF1A008B9451 /* LU.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LU.hpp; sourceTree = "<group>"; };
@@ -68,6 +72,15 @@
 			name = "Data Structures";
 			sourceTree = "<group>";
 		};
+		BE3D37C41E457D9600A2CAA3 /* Difference */ = {
+			isa = PBXGroup;
+			children = (
+				BE3D37C61E457E3B00A2CAA3 /* Derivative.hpp */,
+				BE3D37C51E457E3B00A2CAA3 /* Derivative.cpp */,
+			);
+			name = Difference;
+			sourceTree = "<group>";
+		};
 		BE9AA1981E44236C008DC7E7 /* Integration */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,7 @@
 		BED557241E428AB6006E5F59 /* fnMath */ = {
 			isa = PBXGroup;
 			children = (
+				BE3D37C41E457D9600A2CAA3 /* Difference */,
 				BE9AA1981E44236C008DC7E7 /* Integration */,
 				BE0072151E440FE60015D211 /* Functions */,
 				BE219DCD1E43BDB4008CED63 /* Data Structures */,
@@ -139,6 +153,7 @@
 				BED557341E428DD1006E5F59 /* Matrix.hpp in Headers */,
 				BE9AA19C1E442404008DC7E7 /* Integral.hpp in Headers */,
 				BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */,
+				BE3D37C81E457E3B00A2CAA3 /* Derivative.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +219,7 @@
 				BED557331E428DD1006E5F59 /* Matrix.cpp in Sources */,
 				BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */,
 				BE00721C1E44124D0015D211 /* Factorial.cpp in Sources */,
+				BE3D37C71E457E3B00A2CAA3 /* Derivative.cpp in Sources */,
 				BE9AA19B1E442404008DC7E7 /* Integral.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
