@@ -23,6 +23,7 @@
 #include "Factorial.hpp"
 
 #include "Integral.hpp"
+#include "Derivative.hpp"
 
 /* The classes below are exported */
 #pragma GCC visibility push(default)
