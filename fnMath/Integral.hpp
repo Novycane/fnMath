@@ -12,7 +12,7 @@
 #include "Function.hpp"
 
 namespace fnMath{
-namespace Integral{
+namespace Calculus{
     
     
 class Trapezoidal

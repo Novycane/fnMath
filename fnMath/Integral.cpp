@@ -9,7 +9,7 @@
 #include "Integral.hpp"
 
 namespace fnMath {
-namespace Integral{
+namespace Calculus{
 
 // ----------------------------------------
 // ---------------------------------------- Trapezoidal
