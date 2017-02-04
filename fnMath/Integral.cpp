@@ -79,7 +79,12 @@ double Rhomberg::Integrate(Function* F, double start, double end)
             error *= -1;
         
         if(error <= err)
-            return thisEvaluation[iterations];
+        {
+            x = thisEvaluation[iterations];
+            delete thisEvaluation;
+            delete lastEvaluation;
+            return x;
+        }
         
         std::swap(lastEvaluation, thisEvaluation);
         
