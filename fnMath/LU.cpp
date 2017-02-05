@@ -90,6 +90,15 @@ Matrix<Numeric> LU<Numeric>::Solve(const Matrix<Numeric> & b)
     return y;
 }
     
+template <typename Numeric>
+Numeric LU<Numeric>::Determinate()
+{
+    Numeric det = this->data[0][0];
+    for(int i=1; i<this->rows; i++)
+        det *= this->data[i][i];
+    return det;
+}
+    
 #pragma mark Private Methods
 // ---------------------------------------- Private Methods
 

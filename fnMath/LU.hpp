@@ -29,7 +29,7 @@ public:
     Matrix<Numeric> Upper();
     Matrix<Numeric> Lower();
     Matrix<Numeric> Inverse();
-    Matrix<Numeric> Determinate();
+    Numeric Determinate();
     Matrix<Numeric> Solve(const Matrix<Numeric>& b);
 
 private:
