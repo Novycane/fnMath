@@ -65,7 +65,7 @@ public:
     void print(ostream & stream = cout);
 
 private:
-    
+    // -------------------- Private Methods
     void recursiveInsert(const Comparable & Item, BinaryNode<Comparable>* & node);
     void recursiveInsert(Comparable && Item, BinaryNode<Comparable>* & node);
     void recursiveRemove(const Comparable & Item, BinaryNode<Comparable>* & node);
@@ -77,6 +77,7 @@ private:
     BinaryNode<Comparable>* Clone(BinaryNode<Comparable>* node) const;
 
 protected:
+    // -------------------- Protected Members
     BinaryNode<Comparable>* root;
 
 };
