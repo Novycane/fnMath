@@ -10,6 +10,8 @@
 		BE0072191E4410030015D211 /* Function.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE0072171E4410030015D211 /* Function.hpp */; };
 		BE00721C1E44124D0015D211 /* Factorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE00721A1E44124D0015D211 /* Factorial.cpp */; };
 		BE00721D1E44124D0015D211 /* Factorial.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE00721B1E44124D0015D211 /* Factorial.hpp */; };
+		BE093EAD1E491B1200B893B6 /* QR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE093EAB1E491B1200B893B6 /* QR.cpp */; };
+		BE093EAE1E491B1200B893B6 /* QR.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE093EAC1E491B1200B893B6 /* QR.hpp */; };
 		BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE219DD21E43BF78008CED63 /* BinaryTree.cpp */; };
 		BE219DD51E43BF78008CED63 /* BinaryTree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE219DD31E43BF78008CED63 /* BinaryTree.hpp */; };
 		BE2846311E47907200EF6FBC /* Eigen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE28462F1E47907200EF6FBC /* Eigen.cpp */; };
@@ -29,6 +31,8 @@
 		BE0072171E4410030015D211 /* Function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Function.hpp; sourceTree = "<group>"; };
 		BE00721A1E44124D0015D211 /* Factorial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Factorial.cpp; sourceTree = "<group>"; };
 		BE00721B1E44124D0015D211 /* Factorial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Factorial.hpp; sourceTree = "<group>"; };
+		BE093EAB1E491B1200B893B6 /* QR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QR.cpp; sourceTree = "<group>"; };
+		BE093EAC1E491B1200B893B6 /* QR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = QR.hpp; sourceTree = "<group>"; };
 		BE219DD21E43BF78008CED63 /* BinaryTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTree.cpp; sourceTree = "<group>"; };
 		BE219DD31E43BF78008CED63 /* BinaryTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryTree.hpp; sourceTree = "<group>"; };
 		BE28462F1E47907200EF6FBC /* Eigen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Eigen.cpp; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				BE5FAF021E42BF1A008B9451 /* LU.cpp */,
 				BE2846301E47907200EF6FBC /* Eigen.hpp */,
 				BE28462F1E47907200EF6FBC /* Eigen.cpp */,
+				BE093EAC1E491B1200B893B6 /* QR.hpp */,
+				BE093EAB1E491B1200B893B6 /* QR.cpp */,
 			);
 			name = LinAlg;
 			sourceTree = "<group>";
@@ -157,6 +163,7 @@
 				BE00721D1E44124D0015D211 /* Factorial.hpp in Headers */,
 				BE2846321E47907200EF6FBC /* Eigen.hpp in Headers */,
 				BE0072191E4410030015D211 /* Function.hpp in Headers */,
+				BE093EAE1E491B1200B893B6 /* QR.hpp in Headers */,
 				BED557341E428DD1006E5F59 /* Matrix.hpp in Headers */,
 				BE9AA19C1E442404008DC7E7 /* Integral.hpp in Headers */,
 				BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */,
@@ -224,6 +231,7 @@
 			files = (
 				BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */,
 				BED557331E428DD1006E5F59 /* Matrix.cpp in Sources */,
+				BE093EAD1E491B1200B893B6 /* QR.cpp in Sources */,
 				BE219DD41E43BF78008CED63 /* BinaryTree.cpp in Sources */,
 				BE2846311E47907200EF6FBC /* Eigen.cpp in Sources */,
 				BE00721C1E44124D0015D211 /* Factorial.cpp in Sources */,
