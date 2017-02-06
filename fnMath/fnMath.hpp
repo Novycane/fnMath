@@ -15,6 +15,8 @@
 #include "Matrix.cpp"
 #include "LU.hpp"
 #include "LU.cpp"
+#include "Eigen.hpp"
+#include "Eigen.cpp"
 
 #include "BinaryTree.hpp"
 #include "BinaryTree.cpp"
