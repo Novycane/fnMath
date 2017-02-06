@@ -17,6 +17,8 @@
 #include "LU.cpp"
 #include "Eigen.hpp"
 #include "Eigen.cpp"
+#include "QR.hpp"
+#include "QR.cpp"
 
 #include "BinaryTree.hpp"
 #include "BinaryTree.cpp"
