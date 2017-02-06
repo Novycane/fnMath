@@ -24,7 +24,8 @@ public:
     Eigen();
     
     // -------------------- Public Methods
-    Numeric PowerMethod(Matrix<Numeric> A);
+    Numeric PowerMethod(Matrix<Numeric> & A);
+    Numeric ShiftedPowerMethod(Matrix<Numeric> A, Numeric Shift);
     
     // -------------------- Accessors
     void setStepSize(double newStepSize);

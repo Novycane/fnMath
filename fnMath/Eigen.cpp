@@ -17,13 +17,13 @@ namespace LinAlg{
 #pragma mark Constructors
 // ---------------------------------------- Constructors
 template <typename Numeric>
-Eigen<Numeric>::Eigen() { err = 1e-10; MAXITER = 50; };
+Eigen<Numeric>::Eigen() { err = 1e-10; MAXITER = 100; };
 
     
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
 template <typename Numeric>
-Numeric Eigen<Numeric>::PowerMethod(Matrix<Numeric> A)
+Numeric Eigen<Numeric>::PowerMethod(Matrix<Numeric> & A)
 {
     Numeric result = 0;
     Numeric previousResult;
@@ -43,7 +43,7 @@ Numeric Eigen<Numeric>::PowerMethod(Matrix<Numeric> A)
         
         EigenVector = A * EigenVector;
         
-        result = EigenVector.Max();
+        result = EigenVector.MaxMag();
         
         error = result - previousResult;
         if(error < 0)
@@ -56,7 +56,53 @@ Numeric Eigen<Numeric>::PowerMethod(Matrix<Numeric> A)
         
     }
     
+    cout << "Power Method Did not converge!!!" <<endl;
+    
     return result;
+}
+    
+template <typename Numeric>
+Numeric Eigen<Numeric>::ShiftedPowerMethod(Matrix<Numeric> A, Numeric Shift)
+{
+    Numeric result = 0;
+    Numeric previousResult;
+    Numeric error;
+    
+    if(A.numRows() != A.numColumns())
+        throw new DimensionMismatchException();
+    
+    Matrix<Numeric> EigenVector(1,A.numRows(), 1);
+    
+    for(int i=0; i<A.numRows(); i++)
+    {
+        EigenVector[i][1] = 1;
+        A[i][i] -= Shift;
+    }
+    
+    A.print();
+    
+    for(int iteration=1; iteration < MAXITER; iteration++)
+    {
+        previousResult = result;
+        
+        //EigenVector.print();
+        
+        EigenVector = A * EigenVector;
+        
+        result = EigenVector.MaxMag();
+        
+        error = result - previousResult;
+        if(error < 0)
+            error *= -1;
+        
+        if(error <= err)
+            return result + Shift;
+        
+        EigenVector = EigenVector / result;
+        
+    }
+    
+    return result + Shift;
 }
     
 #pragma mark Accessors
