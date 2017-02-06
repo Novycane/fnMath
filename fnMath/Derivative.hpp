@@ -17,8 +17,10 @@ namespace Calculus{
 class Derivative
 {
 public:
+    // -------------------- Constructors
     Derivative(Function * & Fun);
     
+    // -------------------- Public Methods
     double D_Forward(double x);
     double D_For_One_Side(double x);
     double D_Backward(double x);
@@ -28,6 +30,7 @@ public:
     double D(double x);
     double D2(double x);
     
+    // -------------------- Accessors
     void setStepSize(double newStepSize);
     void setErrorLimit(double newErrorLimit);
     void setMaxIterations(int newMaxIterations);
@@ -37,6 +40,7 @@ public:
     int getMaxIterations() const;
     
 private:
+    // -------------------- Private Members
     Function * F;
     int MAXITER;
     double stepSize;

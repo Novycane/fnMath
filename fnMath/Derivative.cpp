@@ -10,14 +10,16 @@
 
 namespace fnMath{
 namespace Calculus{
-    
-// ---------------------------------------- Constructor
+
+#pragma mark Constructors
+// ---------------------------------------- Constructors
 Derivative::Derivative(Function * & Fun)
 {
     F = Fun;
 }
-    
-// ---------------------------------------- Methods
+
+#pragma mark Public Methods
+// ---------------------------------------- Public Methods
     double Derivative::D_Forward(double x)
     {
         double yPlus = F->Evaluate(x + stepSize);
@@ -75,7 +77,7 @@ Derivative::Derivative(Function * & Fun)
     }
     
     
-    
+#pragma mark Accessors
 // ---------------------------------------- Accessors
 void Derivative::setStepSize(double newStepSize) { stepSize = newStepSize; };
 void Derivative::setErrorLimit(double newErrorLimit) { err = newErrorLimit; };
