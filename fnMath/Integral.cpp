@@ -11,6 +11,7 @@
 namespace fnMath {
 namespace Calculus{
 
+#pragma mark Trapezoidal Integration
 // ----------------------------------------
 // ---------------------------------------- Trapezoidal
 // ----------------------------------------
@@ -29,6 +30,8 @@ double Trapezoidal::Integrate(Function* F, double start, double end, int steps)
     
     return sum * h;
 }
+    
+#pragma mark Rhomberg Integration
 // ----------------------------------------
 // ---------------------------------------- Rhomberg
 // ----------------------------------------

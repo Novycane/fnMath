@@ -18,6 +18,7 @@ namespace Calculus{
 class Trapezoidal
 {
 public:
+    // -------------------- Public Methods
     double Integrate(Function* F, double start, double end, int steps);
     
 }; // end trapezoidal
@@ -25,13 +26,17 @@ public:
 class Rhomberg
 {
 public:
+    // -------------------- Public Methods
     double Integrate(Function* F, double start, double end);
+    
+    // -------------------- Accessors
     void setError(double error);
     void setMaxIterations(int maxIterations);
     int getMaxIterations() const;
     double getError() const;
     
 protected:
+    // -------------------- Private Memebers
     int MAXITER = 10;
     double err = 1e-10;
     
