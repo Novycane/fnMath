@@ -184,7 +184,50 @@ Matrix<Numeric> Matrix<Numeric>::operator~()
 
 }
 
+template <typename Numeric>
+Matrix<Numeric> Matrix<Numeric>::operator+(const Numeric & rhs)
+{
+    Matrix<Numeric> C(0,rows, columns);
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            C[i][j] = data[i][j] + rhs;
+    return C;
+}
+    
+template <typename Numeric>
+Matrix<Numeric> Matrix<Numeric>::operator-(const Numeric & rhs)
+{
+    Matrix<Numeric> C(0,rows, columns);
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            C[i][j] = data[i][j] - rhs;
+    return C;
+}
+    
+template <typename Numeric>
+Matrix<Numeric> Matrix<Numeric>::operator*(const Numeric & rhs)
+{
+    Matrix<Numeric> C(0,rows, columns);
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            C[i][j] = data[i][j] * rhs;
+    return C;
+}
 
+template <typename Numeric>
+Matrix<Numeric> Matrix<Numeric>::operator/(const Numeric & rhs)
+{
+    Matrix<Numeric> C(0,rows, columns);
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            C[i][j] = data[i][j] / rhs;
+    return C;
+}
+    
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
 template <typename Numeric>
@@ -192,6 +235,59 @@ int Matrix<Numeric>::numRows() const { return rows; }
 
 template <typename Numeric>
 int Matrix<Numeric>::numColumns() const { return columns; }
+    
+template <typename Numeric>
+Numeric Matrix<Numeric>::Max()
+{
+    Numeric maxValue = data[0][0];
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            if(data[i][j] > maxValue)
+                maxValue = data[i][j];
+    return maxValue;
+}
+
+template <typename Numeric>
+Numeric Matrix<Numeric>::Min()
+{
+    Numeric minValue = data[0][0];
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            if(data[i][j] < minValue)
+                minValue = data[i][j];
+    return minValue;
+}
+    
+template <typename Numeric>
+Numeric Matrix<Numeric>::absMax()
+{
+    Numeric maxValue = data[0][0];
+    Numeric absVal;
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+        {
+            absVal = data[i][j] > 0 ? data[i][j] : data[i][j] * -1;
+            if( absVal > maxValue)
+                maxValue = absVal;
+        }
+    return maxValue;
+}
+    
+template <typename Numeric>
+Numeric Matrix<Numeric>::absMin()
+{
+    Numeric minValue = data[0][0];
+    Numeric absVal;
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+        {
+            absVal = data[i][j] > 0 ? data[i][j] : data[i][j] * -1;
+            if( absVal < minValue)
+                minValue = absVal;
+        }
+    return minValue;
+}
+
     
 #pragma mark Utility Functions
 // ---------------------------------------- Utility Functions

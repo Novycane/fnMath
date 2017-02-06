@@ -47,10 +47,19 @@ public:
     Matrix<Numeric> operator-(const Matrix<Numeric> & rhs);
     Matrix<Numeric> operator*(const Matrix<Numeric> & rhs);
     Matrix<Numeric> operator~();
+    Matrix<Numeric> operator+(const Numeric & rhs);
+    Matrix<Numeric> operator-(const Numeric & rhs);
+    Matrix<Numeric> operator*(const Numeric & rhs);
+    Matrix<Numeric> operator/(const Numeric & rhs);
+
     
     // -------------------- Methods
     int numRows() const;
     int numColumns() const;
+    Numeric Max();
+    Numeric Min();
+    Numeric absMax();
+    Numeric absMin();
     
     // -------------------- Utility
     void print();
