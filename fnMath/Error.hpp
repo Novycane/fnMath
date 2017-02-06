@@ -21,4 +21,12 @@ class DimensionMismatchException: public exception
     }
 };
 
+class ColumnMismatchException: public exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Matrix must have numer of rows >= number of columns";
+    }
+};
+
 #endif /* Error_h */
