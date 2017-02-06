@@ -48,9 +48,11 @@ Matrix<Numeric>::Matrix(Numeric value, int NumberOfRows, int NumberOfColumns)
     }
 }
 
+/*
 template <typename Numeric>
 Matrix<Numeric>::~Matrix() {}
-
+*/
+    
 template <typename Numeric>
 Matrix<Numeric>::Matrix(const Matrix<Numeric> & rhs)
 {
@@ -263,6 +265,7 @@ Numeric Matrix<Numeric>::absMax()
 {
     Numeric maxValue = data[0][0];
     Numeric absVal;
+    
     for(int i=0; i<rows; i++)
         for(int j=0; j<columns; j++)
         {
@@ -286,6 +289,59 @@ Numeric Matrix<Numeric>::absMin()
                 minValue = absVal;
         }
     return minValue;
+}
+
+template <typename Numeric>
+Numeric Matrix<Numeric>::MaxMag()
+{
+    Numeric maxValue = data[0][0];
+    Numeric absMax = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+    Numeric absVal;
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+        {
+            absVal = data[i][j] > 0 ? data[i][j] : data[i][j] * -1;
+            if( absVal > absMax)
+            {
+                maxValue = data[i][j];
+                absMax = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+            }
+        }
+    return maxValue;
+}
+    
+template <typename Numeric>
+Numeric Matrix<Numeric>::MinMag()
+{
+    Numeric maxValue = data[0][0];
+    Numeric absMin = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+    Numeric absVal;
+    
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+        {
+            absVal = data[i][j] > 0 ? data[i][j] : data[i][j] * -1;
+            if( absVal < absMin)
+            {
+                maxValue = data[i][j];
+                absMin = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+            }
+        }
+    return maxValue;
+}
+    
+template <typename Numeric>
+void Matrix<Numeric>::I()
+{
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+        {
+            if(i==j)
+                data[i][j] = 1;
+            else
+                data[i][j] = 0;
+        }
 }
 
     

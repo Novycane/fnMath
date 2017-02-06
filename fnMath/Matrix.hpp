@@ -33,7 +33,7 @@ public:
     // -------------------- Constructors
     Matrix();
     Matrix(Numeric value, int NumberOfRows, int NumberOfColumns);
-    ~Matrix();
+    //~Matrix();
     Matrix(const Matrix<Numeric> & rhs);
     Matrix(Matrix<Numeric> && rhs);
     
@@ -60,6 +60,9 @@ public:
     Numeric Min();
     Numeric absMax();
     Numeric absMin();
+    Numeric MaxMag();
+    Numeric MinMag();
+    void I();
     
     // -------------------- Utility
     void print();
