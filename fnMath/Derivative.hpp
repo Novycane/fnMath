@@ -18,7 +18,7 @@ class Derivative
 {
 public:
     // -------------------- Constructors
-    Derivative(Function * & Fun);
+    Derivative(Function * Fun);
     
     // -------------------- Public Methods
     double D_Forward(double x);
@@ -27,7 +27,7 @@ public:
     double D_Back_One_Side(double x);
     double D_Centered(double x);
     double D2_Centered(double x);
-    double D(double x);
+    double D1(double x);
     double D2(double x);
     
     // -------------------- Accessors
