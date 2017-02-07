@@ -26,7 +26,8 @@ public:
     
     // -------------------- Public Methods
     void print();
-    
+    Matrix<Numeric> GetQ();
+    Matrix<Numeric> GetR();
     
 private:
     // -------------------- Private Members
@@ -34,7 +35,8 @@ private:
     std::unique_ptr<Matrix<Numeric>> R;
     
     // -------------------- Private Methods
-    void DecomposeGrahmSchmidt(const Matrix<Numeric> & A);    
+    void DecomposeGrahmSchmidt(const Matrix<Numeric> & A);
+    void DecomposeHouseholder(const Matrix<Numeric> & A);
     
 }; // End QR Class
     
