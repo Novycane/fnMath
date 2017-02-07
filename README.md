@@ -28,7 +28,7 @@ LU: Performs an LU decomposition of a square matrix for solving linear equations
 
 Eigen: Implements eigen value calculation routines
 
-QR: Implements QR fortorization of matricies for least squares, eigen value and other applications
+QR: Implements QR facrtorization of matricies for least squares, eigen value and other applications
 
 Factorial: Static implementation for calculating factorials efficiently.  
 
