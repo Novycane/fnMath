@@ -77,7 +77,7 @@ double Rhomberg::Integrate(Function* F, double start, double end)
             factor = factor << 1;
         }
         
-        error = thisEvaluation[iterations] - lastEvaluation[iterations-1];
+        error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1;
         if(error < 0)
             error *= -1;
         
@@ -92,8 +92,11 @@ double Rhomberg::Integrate(Function* F, double start, double end)
         std::swap(lastEvaluation, thisEvaluation);
         
     }
+    x = lastEvaluation[MAXITER];
+    delete thisEvaluation;
+    delete lastEvaluation;
     
-    return lastEvaluation[MAXITER];
+    return x;
 }
     
 void Rhomberg::setError(double error) { err = error; }
