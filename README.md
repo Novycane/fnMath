@@ -1,4 +1,4 @@
-# fnMath
+# fnMath (Free Numerical Math)
 This repository contains numerical routines, data structures, and algorithms implemented in C++11 
  
 #ToDo
