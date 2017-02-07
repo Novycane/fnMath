@@ -61,7 +61,7 @@ Matrix<Numeric>::Matrix(const Matrix<Numeric> & rhs)
     #endif
     
     rows = rhs.rows;
-    columns = rhs.rows;
+    columns = rhs.columns;
     
     data.resize(rows);
     for(int i=0; i<rows; i++)
@@ -80,7 +80,7 @@ Matrix<Numeric>::Matrix(Matrix<Numeric> && rhs)
     #endif
     
     rows = rhs.rows;
-    columns = rhs.rows;
+    columns = rhs.columns;
     data = std::move(rhs.data);
 }
 
