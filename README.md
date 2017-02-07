@@ -2,7 +2,7 @@
 This repository contains numerical routines, data structures, and algorithms implemented in C++11 
  
 #ToDo
-1) Implement QR decomposition through Householder transformations ofr better numerical stability
+1) Implement QR decomposition through Householder transformations for better numerical stability
 
 2) Implement Levenberg-Marquardt routine
 
