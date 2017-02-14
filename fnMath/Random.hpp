@@ -9,12 +9,20 @@
 #ifndef Random_hpp
 #define Random_hpp
 
+#include <stdint.h>
+
 namespace fnMath{
     
-class Random
+class RandomNumber
 {
 public:
+    RandomNumber();
     
+    double GenerateDouble();
+    float GenerateFloat();
+    uint64_t GenerateInt64();
+    uint32_t GenerateInt32();
+    uint16_t GenerateInt16();
     
 private:
     bool hardwareRNGPresent;
