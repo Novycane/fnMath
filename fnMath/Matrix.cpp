@@ -354,7 +354,7 @@ void Matrix<Numeric>::print()
     for(int i=0; i < rows; i++)
     {
         for(int j=0; j < columns; j++)
-            cout << data[i][j] << "\t";
+            cout << data[i][j] << "\t\t";
         cout << endl;
     }
     cout << endl;
