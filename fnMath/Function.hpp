@@ -13,12 +13,13 @@
 #include "Matrix.cpp"
 
 namespace fnMath{
+    using namespace LinAlg;
     
 class Function
 {
 public:
     double virtual Evaluate(double x) = 0;
-    double virtual Evaluate(double x, LinAlg::Matrix<double> params) = 0;
+    double virtual Evaluate(double x, MatrixD params) = 0;
     
 }; // End function Interface
 
