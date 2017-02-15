@@ -24,8 +24,7 @@ using namespace std;
 
 namespace fnMath {
 namespace LinAlg{
-        
-
+    
 template <typename Numeric>
 class Matrix
 {

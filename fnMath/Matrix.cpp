@@ -15,7 +15,13 @@
 namespace fnMath{
 namespace LinAlg{
 
+// ------------------------- Type Definitions
+typedef Matrix<double> MatrixD;
+typedef Matrix<float> MatrixF;
+typedef Matrix<int> MatrixI;
 
+    
+    
 #pragma mark Constructors
 // ---------------------------------------- Constructors
 
@@ -232,6 +238,7 @@ Matrix<Numeric> Matrix<Numeric>::operator/(const Numeric & rhs)
     
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
+    
 template <typename Numeric>
 int Matrix<Numeric>::numRows() const { return rows; }
 
