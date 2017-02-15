@@ -24,6 +24,8 @@
 		BE3D37C81E457E3B00A2CAA3 /* Derivative.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE3D37C61E457E3B00A2CAA3 /* Derivative.hpp */; };
 		BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE5FAF021E42BF1A008B9451 /* LU.cpp */; };
 		BE5FAF051E42BF1A008B9451 /* LU.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE5FAF031E42BF1A008B9451 /* LU.hpp */; };
+		BE6F22231E53BD2000ECDAF9 /* Gaussian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE6F22211E53BD2000ECDAF9 /* Gaussian.cpp */; };
+		BE6F22241E53BD2000ECDAF9 /* Gaussian.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE6F22221E53BD2000ECDAF9 /* Gaussian.hpp */; };
 		BE9AA19B1E442404008DC7E7 /* Integral.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE9AA1991E442404008DC7E7 /* Integral.cpp */; };
 		BE9AA19C1E442404008DC7E7 /* Integral.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BE9AA19A1E442404008DC7E7 /* Integral.hpp */; };
 		BED557261E428AB6006E5F59 /* fnMath.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BED557251E428AB6006E5F59 /* fnMath.hpp */; };
@@ -50,6 +52,8 @@
 		BE5FAF011E42A686008B9451 /* Error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
 		BE5FAF021E42BF1A008B9451 /* LU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LU.cpp; sourceTree = "<group>"; };
 		BE5FAF031E42BF1A008B9451 /* LU.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LU.hpp; sourceTree = "<group>"; };
+		BE6F22211E53BD2000ECDAF9 /* Gaussian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gaussian.cpp; sourceTree = "<group>"; };
+		BE6F22221E53BD2000ECDAF9 /* Gaussian.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gaussian.hpp; sourceTree = "<group>"; };
 		BE9AA1991E442404008DC7E7 /* Integral.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Integral.cpp; sourceTree = "<group>"; };
 		BE9AA19A1E442404008DC7E7 /* Integral.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Integral.hpp; sourceTree = "<group>"; };
 		BED557221E428AB6006E5F59 /* libfnMath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfnMath.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +79,8 @@
 				BE0072171E4410030015D211 /* Function.hpp */,
 				BE00721B1E44124D0015D211 /* Factorial.hpp */,
 				BE00721A1E44124D0015D211 /* Factorial.cpp */,
+				BE6F22221E53BD2000ECDAF9 /* Gaussian.hpp */,
+				BE6F22211E53BD2000ECDAF9 /* Gaussian.cpp */,
 			);
 			name = Functions;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 				BE00721D1E44124D0015D211 /* Factorial.hpp in Headers */,
 				BE2846321E47907200EF6FBC /* Eigen.hpp in Headers */,
 				BE0072191E4410030015D211 /* Function.hpp in Headers */,
+				BE6F22241E53BD2000ECDAF9 /* Gaussian.hpp in Headers */,
 				BE093EAE1E491B1200B893B6 /* QR.hpp in Headers */,
 				BED557341E428DD1006E5F59 /* Matrix.hpp in Headers */,
 				BE9AA19C1E442404008DC7E7 /* Integral.hpp in Headers */,
@@ -252,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5FAF041E42BF1A008B9451 /* LU.cpp in Sources */,
+				BE6F22231E53BD2000ECDAF9 /* Gaussian.cpp in Sources */,
 				BED557331E428DD1006E5F59 /* Matrix.cpp in Sources */,
 				BE093EAD1E491B1200B893B6 /* QR.cpp in Sources */,
 				BE25E6B61E4A41E700FEAB2E /* Random.cpp in Sources */,
