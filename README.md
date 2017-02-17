@@ -6,11 +6,11 @@ This repository contains numerical routines, data structures, and algorithms imp
 
 2) Implement Levenberg-Marquardt routine
 
-3) Implement balenced tree data structure 
+3) Implement heap structure 
 
-4) Implement heap structure 
+4) Implement heap sort
 
-5) Implement random number generator 
+5) Implement Chi-squared distribtuion
 
 #----- Data Structures
 Matrix: Template class implementing a 2D Matrix for linear algebra and solving systems of linear equations. 
