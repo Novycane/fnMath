@@ -1,0 +1,12 @@
+$ cat .gitignore
+
+# exclude everything
+/*
+!/.gitignore
+
+!/fnMath
+fnMath/*
+!fnMath/*.cpp
+!fnMath/*.c
+!fnMath/*.hpp
+!fnMath/*.h
