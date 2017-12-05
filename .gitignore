@@ -4,9 +4,9 @@ $ cat .gitignore
 /*
 !/.gitignore
 
-!/fnMath
-fnMath/*
-!fnMath/*.cpp
-!fnMath/*.c
-!fnMath/*.hpp
-!fnMath/*.h
+!/src
+src/*
+!src/*.cpp
+!src/*.c
+!src/*.hpp
+!src/*.h
