@@ -3,6 +3,7 @@ $ cat .gitignore
 # exclude everything
 /*
 !/.gitignore
+!/makefile
 
 !/src
 src/*
