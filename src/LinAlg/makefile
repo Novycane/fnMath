@@ -7,6 +7,7 @@ LFLAGS		= -g -lc++
 TEMP		= ../../temp/
 BIN		= ../../bin/
 COMMON		= ../
+MATRIX		= $(TEMP)Matrix.o
 
 # ----- Targets
 all:	Matrix LU QR Eigen
@@ -23,17 +24,17 @@ clean:
 	rm $(TEMP)Eigen.o
 	rm $(TEMP)LinAlg.o
 
-Matrix: Matrix.cpp Matrix.hpp $(COMMON)Error.hpp
+Matrix: $(MATRIX) $(COMMON)Error.hpp
 	-@ECHO -n "Building Matrix.cpp"
 	-@$(CC) $(CFLAGS) Matrix.cpp -o $(TEMP)Matrix.o
 	-@ECHO "...ok"
 
-LU: Matrix
+LU: LU.cpp LU.hpp $(MATRIX)
 	-@ECHO -n "Building LU.cpp..."
 	-@$(CC) $(CFLAGS) LU.cpp -o $(TEMP)LU.o
 	-@ECHO "....ok"
 
-QR: Matrix
+QR: QR.cpp QR.hpp $(MATRIX)
 	-@ECHO -n "Building QR.cpp...."
 	-@$(CC) $(CFLAGS) QR.cpp -o $(TEMP)QR.o
 	-@ECHO "...ok"
