@@ -27,6 +27,21 @@ src/Calculus/*
 !/src/Calculus/*.hpp
 !/src/Calculus/makefile
 
+# ----- Bring in DataStructs
+!/src/DataStructs
+src/DataStructs/*
+!/src/DataStructs/*.cpp
+!/src/DataStructs/*.hpp
+!/src/DataStructs/makefile
+
+# ----- Stats
+!/src/Stats
+src/Stats/*
+!/src/Stats/*.cpp
+!/src/Stats/*.hpp
+!/src/Stats/makefile
+
+
 # ----- Excluda all test files except .cpp
 !/test
 test/*
