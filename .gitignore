@@ -20,6 +20,12 @@ src/LinAlg/*
 !/src/LinAlg/*.hpp
 !/src/LinAlg/makefile
 
+# ----- Bring in Calculus
+!/src/Calculus
+src/Calculus/*
+!/src/Calculus/*.cpp
+!/src/Calculus/*.hpp
+!/src/Calculus/makefile
 
 # ----- Excluda all test files except .cpp
 !/test
