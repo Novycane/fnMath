@@ -1,13 +1,19 @@
 $ cat .gitignore
 
-# exclude everything
+# ----- exclude everything
 /*
 !/.gitignore
 !/makefile
 
+# ----- Exclude all src except cpp, c, hpp, and h files
 !/src
 src/*
 !src/*.cpp
 !src/*.c
 !src/*.hpp
 !src/*.h
+
+# ----- Excluda all test files except .cpp
+!/test
+test/*
+!test/*.cpp
