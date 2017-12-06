@@ -13,6 +13,14 @@ src/*
 !src/*.hpp
 !src/*.h
 
+# ----- Bring in LinAlg
+!/src/LinAlg
+src/LinAlg/*
+!/src/LinAlg/*.cpp
+!/src/LinAlg/*.hpp
+!/src/LinAlg/makefile
+
+
 # ----- Excluda all test files except .cpp
 !/test
 test/*

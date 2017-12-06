@@ -9,7 +9,7 @@
 #ifndef QR_hpp
 #define QR_hpp
 
-#include <Memory>
+#include <memory>
 #include "Matrix.hpp"
 #include "Matrix.cpp"
 

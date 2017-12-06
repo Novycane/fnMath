@@ -9,7 +9,7 @@
 #ifndef Eigen_hpp
 #define Eigen_hpp
 
-#include "Error.hpp"
+#include "../Error.hpp"
 #include "Matrix.hpp"
 #include "Matrix.cpp"
 

@@ -15,7 +15,7 @@ TESTPATH 	= test
 HEADPATH	= src
 SRCPATH		= src
 BINPATH		= bin
-TEMPPATH 	= tmp
+TEMPPATH 	= temp
 
 # ----- Main Targets
 all		    : Make_Dirs Matrix.o
