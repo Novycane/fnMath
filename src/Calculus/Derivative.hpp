@@ -9,7 +9,7 @@
 #ifndef Derivative_hpp
 #define Derivative_hpp
 
-#include "Function.hpp"
+#include "../Function.hpp"
 
 namespace fnMath{
 namespace Calculus{

@@ -9,8 +9,8 @@
 #ifndef Function_hpp
 #define Function_hpp
 
-#include "Matrix.hpp"
-#include "Matrix.cpp"
+#include "LinAlg/Matrix.hpp"
+#include "LinAlg/Matrix.cpp"
 
 namespace fnMath{
     using namespace LinAlg;

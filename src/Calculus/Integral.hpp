@@ -9,7 +9,7 @@
 #ifndef Integral_hpp
 #define Integral_hpp
 
-#include "Function.hpp"
+#include "../Function.hpp"
 
 namespace fnMath{
 namespace Calculus{
