@@ -9,7 +9,7 @@
 #ifndef Gamma_hpp
 #define Gamma_hpp
 
-#include "Function.hpp"
+#include "../Function.hpp"
 
 namespace fnMath {
     

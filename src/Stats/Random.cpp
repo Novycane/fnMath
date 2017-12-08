@@ -153,7 +153,7 @@ void RandomNumber::CheckHardwareAvailability()
     
     
     // Check for RDRAND Support
-    if(ecx & 0x40000000 !=  0x40000000)
+    if((ecx & 0x40000000) !=  0x40000000)
     {
         hardwareRNGPresent = false;
         return;
