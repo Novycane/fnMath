@@ -24,7 +24,7 @@ clean:
 	rm $(TEMP)Eigen.o
 	rm $(TEMP)LinAlg.o
 
-Matrix: $(MATRIX) $(COMMON)Error.hpp
+Matrix: Matrix.cpp Matrix.hpp $(COMMON)Error.hpp
 	-@ECHO -n "Building Matrix.cpp"
 	-@$(CC) $(CFLAGS) Matrix.cpp -o $(TEMP)Matrix.o
 	-@ECHO "...ok"

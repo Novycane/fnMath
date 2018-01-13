@@ -37,6 +37,12 @@ Matrix.o	: src/Matrix.cpp src/Matrix.hpp
 	-@${CC} $(CFLAGS) -c src/Matrix.cpp ${CFLAGS} -o $(TEMPPATH)/Matrix.o
 	-@echo "Done!"
 
+# ----- Dependencies
+Crypto.o	: src/Rijndael.cpp src/Rijndael.hpp
+	-@echo "Making Crypto Routines..."
+	-@${CC} $(CFLAGS) -c src/Rijndael.cpp ${CFLAGS} -o $(TEMPPATH)/Rijndael.o
+	-@echo "Done!"
+
 # ----- Utilities
 .PHONY		:Make_Dirs
 Make_Dirs:	
@@ -51,8 +57,8 @@ endif
 
 .PHONY		: clean
 clean:
-	-@rm $(BINPATH)/*.o
-	-@rm $(TEMPPATH)/*.*
+	-@rm $(BINPATH)\*.o
+	-@rm $(TEMPPATH)\*.*
 	-@rmdir $(TEMPPATH)
 	-@rmdir $(BINPATH)
 	-@echo "Done Cleaning..."

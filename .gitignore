@@ -41,6 +41,12 @@ src/Stats/*
 !/src/Stats/*.hpp
 !/src/Stats/makefile
 
+# ----- Bring in LinAlg
+!/src/Crypto
+src/Crypto/*
+!/src/Crypto/*.cpp
+!/src/Crypto/*.hpp
+!/src/Crypto/makefile
 
 # ----- Excluda all test files except .cpp
 !/test

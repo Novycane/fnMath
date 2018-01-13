@@ -29,6 +29,9 @@
 #include "Function.hpp"
 #include "Factorial.hpp"
 
+// ------------------------- Crypto Headers
+#include "Rijndael.hpp"
+
 // ------------------------- Calculus Headers
 #include "Integral.hpp"
 #include "Derivative.hpp"
