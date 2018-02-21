@@ -1,5 +1,5 @@
 //
-//  Matrix.cpp
+//  Rijndael.cpp
 //  fnMath
 //
 //  Created by Steven Novak on 1/12/18.

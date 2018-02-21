@@ -34,11 +34,10 @@ QR<Numeric>::QR(Matrix<Numeric> && A)
 {
     if(A.numRows() < A.numColumns())
         throw new ColumnMismatchException();
-
     DecomposeHouseholder(A);
 }
 
-    
+
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
     
