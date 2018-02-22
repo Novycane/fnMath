@@ -45,12 +45,32 @@ unsigned long long Prime::Naive (unsigned long long maxNumber)
             }
         }
     }
-
     delete flags;
-
     return result;
 }
 
+unsigned long long NaiveSQ (unsigned long long maxNumber)
+{
+bool* flags = (bool*)malloc(maxNumber * sizeof(bool));
+
+    for(int i=0; i<maxNumber; i++)
+        flags[i] = true;
+ 
+    unsigned long long result;
+    for(unsigned long long i=2; i< sqrt(maxNumber); i++)
+    {
+        if(flags[i] == true)
+        {
+            result = i; 
+            for(unsigned long long p = i + i; p<maxNumber; p+=i)
+            {
+                flags[p] = false;
+            }
+        }
+    }
+    delete flags;
+    return result;
+}
 
 } // End Crypto Namespace
 } // End fnMath Namespace
