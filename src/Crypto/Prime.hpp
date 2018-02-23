@@ -31,6 +31,8 @@ class Prime
     // ------------------------- Public Methods
     static unsigned long long GetPrime(unsigned long long maxNumber);
 
+    static unsigned long long Segmented(unsigned long long maxNumber);
+
     static unsigned long long Naive (unsigned long long maxNumber);
 
     static unsigned long long NaiveSQ (unsigned long long maxNumber);

@@ -26,6 +26,23 @@ unsigned long long Prime::GetPrime(unsigned long long maxNumber)
 
 #pragma mark Private Methods
 // ---------------------------------------- Private Methods
+
+unsigned long long Prime::Segmented(unsigned long long maxNumber)
+{
+    // Guess the number of primes in sqrt(maxNumber)
+    // Allocate that memory
+    // Sieve to sqrt(n)
+
+
+    // Divide the total range into segments of size < sqrt(n)
+    // for each segment of size x...
+    // -- Create an array to store flags
+    // -- Iterate through the primes in the initial sieve
+    // -- Mark it's multiples in the segment
+
+    return 0;
+}
+
 unsigned long long Prime::Naive (unsigned long long maxNumber)
 {
     bool* flags = (bool*)malloc(maxNumber * sizeof(bool));
