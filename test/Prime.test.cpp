@@ -20,6 +20,7 @@ using namespace Crypto;
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 bool testNaivePrime();
 bool testNaiveSQPrime();
 
@@ -33,6 +34,8 @@ bool testNaivePrime()
 {
     std::cout << "Testing Naive Prime Number Generator\n" << std::endl;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 bool TestPrime();
@@ -116,6 +119,7 @@ bool testNaiveSQPrime()
     std::cout << "Testing NaiveSQ Prime Number Generator\n" << std::endl;
     Prime myPrime;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     clock_t now, later;
     unsigned long long maxNumber = 10000000001;
     now = clock();
@@ -189,11 +193,77 @@ bool testNaiveSQPrime()
 }
 
 >>>>>>> Stashed changes
+=======
+    clock_t  now;
+
+    now = clock();
+    unsigned long long result = myPrime.GetPrime(20);
+    PrintTime(now);
+    if(result != 19)
+    {
+        std::cout << "Highest Prime < 20 Found To Be: " << result << " : Expected 19 " << std::endl;
+        return false;
+    }
+
+    now = clock();
+    result = myPrime.GetPrime(100);
+    PrintTime(now);
+    if(result != 97)
+    {
+        std::cout << "Highest Prime < 100 Found To Be: " << result << " : Expected 97 " << std::endl;
+        return false;
+    }
+
+    now = clock();
+    result = myPrime.GetPrime(10000);
+    PrintTime(now);
+    if(result != 9973)
+    {
+        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        return false;
+    }
+
+    now = clock();
+    result = myPrime.GetPrime(100000);
+    PrintTime(now);
+    if(result != 99991)
+    {
+        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        return false;
+    }
+
+
+    now = clock();
+    result = myPrime.GetPrime(1000000);
+    PrintTime(now);
+    if(result != 999983)
+    {
+        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        return false;
+    }
+
+    now = clock();
+    result = myPrime.GetPrime(10000000);
+    PrintTime(now);
+    if(result != 9999991)
+    {
+        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        return false;
+    }
+
+
+    return true;
+}
+
+>>>>>>> Stashed changes
 void PrintTime(clock_t now)
 {
     clock_t later = clock();
     std::cout << ((float)(later - now) / CLOCKS_PER_SEC) << " s elapsed" << std::endl;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
