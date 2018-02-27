@@ -30,12 +30,12 @@ Rijndael:
 	-@ECHO "...ok"
 
 Prime:
-	-@ECHO -n "Building Prime.cpp"
+	-@ECHO -n Building Prime.cpp
 	-@$(CC) $(CFLAGS) Prime.cpp -o $(TEMP)Prime.o
-	-@ECHO "...ok"
+	-@ECHO ...ok
 
 Test: Prime
-	-@ECHO Testing Prime.cpp
-	-@$(CC) $(CFLAGS) $(TEST)Prime.test.cpp -o $(TEMP)Prime.test.o
-	$(CC) $(TEMP)Prime.o $(TEMP)Prime.test.o -o $(TEMP)Prime
-	-@$(TEMP)Prime
+	-@ECHO -n Testing Prime.cpp
+	$(CC) $(CFLAGS) $(TEST)Prime.test.cpp -o $(TEMP)Prime.test.o
+	$(CC) $(TEMP)Prime.o $(TEMP)Prime.test.o -o $(TEMP)Prime.exe
+	$(TEMP)Prime.exe
