@@ -126,7 +126,6 @@ double Derivative::D2(double x)
     
     for(int iterations=1; iterations <= MAXITER; iterations++)
     {
-        //cout << "Iteration #" << iterations << " Sum= " << lastEvaluation [iterations-1] << endl;
         h /= 2;
         yPlus = F->Evaluate(x + h);
         yMinus = F->Evaluate(x - h);
@@ -135,9 +134,7 @@ double Derivative::D2(double x)
         error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1 ;
         if(error < 0)
             error *= -1;
-        
-        cout << error << endl;
-        
+                
         if(error <= err)
         {
             x = thisEvaluation[iterations];

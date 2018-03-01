@@ -1,11 +1,13 @@
 # ----- Compiler
 CC 		= clang++
-CFLAGS		= -g -c -std=c++14	
+CFLAGS		= -g -Wall -c -std=c++14
+TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
 
 # ----- Directories
 TEMP		= ../../temp/
-BIN		= ../../bin/
+BIN			= ../../bin/
+TEST		= ../../test/
 COMMON		= ../
 
 # ----- Targets
@@ -30,3 +32,15 @@ Integral: Integral.cpp Integral.hpp $(COMMON)Function.hpp
 	-@ECHO -n "Building Integral.cpp..."
 	-@$(CC) $(CFLAGS) Integral.cpp -o $(TEMP)Integral.o
 	-@ECHO "....ok"
+
+# ----- Testing Targets
+Test: Integral Derivative
+	-@ECHO -n -------- Integral.cpp --------
+	-@$(CC) $(CFLAGS) $(TEST)Integral.test.cpp -o $(TEMP)Integral.test.o
+	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral
+	-@$(TEMP)Integral
+	-@ECHO .
+	-@ECHO -n -------- Derivative.cpp ---------
+	-@$(CC) $(CFLAGS) $(TEST)Derivative.test.cpp -o $(TEMP)Derivative.test.o
+	-@$(CC) $(TEMP)Derivative.o $(TEMP)Derivative.test.o -o $(TEMP)Derivative
+	-@$(TEMP)Derivative

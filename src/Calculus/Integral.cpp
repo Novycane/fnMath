@@ -47,7 +47,6 @@ double Rhomberg::Integrate(Function* F, double start, double end)
     double error;
     int maxIndex = 1;
     int steps = 1;
-    int k;
     int factor;
     
     evaluations[0] = end;
