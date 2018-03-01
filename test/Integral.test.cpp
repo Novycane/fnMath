@@ -41,7 +41,7 @@ public:
 int main (int argCount, char** args)
 {
     bool result;
-    std::cout << "\n\nTesting Trapezoidal Integration";
+    std::cout << "\nTesting Trapezoidal Integration";
     result = TestTrapezoidal();
     if(result)
         std::cout << "...ok" << std::endl;
