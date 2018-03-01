@@ -11,33 +11,32 @@
 #define fnMath_
 
 // ------------------------- Linear Algebra Headers
-#include "Matrix.hpp"
-#include "Matrix.cpp"
-#include "LU.hpp"
-#include "LU.cpp"
-#include "Eigen.hpp"
-#include "Eigen.cpp"
-#include "QR.hpp"
-#include "QR.cpp"
-#include "Transforms.hpp"
-#include "Transforms.cpp"
+#include "./LinAlg/Matrix.hpp"
+#include "./LinAlg/Matrix.cpp"
+#include "./LinAlg/LU.hpp"
+#include "./LinAlg/LU.cpp"
+#include "./LinAlg/Eigen.hpp"
+#include "./LinAlg/Eigen.cpp"
+#include "./LinAlg/QR.hpp"
+#include "./LinAlg/QR.cpp"
 
 // ------------------------- Data Structure Headers
-#include "BinaryTree.hpp"
-#include "BinaryTree.cpp"
-
-#include "Function.hpp"
-#include "Factorial.hpp"
+#include "./DataStructs/BinaryTree.hpp"
+#include "./DataStructs/BinaryTree.cpp"
 
 // ------------------------- Crypto Headers
-#include "Rijndael.hpp"
+#include "./Crypto/Rijndael.hpp"
 
 // ------------------------- Calculus Headers
-#include "Integral.hpp"
-#include "Derivative.hpp"
+#include "./Calculus/Integral.hpp"
+#include "./Calculus/Derivative.hpp"
 
 // ------------------------- Function / Routines
-#include "Random.hpp"
+#include "Function.hpp"
+#include "./Stats/Random.hpp"
+#include "./Stats/Factorial.hpp"
+
+
 
 /* The classes below are exported */
 #pragma GCC visibility push(default)

@@ -56,7 +56,7 @@ unsigned long long Prime::Naive (unsigned long long maxNumber)
         if(flags[i] == true)
         {
             result = i; 
-            for(unsigned long long p = i + i; p<maxNumber; p+=i)
+            for(unsigned long long p = i + i; p < maxNumber; p += i)
             {
                 flags[p] = false;
             }
