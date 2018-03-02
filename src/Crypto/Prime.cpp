@@ -24,6 +24,51 @@ unsigned long long Prime::GetPrime(unsigned long long maxNumber)
     return Naive(maxNumber);
 }
 
+unsigned long long* Prime::RandomPrime1024()
+{
+    RandomNumber R;
+    
+    unsigned long long* randoms = (unsigned long long*) malloc(16 * sizeof(unsigned long long));
+
+    for(int i=0; i<16; i++)
+    {
+        randoms[i] = R.GenerateInt64();
+        std::cout << i <<  "--" << randoms[i] << std::endl;
+    }
+
+    return randoms;
+}
+
+unsigned long long* Prime::RandomPrime512()
+{
+    return 0;
+}
+
+unsigned long long* Prime::RandomPrime256()
+{
+    return 0;
+}
+
+unsigned long long* Prime::RandomPrime128()
+{
+    return 0;
+}
+
+unsigned long long Prime::RandomPrime64()
+{
+    return 0;
+}
+
+unsigned long Prime::RandomPrime32()
+{
+    return 0;
+}
+
+unsigned int Prime::RandomPrime16()
+{
+    return 0;
+}
+
 #pragma mark Private Methods
 // ---------------------------------------- Private Methods
 

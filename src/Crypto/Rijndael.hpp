@@ -14,6 +14,9 @@
 //
 //
 
+#ifndef RIJNDAEL_HPP
+#define RIJNDAEL_HPP
+
 namespace fnMath {
 namespace Crypto {
 
@@ -37,3 +40,5 @@ private:
 
 } // End Namespace Crypto
 } // End Namespace fnMath
+
+#endif

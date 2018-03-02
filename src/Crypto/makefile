@@ -29,7 +29,7 @@ Rijndael:
 	-@$(CC) $(CFLAGS) Rijndael.cpp -o $(TEMP)Rijndael.o
 	-@ECHO "...ok"
 
-Prime:
+Prime: 
 	-@ECHO -n Building Prime.cpp
 	-@$(CC) $(CFLAGS) Prime.cpp -o $(TEMP)Prime.o
 	-@ECHO ...ok
@@ -37,5 +37,6 @@ Prime:
 Test: Prime
 	-@ECHO -n Testing Prime.cpp
 	$(CC) $(CFLAGS) $(TEST)Prime.test.cpp -o $(TEMP)Prime.test.o
-	$(CC) $(TEMP)Prime.o $(TEMP)Prime.test.o -o $(TEMP)Prime.exe
+	$(CC) $(CFLAGS) ../Stats/Random.cpp -o $(TEMP)Random.o
+	$(CC) $(TEMP)Prime.o $(TEMP)Random.o $(TEMP)Prime.test.o -o $(TEMP)Prime.exe
 	$(TEMP)Prime.exe

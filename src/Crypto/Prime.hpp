@@ -14,9 +14,13 @@
 //
 //
 
+#ifndef PRIME_HPP
+#define PRIME_HPP
+
 #include <memory>
 #include <iostream>
 #include <cmath>
+#include "../Stats/Random.hpp"
 
 namespace fnMath {
 namespace Crypto {
@@ -30,6 +34,20 @@ class Prime
     
     // ------------------------- Public Methods
     static unsigned long long GetPrime(unsigned long long maxNumber);
+
+    static unsigned long long* RandomPrime1024();
+
+    static unsigned long long* RandomPrime512();
+
+    static unsigned long long* RandomPrime256();
+
+    static unsigned long long* RandomPrime128();
+
+    static unsigned long long RandomPrime64();
+
+    static unsigned long RandomPrime32();
+
+    static unsigned int RandomPrime16();
 
     static unsigned long long Segmented(unsigned long long maxNumber);
 
@@ -47,3 +65,5 @@ class Prime
 
 } // End Crypto Namespace
 } // End fnMath Namespace
+
+#endif
