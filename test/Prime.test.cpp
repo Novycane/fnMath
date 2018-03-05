@@ -19,6 +19,7 @@ using namespace fnMath;
 using namespace Crypto;
 
 bool TestPrime();
+bool TestRandomPrime();
 bool TestSegmentedPrime();
 bool TestSQPrime();
 void ComparePerformance();
@@ -30,6 +31,16 @@ int main (int argCount, char** args)
     TestSQPrime();
     ComparePerformance();
     TestSegmentedPrime();
+    TestRandomPrime();
+}
+
+bool TestRandomPrime()
+{
+    Prime myPrime;
+
+    myPrime.RandomPrime1024();
+
+    return true;
 }
 
 bool TestPrime()
@@ -44,7 +55,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 19)
     {
-        std::cout << "Highest Prime < 20 Found To Be: " << result << " : Expected 19 " << std::endl;
+        //std::cout << "Highest Prime < 20 Found To Be: " << result << " : Expected 19 " << std::endl;
         return false;
     }
 
@@ -53,7 +64,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 97)
     {
-        std::cout << "Highest Prime < 100 Found To Be: " << result << " : Expected 97 " << std::endl;
+        //std::cout << "Highest Prime < 100 Found To Be: " << result << " : Expected 97 " << std::endl;
         return false;
     }
 
@@ -62,7 +73,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 9973)
     {
-        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        //std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
         return false;
     }
 
@@ -71,7 +82,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 99991)
     {
-        std::cout << "Highest Prime < 100,000 Found To Be: " << result << " : Expected 99,991 " << std::endl;
+        //std::cout << "Highest Prime < 100,000 Found To Be: " << result << " : Expected 99,991 " << std::endl;
         return false;
     }
 
@@ -81,7 +92,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 999983)
     {
-        std::cout << "Highest Prime < 1,000,000 Found To Be: " << result << " : Expected 999,983 " << std::endl;
+        //std::cout << "Highest Prime < 1,000,000 Found To Be: " << result << " : Expected 999,983 " << std::endl;
         return false;
     }
 
@@ -90,7 +101,7 @@ bool TestPrime()
     PrintTime(now);
     if(result != 9999991)
     {
-        std::cout << "Highest Prime < 10,000,000 Found To Be: " << result << " : Expected 9,999,991 " << std::endl;
+        //std::cout << "Highest Prime < 10,000,000 Found To Be: " << result << " : Expected 9,999,991 " << std::endl;
         return false;
     }
 
@@ -109,7 +120,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 19)
     {
-        std::cout << "Highest Prime < 20 Found To Be: " << result << " : Expected 19 " << std::endl;
+        //std::cout << "Highest Prime < 20 Found To Be: " << result << " : Expected 19 " << std::endl;
         return false;
     }
 
@@ -118,7 +129,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 97)
     {
-        std::cout << "Highest Prime < 100 Found To Be: " << result << " : Expected 97 " << std::endl;
+        //std::cout << "Highest Prime < 100 Found To Be: " << result << " : Expected 97 " << std::endl;
         return false;
     }
 
@@ -127,7 +138,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 9973)
     {
-        std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
+        //std::cout << "Highest Prime < 10,000 Found To Be: " << result << " : Expected 9,973 " << std::endl;
         return false;
     }
 
@@ -136,7 +147,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 99991)
     {
-        std::cout << "Highest Prime < 100,000 Found To Be: " << result << " : Expected 99,991 " << std::endl;
+        //std::cout << "Highest Prime < 100,000 Found To Be: " << result << " : Expected 99,991 " << std::endl;
         return false;
     }
 
@@ -146,7 +157,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 999983)
     {
-        std::cout << "Highest Prime < 1,000,000 Found To Be: " << result << " : Expected 999,983 " << std::endl;
+        //std::cout << "Highest Prime < 1,000,000 Found To Be: " << result << " : Expected 999,983 " << std::endl;
         return false;
     }
 
@@ -155,7 +166,7 @@ bool TestSQPrime()
     PrintTime(now);
     if(result != 9999991)
     {
-        std::cout << "Highest Prime < 10,000,000 Found To Be: " << result << " : Expected 9,999,991 " << std::endl;
+        //std::cout << "Highest Prime < 10,000,000 Found To Be: " << result << " : Expected 9,999,991 " << std::endl;
         return false;
     }
 
@@ -170,12 +181,12 @@ void ComparePerformance()
     unsigned long long result;
 
     now = clock();
-    result = myPrime.Naive(3000000000);
+    result = myPrime.Naive(30000000);
     PrintTime(now);
     std::cout << "Odd And Even " << result << std::endl;
 
     now = clock();
-    result = myPrime.NaiveSQ(3000000000);
+    result = myPrime.NaiveSQ(30000000);
     PrintTime(now);
     std::cout << "Odd Only " << result << std::endl;
 
