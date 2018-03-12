@@ -9,7 +9,7 @@
 #ifndef FISHERYATES_HPP
 #define FISHERYATES_HPP
 
-#include "FisherYates.cpp"
+#include "Random.hpp"
 
 namespace fnMath{
 
@@ -17,7 +17,8 @@ template <typename T>
 class FisherYates
 {
 public:
-    static void ShuffleInPlace(T* array, int count);
+    void ShuffleInPlace(T* array, uint16_t count);
+
 };  // End FisherYates Class
 
 } // End fnMath Namespace
