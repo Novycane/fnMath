@@ -46,8 +46,11 @@ public:
     double GenerateDouble();
     float GenerateFloat();
     uint64_t GenerateInt64();
+    uint64_t GenerateInt64(uint64_t lower, uint64_t upper);
     uint32_t GenerateInt32();
+    uint32_t GenerateInt32(uint32_t lower, uint32_t upper);
     uint16_t GenerateInt16();
+    uint16_t GenerateInt16(uint16_t lower, uint16_t upper);
     
     // Utility Functions
     void SetSeed(uint64_t NewSeed);

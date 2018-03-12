@@ -60,6 +60,12 @@ uint64_t RandomNumber::GenerateInt64()
     (this->*RandomNumberGenerator)(&RandNum);
     return RandNum;
 }
+
+uint64_t RandomNumber::GenerateInt64(uint64_t lower, uint64_t upper)
+{
+    (this->*RandomNumberGenerator)(&RandNum);
+    return (RandNum % (upper - lower) + lower);
+}
     
 uint32_t RandomNumber::GenerateInt32()
 {
@@ -69,12 +75,28 @@ uint32_t RandomNumber::GenerateInt32()
     return RandomInt;
 }
 
+uint32_t RandomNumber::GenerateInt32(uint32_t lower, uint32_t upper)
+{
+    uint32_t RandomInt;
+    (this->*RandomNumberGenerator)(&RandNum);
+    RandomInt = (uint32_t) RandNum;
+    return (RandomInt % (upper - lower) + lower);
+}
+
 uint16_t RandomNumber::GenerateInt16()
 {
     uint16_t RandomInt;
     (this->*RandomNumberGenerator)(&RandNum);
     RandomInt = (uint16_t) RandNum;
     return RandomInt;
+}
+
+uint16_t RandomNumber::GenerateInt16(uint16_t lower, uint16_t upper)
+{
+    uint16_t RandomInt;
+    (this->*RandomNumberGenerator)(&RandNum);
+    RandomInt = (uint16_t) RandNum;
+    return (RandomInt % (upper - lower) + lower);
 }
 
 void RandomNumber::SetSeed(uint64_t NewSeed)
@@ -158,7 +180,7 @@ void RandomNumber::CheckHardwareAvailability()
         hardwareRNGPresent = false;
         return;
     }
-    std::cout << "Harware Random Number Generation Supported!\n";
+    //std::cout << "Harware Random Number Generation Supported!\n";
 }
 
 void RandomNumber::GetHardware64(uint64_t *number)
