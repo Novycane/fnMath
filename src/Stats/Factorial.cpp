@@ -30,11 +30,8 @@ double Factorial::ComputeLn(int n)
         return Factorial::values[n];
     
     for(int i=maxN+1; i<=n; i++)
-    {
         Factorial::values[i] = Factorial::values[i-1] + log(i);
-        //std::cout << i << " " << exp(values[i]) << std::endl;
-    }
-    
+            
     return Factorial::values[n];
 }
     

@@ -12,13 +12,17 @@
 // --------------------------------------------------
 
 #include <iostream>
+#include <cmath>
 #include "../src/Stats/Random.hpp"
+#include "../src/Stats/FisherYates.hpp"
+#include "../src/Stats/FisherYates.cpp"
 
 using namespace fnMath;
 
 // ------------------------- Declarations
 bool TestHWRandom();
 bool TestRandomBetween();
+bool TestFisherYates();
 
 // ------------------------- Main
 
@@ -35,7 +39,15 @@ int main (int argCount, char** args)
     
     if(!TestRandomBetween())
     {
-        std::cout << "Error in HW RNG:\n ";
+        std::cout << "Error in Random Int Between RNG:\n ";
+        return -1;
+    }
+    else
+        std::cout << "...ok" << std::endl;
+
+    if(!TestFisherYates())
+    {
+        std::cout << "Error in Fisher-Yates Shuffle:\n ";
         return -1;
     }
     else
@@ -56,7 +68,8 @@ bool TestHWRandom()
     for(int i=0; i<25000000; i++)
         num += r.GenerateDouble();
 
-    if(abs(num / 25000000 - 0.5) > 0.0001)
+    double err = abs(num / 25000000 - 0.5);
+    if(err > 0.0001)
     {
         std::cout << "Mean deviation larger than expected!!" << std::endl;
         return false;
@@ -100,6 +113,19 @@ bool TestRandomBetween()
             return false;
         }
     }
+
+    return true;
+}
+
+bool TestFisherYates()
+{
+    int j = 200;
+    uint16_t nums[j];
+    for(int i=0; i<j; i++)
+        nums[i] = i;
+    FisherYates<uint16_t> fy;
+
+    fy.ShuffleInPlace(nums, j);
 
     return true;
 }

@@ -1,3 +1,7 @@
+ifeq ($(OS),Windows_NT)
+EXT = .exe
+endif
+
 # ----- Compiler
 CC 		= clang++
 CFLAGS		= -g -Wall -c -std=c++14
@@ -27,8 +31,8 @@ clean:
 Test: Random.o
 	-@ECHO "Testing Random.cpp"
 	$(CC) $(CFLAGS) $(TEST)Random.test.cpp -o $(TEMP)Random.test.o
-	$(CC) $(TEMP)Random.o $(TEMP)Random.test.o -o $(TEMP)Random.exe
-	$(TEMP)Random.exe
+	$(CC) $(TEMP)Random.o $(TEMP)Random.test.o -o $(TEMP)Random$(EXT)
+	$(TEMP)Random$(EXT)
 
 
 Factorial.o: Factorial.cpp Factorial.hpp
