@@ -15,9 +15,9 @@ TEST		= ../../test/
 COMMON		= ../
 
 # ----- Targets
-all:	Factorial.o Gamma.o Random.o FisherYates.o
+all:	Factorial.o Gamma.o Random.o FisherYates.o MetropolisHastings.o
 	-@ECHO -n "Creating Sats.o"
-	-@ld -r $(TEMP)Factorial.o $(TEMP)Gamma.o $(TEMP)Random.o -o $(TEMP)LinAlg.o
+	-@ld -r $(TEMP)Factorial.o $(TEMP)Gamma.o $(TEMP)Random.o $(TEMP)MetropolisHastings.o -o $(TEMP)Stats.o
 	-@ECHO "...ok"
 
 .PHONY:
@@ -31,9 +31,8 @@ clean:
 Test: Random.o
 	-@ECHO "Testing Random.cpp"
 	$(CC) $(CFLAGS) $(TEST)Random.test.cpp -o $(TEMP)Random.test.o
-	$(CC) $(TEMP)Random.o $(TEMP)Random.test.o -o $(TEMP)Random$(EXT)
+	$(CC) $(TEMP)Random.o $(TEMP)Random.test.o $(TEMP)MetropolisHastings.o -o $(TEMP)Random$(EXT)
 	$(TEMP)Random$(EXT)
-
 
 Factorial.o: Factorial.cpp Factorial.hpp
 	-@ECHO -n "Building Factorial"
@@ -53,4 +52,9 @@ Random.o: Random.cpp Random.hpp
 FisherYates.o: FisherYates.hpp FisherYates.cpp Random.cpp Random.hpp 
 	-@ECHO -n "Building FisherYates.cpp...."
 	-@$(CC) $(CFLAGS) FisherYates.cpp -o $(TEMP)FisherYates.o
+	-@ECHO "...ok"
+
+MetropolisHastings.o: MetropolisHastings.hpp MetropolisHastings.cpp Random.o
+	-@ECHO -n "Building MetropolisHastings.cpp...."
+	-@$(CC) $(CFLAGS) MetropolisHastings.cpp -o $(TEMP)MetropolisHastings.o
 	-@ECHO "...ok"

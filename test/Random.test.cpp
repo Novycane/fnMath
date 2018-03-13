@@ -13,21 +13,56 @@
 
 #include <iostream>
 #include <cmath>
+#include "../src/Function.hpp"
 #include "../src/Stats/Random.hpp"
 #include "../src/Stats/FisherYates.hpp"
 #include "../src/Stats/FisherYates.cpp"
+#include "../src/Stats/MetropolisHastings.hpp"
 
 using namespace fnMath;
+using namespace Stats;
 
 // ------------------------- Declarations
 bool TestHWRandom();
 bool TestRandomBetween();
 bool TestFisherYates();
+bool TestMetropolisHastings();
+
+class Exponential : public fnMath::Function
+{
+public:
+    double Evaluate(double x)
+    {
+        return exp(x);
+    }
+
+    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    {
+        return 0.0;
+    }
+};
+
+class Square : public fnMath::Function
+{
+public:
+    double Evaluate(double x)
+    {
+        return x * x;
+    }
+
+    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    {
+        return 0.0;
+    }
+};
 
 // ------------------------- Main
 
 int main (int argCount, char** args)
 {   
+    TestMetropolisHastings();
+
+    /*
     if(!TestHWRandom())
     {
         std::cout << "Error in HW RNG:\n ";
@@ -52,7 +87,7 @@ int main (int argCount, char** args)
     }
     else
         std::cout << "...ok" << std::endl;
-
+    */
     return 0;
 }
 
@@ -126,6 +161,18 @@ bool TestFisherYates()
     FisherYates<uint16_t> fy;
 
     fy.ShuffleInPlace(nums, j);
+
+    return true;
+}
+
+bool TestMetropolisHastings()
+{
+    MetropolisHastings MH(new Square());
+
+    MH.BurnIn(100000);
+
+    for(int i=0; i<1000000; i++)
+        std::cout << MH.GetNext() << std::endl;
 
     return true;
 }
