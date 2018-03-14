@@ -47,7 +47,8 @@ class Square : public fnMath::Function
 public:
     double Evaluate(double x)
     {
-        return x * x;
+        double b = x;
+        return b * b;
     }
 
     double Evaluate(double x, fnMath::LinAlg::MatrixD params)
@@ -171,8 +172,9 @@ bool TestMetropolisHastings()
 
     MH.BurnIn(100000);
 
-    for(int i=0; i<1000000; i++)
+    
+    for(int i=0; i<100000; i++)
         std::cout << MH.GetNext() << std::endl;
-
+    
     return true;
 }

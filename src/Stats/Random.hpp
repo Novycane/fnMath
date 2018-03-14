@@ -23,8 +23,8 @@ public:
     // -------------------- Public Methods
     // Normal Deviates
     double GenerateNormal();
-    void GenerateNormals(double & z0, double & z1);
-    void GenerateNormals(double mean, double stdev, double & z0, double & z1);
+    void GenerateNormals(double* z0, double* z1);
+    void GenerateNormals(double mean, double stdev, double* z0, double* z1);
     double GenerateGaussian(double Mean, double StDev);
     
     // Exponential Deviates
@@ -69,13 +69,13 @@ private:
     uint64_t RandNum;
     bool hardwareRNGPresent;
     void (RandomNumber::*RandomNumberGenerator)(uint64_t *number);
-    void (RandomNumber::*NormalDeviates)(double & z0, double & z1);
+    void (RandomNumber::*NormalDeviates)(double* z0, double* z1);
     
     // -------------------- Private Methods
     void CheckHardwareAvailability();
     void GetHardware64(uint64_t *number);
     void GetPseudo64(uint64_t *number);
-    void GeneratePolarPair(double & z0, double & z1);
+    void GeneratePolarPair(double* z0, double* z1);
 
     
     

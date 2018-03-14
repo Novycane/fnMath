@@ -35,10 +35,13 @@ RandomNumber::RandomNumber()
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
 
-double GenerateNormal()
+double RandomNumber::GenerateNormal()
 {
+    double x, y;
+
+    GenerateNormals(&x, &y);
     
-    return 0;
+    return x;
 }
     
 double RandomNumber::GenerateDouble()
@@ -123,16 +126,16 @@ void RandomNumber::ForceHardwareRand()
     RandomNumberGenerator = &RandomNumber::GetHardware64;
 }
 
-void RandomNumber::GenerateNormals(double & z0, double & z1)
+void RandomNumber::GenerateNormals(double* z0, double* z1)
 {
     (this->*NormalDeviates)(z0, z1);
 }
     
-void RandomNumber::GenerateNormals(double mean, double stdev, double & z0, double & z1)
+void RandomNumber::GenerateNormals(double mean, double stdev, double* z0, double* z1)
 {
     (this->*NormalDeviates)(z0, z1);
-    z0 = z0 * stdev + mean;
-    z1 = z1 * stdev + mean;
+    *z0 = *z0 * stdev + mean;
+    *z1 = *z1 * stdev + mean;
 }
 
 double RandomNumber::GenerateExponential(double lambda)
@@ -201,7 +204,7 @@ void RandomNumber::GetPseudo64(uint64_t *number)
     *number ^= *number >> shift3;
 }
 
-void RandomNumber::GeneratePolarPair(double & z0, double & z1)
+void RandomNumber::GeneratePolarPair(double * z0, double * z1)
 {
     double u, v, s = 0;
     
@@ -212,8 +215,8 @@ void RandomNumber::GeneratePolarPair(double & z0, double & z1)
         s = (u * u) + (v * v);
     }
     s = sqrt(-2 * log(s) / s);
-    z0 = u * s;
-    z1 = v * s;
+    *z0 = u * s;
+    *z1 = v * s;
 }
 
 

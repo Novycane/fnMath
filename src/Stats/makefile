@@ -30,9 +30,10 @@ clean:
 
 Test: Random.o
 	-@ECHO "Testing Random.cpp"
-	$(CC) $(CFLAGS) $(TEST)Random.test.cpp -o $(TEMP)Random.test.o
-	$(CC) $(TEMP)Random.o $(TEMP)Random.test.o $(TEMP)MetropolisHastings.o -o $(TEMP)Random$(EXT)
-	$(TEMP)Random$(EXT)
+	-@$(CC) $(CFLAGS) $(TEST)Random.test.cpp -o $(TEMP)Random.test.o
+	-@$(CC) $(CFLAGS) MetropolisHastings.cpp -o $(TEMP)MetropolisHastings.o
+	-@$(CC) $(TEMP)Random.o $(TEMP)Random.test.o $(TEMP)MetropolisHastings.o -o $(TEMP)Random$(EXT)
+	-@$(TEMP)Random$(EXT)
 
 Factorial.o: Factorial.cpp Factorial.hpp
 	-@ECHO -n "Building Factorial"

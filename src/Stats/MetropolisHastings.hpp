@@ -25,7 +25,7 @@ public:
     double GetNext();
 
 private:
-    double _v;
+    double _v, _x;
     RandomNumber _rng;
     Function* _function;
 

@@ -7,7 +7,7 @@
 //
 
 #include "Gamma.hpp"
-#include "Constants.h"
+#include "../Constants.h"
 #include <cmath>
 
 namespace fnMath {

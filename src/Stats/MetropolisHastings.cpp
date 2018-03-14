@@ -17,11 +17,13 @@ namespace Stats{
 MetropolisHastings::MetropolisHastings()
 {
     _function = nullptr;
+    _x = _rng.GenerateDouble();
 }
 
 MetropolisHastings::MetropolisHastings(Function* f)
 {
     _function = f;
+    _x = _rng.GenerateDouble();
 }
 
 void MetropolisHastings::BurnIn(int iterations)
@@ -36,17 +38,17 @@ void MetropolisHastings::BurnIn(int iterations)
 
 double MetropolisHastings::GetNext()
 {
-    double value, x, u=1, a=0;
+    double value, x, xp, u=1, a=0;
 
     while(a < u)
     {
-        x = _rng.GenerateDouble();
+        _rng.GenerateNormals(_x, 1, &x, &xp);
         u = _rng.GenerateDouble();
 
         value = _function->Evaluate(x);
         a = value / _v;
     }
-
+    _x = x;
     _v = value;
     return value;
 }
