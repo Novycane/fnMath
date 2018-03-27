@@ -37,6 +37,8 @@ namespace fnMath
         std::vector<BSPPoly>* frontSet;
         std::vector<BSPPoly>* backSet;
 
+        std::cout << "Polygons: " << polySet->size() << std::endl;
+
         if(polySet->size() == 1)
         {
             node->poly = (*polySet)[0];
@@ -45,6 +47,8 @@ namespace fnMath
         }
 
         node->poly = (*polySet)[FindCenter(polySet)];
+
+        return;
 
         // Construct Two Sets
         frontSet = new std::vector<BSPPoly>();
@@ -83,7 +87,36 @@ namespace fnMath
 
     int BSP::FindCenter(std::vector<BSPPoly>* polySet)
     {
-        return (int)polySet->size() / 2;
+        int center = 0;
+        int index, front, back;
+        int diff = polySet->size();
+
+        srand((unsigned int)polySet * polySet->size());
+
+        for(int j=0; j<5; j++)
+        {
+            front = back = 0;
+            index = rand() % polySet->size();
+            BSPPoly* target = &(*polySet)[index];
+
+            for(int i=0; i < polySet->size(); i++)
+            {
+                BSPLocation location = IsInFront(&(*polySet)[i] ,target);
+                if(location == InFront)
+                    front++;
+                if(location == Behind)
+                    back++;
+            }
+
+            int newDiff = abs(front - back);
+            if(newDiff < diff)
+            {
+                diff = newDiff;
+                center = index;
+            }
+        }
+
+        return center;
     }
 
     BSPLocation BSP::IsInFront(Point* target, BSPPoly* divider)
@@ -114,7 +147,7 @@ namespace fnMath
             return Congruent;
         else if(numInFront == 3)
             return InFront;
-        else if(numInFront = -3)
+        else if(numInFront == -3)
             return Behind;
         else
             return Divided;

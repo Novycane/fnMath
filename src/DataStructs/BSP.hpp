@@ -23,9 +23,9 @@ namespace fnMath{
 
 typedef enum
 {
-    InFront,
-    Behind,
+    Behind = -1,
     Congruent,
+    InFront,
     Divided
 } BSPLocation;
 
