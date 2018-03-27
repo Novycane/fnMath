@@ -86,18 +86,33 @@ namespace fnMath
         return (int)polySet->size() / 2;
     }
 
-    bool BSP::IsInFront(BSPPoly* target, BSPPoly* divider)
+    bool BSP::IsInFront(Point* target, BSPPoly* divider)
     {
-        Point normT;
+        // ----- Should I put this in a function?
         Point normD;
         float dot;
-        
-        Norm(target, &normT);
         Norm(divider, &normD);
-
-        dot = normT.x * normD.x + normT.y * normD.y + normT.z * normD.z;
+        dot = target->x * normD.x + target->y * normD.y + target->z * normD.z;
         
         if(dot < 0)
+            return true;
+        else
+            return false;
+    }
+
+    bool BSP::IsInFront(BSPPoly* target, BSPPoly* divider)
+    {
+        int numInFront = 0;
+        if(IsInFront(&target->p1, divider))
+            numInFront++;
+        if(IsInFront(&target->p2, divider))
+            numInFront++;
+        if(IsInFront(&target->p3, divider))
+            numInFront++;
+
+        if(numInFront == 0)
+            return false;
+        if(numInFront == 3)
             return true;
         else
             return false;

@@ -21,6 +21,14 @@
 
 namespace fnMath{
 
+typedef enum
+{
+    InFront,
+    Behind,
+    Congruent,
+    Divided
+} BSPLocation;
+
 typedef struct
 {
     float x;
@@ -60,7 +68,8 @@ class BSP
     // ------------------------- Private Method
     void RecursiveAdd(BSPNode* node, std::vector<BSPPoly>* polySet);
     int FindCenter(std::vector<BSPPoly>* polySet);
-    bool IsInFront(BSPPoly* target, BSPPoly* divider);
+    int IsInFront(BSPPoly* target, BSPPoly* divider);
+    int IsInFront(Point* target, BSPPoly* divider);
     void DividePoly(BSPPoly* poly,BSPPoly* plane);
     void Norm(BSPPoly *poly, Point *norm);
 
