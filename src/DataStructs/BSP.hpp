@@ -68,8 +68,8 @@ class BSP
     // ------------------------- Private Method
     void RecursiveAdd(BSPNode* node, std::vector<BSPPoly>* polySet);
     int FindCenter(std::vector<BSPPoly>* polySet);
-    int IsInFront(BSPPoly* target, BSPPoly* divider);
-    int IsInFront(Point* target, BSPPoly* divider);
+    BSPLocation IsInFront(BSPPoly* target, BSPPoly* divider);
+    BSPLocation IsInFront(Point* target, BSPPoly* divider);
     void DividePoly(BSPPoly* poly,BSPPoly* plane);
     void Norm(BSPPoly *poly, Point *norm);
 

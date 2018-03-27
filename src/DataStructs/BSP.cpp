@@ -86,7 +86,7 @@ namespace fnMath
         return (int)polySet->size() / 2;
     }
 
-    bool BSP::IsInFront(Point* target, BSPPoly* divider)
+    BSPLocation BSP::IsInFront(Point* target, BSPPoly* divider)
     {
         // ----- Should I put this in a function?
         Point normD;
@@ -95,27 +95,29 @@ namespace fnMath
         dot = target->x * normD.x + target->y * normD.y + target->z * normD.z;
         
         if(dot < 0)
-            return true;
+            return Behind;
+        if(dot == 0)
+            return Congruent;
         else
-            return false;
+            return InFront;
     }
 
-    bool BSP::IsInFront(BSPPoly* target, BSPPoly* divider)
+    BSPLocation BSP::IsInFront(BSPPoly* target, BSPPoly* divider)
     {
         int numInFront = 0;
-        if(IsInFront(&target->p1, divider))
-            numInFront++;
-        if(IsInFront(&target->p2, divider))
-            numInFront++;
-        if(IsInFront(&target->p3, divider))
-            numInFront++;
+        
+        numInFront += IsInFront(&target->p1, divider);
+        numInFront += IsInFront(&target->p2, divider);            
+        numInFront += IsInFront(&target->p3, divider);
 
         if(numInFront == 0)
-            return false;
-        if(numInFront == 3)
-            return true;
+            return Congruent;
+        else if(numInFront == 3)
+            return InFront;
+        else if(numInFront = -3)
+            return Behind;
         else
-            return false;
+            return Divided;
     }
 
     void BSP::Norm(BSPPoly *poly, Point *norm )
@@ -134,6 +136,15 @@ namespace fnMath
         norm->x = U.y * V.z - U.z * V.y;
         norm->y = U.z * V.x - U.x * V.z;
         norm->z = U.x * V.y - U.y * V.x;
+
+        float sum = norm->x * norm->x;
+        sum += norm->y * norm->y;
+        sum += norm->z * norm->z;
+        sum = sqrt(sum);
+
+        norm->x /= sum;
+        norm->y /= sum;
+        norm->z /= sum;
     }
 
 
