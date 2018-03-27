@@ -27,6 +27,7 @@ bool TestHWRandom();
 bool TestRandomBetween();
 bool TestFisherYates();
 bool TestMetropolisHastings();
+bool TestNormals();
 
 class Exponential : public fnMath::Function
 {
@@ -57,11 +58,38 @@ public:
     }
 };
 
+class Tri : public fnMath::Function
+{
+public:
+    double Evaluate(double x)
+    {
+        if(x < 0)
+            return 0.0;
+        else if(x < 5 )
+            return x * 0.5;
+        else if(x < 10 )
+            return x;
+        else if(x < 15 )
+            return 10 - (x - 10);
+        else if(x < 20 )
+            return(5 * x - 15);
+        else
+            return 0.0;
+        
+    }
+
+    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    {
+        return 0.0;
+    }
+};
+
 // ------------------------- Main
 
 int main (int argCount, char** args)
 {   
     TestMetropolisHastings();
+    //TestNormals();
 
     /*
     if(!TestHWRandom())
@@ -168,13 +196,31 @@ bool TestFisherYates()
 
 bool TestMetropolisHastings()
 {
-    MetropolisHastings MH(new Square());
+    MetropolisHastings MH(new Tri());
 
-    MH.BurnIn(100000);
+    MH.BurnIn(10000);
 
-    
-    for(int i=0; i<100000; i++)
+    for(int i=0; i<1000000; i++)
         std::cout << MH.GetNext() << std::endl;
+    
+    return true;
+}
+
+bool TestNormals()
+{
+    
+    RandomNumber rng;
+    
+    double x, y;
+    double x1, y1;
+    
+    std::cout << "x, y, x1, y1"  << std::endl;
+    for(int i=0; i<50000; i++)
+    {
+        rng.GenerateNormals(&x, &y);
+        rng.GenerateNormals(10, 3, &x1, &y1);
+        std::cout << x << "," << y << "," << x1 << "," << y1 << std::endl;
+    }
     
     return true;
 }

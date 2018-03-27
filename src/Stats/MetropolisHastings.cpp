@@ -40,6 +40,8 @@ double MetropolisHastings::GetNext()
 {
     double value, x, xp, u=1, a=0;
 
+    _v = _function->Evaluate(_x);
+
     while(a < u)
     {
         _rng.GenerateNormals(_x, 1, &x, &xp);
@@ -50,7 +52,7 @@ double MetropolisHastings::GetNext()
     }
     _x = x;
     _v = value;
-    return value;
+    return x;
 }
 
 #pragma mark Accessors
