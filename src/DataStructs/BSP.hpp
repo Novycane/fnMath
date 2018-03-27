@@ -17,16 +17,55 @@
 #ifndef BSP_HPP
 #define BSP_HPP
 
+#include <vector>
+
 namespace fnMath{
+
+typedef struct
+{
+    float x;
+    float y;
+    float z;
+} Point;
+
+typedef struct
+{
+    Point p1;
+    Point p2;
+    Point p3;
+} BSPPoly;
+
+typedef struct BSPNode BSPNode;
+
+struct BSPNode
+{
+    BSPNode* parent;
+    BSPNode* front;
+    BSPNode* back; 
+    BSPPoly poly;
+}; 
 
 class BSP 
 {
     public:
+    // ------------------------- Public Method
+    BSP();
+
+    void ConstructTree(std::vector<BSPPoly>* polySet);
 
     private:
+    // ------------------------- Private Members
+    BSPNode _root;
 
+    // ------------------------- Private Method
+    void RecursiveAdd(BSPNode* node, std::vector<BSPPoly>* polySet);
+    int FindCenter(std::vector<BSPPoly>* polySet);
+    bool IsInFront(BSPPoly* target, BSPPoly* divider);
+    void DividePoly(BSPPoly* poly,BSPPoly* plane);
+    void Norm(BSPPoly *poly, Point *norm);
 
 }; // End BSP Class
+
 } // End fnMath Namespace
 
 #endif
