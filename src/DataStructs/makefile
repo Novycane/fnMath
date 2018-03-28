@@ -30,6 +30,7 @@ Test: BSP.o
 	-@$(CC) $(CFLAGS) $(TEST)BSP.test.cpp -o $(TEMP)BSP.test.o
 	-@$(CC) $(TEMP)BSP.o $(TEMP)BSP.test.o -o $(TEMP)BSP$(EXT)
 	-@$(TEMP)BSP$(EXT)
+	-@del $(TEMP)BSP$(EXT)
 
 BSP.o: BSP.cpp BSP.hpp
 	-@ECHO -n "Building BSP"

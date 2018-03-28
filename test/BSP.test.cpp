@@ -12,20 +12,52 @@
 // --------------------------------------------------
 
 #include <iostream>
+#include <string>
 #include "../src/DataStructs/BSP.hpp"
 
 using namespace fnMath;
 
+bool Normal();
+bool BSPConstruction();
 void SetupPolyArray(std::vector<BSPPoly>* polySet);
 
 int main (int argCount, char** args)
 {
+    int passedTests = 0;
+    
+    passedTests += Test(Normal(), "Error Testing Normal Calculation");
+    passedTests += Test(BSPConstruction(), "Error Testing BSP Construction");
+}
+
+// -------------------------------------------------- Tests
+
+bool Normal()
+{
+    return true;
+}
+
+bool BSPConstruction()
+{
     BSP level;
     std::vector<BSPPoly>* polySet = new std::vector<BSPPoly>();
-
     SetupPolyArray(polySet);
-
     level.ConstructTree(polySet);
+    return true;
+}
+
+// -------------------------------------------------- Utils
+
+int Test(bool didPass, string* message)
+{
+    if(didPass)
+    {
+        return 1;
+    }
+    else
+    {
+        std::cout << message << std::endl;
+        return 0;
+    }
 }
 
 void SetupPolyArray(std::vector<BSPPoly>* polySet)
