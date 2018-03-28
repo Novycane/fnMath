@@ -61,17 +61,25 @@ class BSP
 
     void ConstructTree(std::vector<BSPPoly>* polySet);
 
+    void RecursiveAdd(BSPNode* node, std::vector<BSPPoly>* polySet);
+    
+    int FindCenter(std::vector<BSPPoly>* polySet);
+    
+    void DividePoly(BSPPoly* poly,BSPPoly* plane);
+    
+    bool IsConvexSet(std::vector<BSPPoly>* polySet);
+
+    BSPLocation IsInFront(BSPPoly* target, BSPPoly* divider);
+    
+    BSPLocation IsInFront(Point* target, BSPPoly* divider);
+    
+    void Norm(BSPPoly *poly, Point *norm);
+
     private:
     // ------------------------- Private Members
     BSPNode _root;
 
     // ------------------------- Private Method
-    void RecursiveAdd(BSPNode* node, std::vector<BSPPoly>* polySet);
-    int FindCenter(std::vector<BSPPoly>* polySet);
-    BSPLocation IsInFront(BSPPoly* target, BSPPoly* divider);
-    BSPLocation IsInFront(Point* target, BSPPoly* divider);
-    void DividePoly(BSPPoly* poly,BSPPoly* plane);
-    void Norm(BSPPoly *poly, Point *norm);
 
 }; // End BSP Class
 

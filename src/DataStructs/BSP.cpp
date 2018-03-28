@@ -48,24 +48,25 @@ namespace fnMath
 
         node->poly = (*polySet)[FindCenter(polySet)];
 
-        return;
-
         // Construct Two Sets
         frontSet = new std::vector<BSPPoly>();
         backSet = new std::vector<BSPPoly>();
         
         for(int i=0; i<polySet->size(); i++)
         {
-            if(IsInFront(&(*polySet)[i] , &node->poly))
+            BSPLocation location = IsInFront(&(*polySet)[i] , &node->poly);
+            if(location == InFront || location == Congruent)
                 frontSet->push_back((*polySet)[i]);
-            else
+            else if (location == Behind)
                 backSet->push_back((*polySet)[i]);
+            else
+            {
+                DividePoly(&(*polySet)[i] , &node->poly);
+            }
         }
     
         std::cout << "Front: " << frontSet->size() << std::endl;
         std::cout << "Back: " << backSet->size() << std::endl;
-
-        //return;
 
         BSPNode* frontNode = new BSPNode();
         BSPNode* backNode = new BSPNode();
@@ -74,15 +75,57 @@ namespace fnMath
         node->front = frontNode;
         node->back = backNode;
 
-        RecursiveAdd(frontNode, frontSet);
+        if(!IsConvexSet(frontSet))
+            RecursiveAdd(frontNode, frontSet);
 
-        RecursiveAdd(backNode, backSet);
-
+        if(!IsConvexSet(backSet))
+            RecursiveAdd(backNode, backSet);
+        return;
     }
 
     void BSP::DividePoly(BSPPoly* poly,BSPPoly* plane)
     {
 
+    }
+
+    bool BSP::IsConvexSet(std::vector<BSPPoly>* polySet)
+    {
+        for(int i = 0; i < polySet->size(); i++)
+        {
+            Point normI;
+            Point normIHat;
+            float sum;
+            Norm(&(*polySet)[i], &normI);
+
+            sum = sqrt(normI.x * normI.x + normI.y * normI.y + normI.z * normI.z);
+
+            std::cout << sum << std::endl;
+
+            normIHat.x = normI.x / sum;
+            normIHat.y = normI.y / sum;
+            normIHat.z = normI.z / sum;
+
+            for(int j = i + 1; j<polySet->size(); j++)
+            {
+                Point normJ;
+                Point normJHat;
+                Norm(&(*polySet)[i], &normJ);
+                sum = sqrt(normJ.x * normJ.x + normJ.y * normJ.y + normJ.z * normJ.z);
+                normJHat.x = normJ.x / sum;
+                normJHat.y = normJ.y / sum;
+                normJHat.z = normJ.z / sum;
+
+                normJ.x = normJ.x * normI.x + normJ.y * normI.y + normJ.z * normI.z;    
+                normJHat.x = normJHat.x * normIHat.x + normJHat.y * normIHat.y + normJHat.z * normIHat.z;
+                
+                std::cout << "Cos Theta: " << (normJ.x / normJHat.x) << " " << normJ.x << " " <<  normJHat.x << std::endl;
+
+                if(normJ.x / normJHat.x < 0 )
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     int BSP::FindCenter(std::vector<BSPPoly>* polySet)
