@@ -37,18 +37,13 @@ namespace fnMath
         std::vector<BSPPoly>* frontSet;
         std::vector<BSPPoly>* backSet;
 
-        std::cout << "Polygons: " << polySet->size() << std::endl;
-
-        if(polySet->size() == 1)
+        if(IsConvexSet(polySet))
         {
-            node->poly = (*polySet)[0];
-            // delete polyset?
             return;
         }
 
         node->poly = (*polySet)[FindCenter(polySet)];
 
-        // Construct Two Sets
         frontSet = new std::vector<BSPPoly>();
         backSet = new std::vector<BSPPoly>();
         
@@ -61,12 +56,9 @@ namespace fnMath
                 backSet->push_back((*polySet)[i]);
             else
             {
-                DividePoly(&(*polySet)[i] , &node->poly);
+                DividePoly(&(*polySet)[i] , &node->poly, frontSet, backSet);
             }
         }
-    
-        std::cout << "Front: " << frontSet->size() << std::endl;
-        std::cout << "Back: " << backSet->size() << std::endl;
 
         BSPNode* frontNode = new BSPNode();
         BSPNode* backNode = new BSPNode();
@@ -75,56 +67,64 @@ namespace fnMath
         node->front = frontNode;
         node->back = backNode;
 
-        if(!IsConvexSet(frontSet))
-            RecursiveAdd(frontNode, frontSet);
-
-        if(!IsConvexSet(backSet))
-            RecursiveAdd(backNode, backSet);
-        return;
+        RecursiveAdd(frontNode, frontSet);
+        RecursiveAdd(backNode, backSet);
     }
 
-    void BSP::DividePoly(BSPPoly* poly,BSPPoly* plane)
+    void BSP::DividePoly(BSPPoly* poly, BSPPoly* plane, std::vector<BSPPoly>* front, std::vector<BSPPoly>* back)
     {
+        std::vector<Point> f, b;
 
+        // calculate points on front and back of plane
+        if(IsInFront(&poly->p1, plane) == InFront)
+            f.push_back(poly->p1);
+        else
+            b.push_back(poly->p1);
+
+        if(IsInFront(&poly->p2, plane) == InFront)
+            f.push_back(poly->p1);
+        else
+            b.push_back(poly->p1);
+
+        if(IsInFront(&poly->p3, plane) == InFront)
+            f.push_back(poly->p1);
+        else
+            b.push_back(poly->p1);
+            
+        std::cout << f.size() << " " << b.size() << std::endl;
+        // are two points infront or behind plane?
+        if(f.size() == 2)
+        {
+            // -- calculate first intersection
+        }
+        else
+        {
+            // -- calculate second intersection
+        }
+        
+        // Create triangle from two new points to single point
+        // Create triangle from two old points to one new point
+        // Create Triangle From two old points to second new point
     }
 
     bool BSP::IsConvexSet(std::vector<BSPPoly>* polySet)
     {
         for(int i = 0; i < polySet->size(); i++)
         {
-            Point normI;
-            Point normIHat;
-            float sum;
-            Norm(&(*polySet)[i], &normI);
-
-            sum = sqrt(normI.x * normI.x + normI.y * normI.y + normI.z * normI.z);
-
-            std::cout << sum << std::endl;
-
-            normIHat.x = normI.x / sum;
-            normIHat.y = normI.y / sum;
-            normIHat.z = normI.z / sum;
-
-            for(int j = i + 1; j<polySet->size(); j++)
+            BSPPoly pi = (*polySet)[i];
+            for(int j = 0; j<polySet->size(); j++)
             {
-                Point normJ;
-                Point normJHat;
-                Norm(&(*polySet)[i], &normJ);
-                sum = sqrt(normJ.x * normJ.x + normJ.y * normJ.y + normJ.z * normJ.z);
-                normJHat.x = normJ.x / sum;
-                normJHat.y = normJ.y / sum;
-                normJHat.z = normJ.z / sum;
-
-                normJ.x = normJ.x * normI.x + normJ.y * normI.y + normJ.z * normI.z;    
-                normJHat.x = normJHat.x * normIHat.x + normJHat.y * normIHat.y + normJHat.z * normIHat.z;
-                
-                std::cout << "Cos Theta: " << (normJ.x / normJHat.x) << " " << normJ.x << " " <<  normJHat.x << std::endl;
-
-                if(normJ.x / normJHat.x < 0 )
-                    return false;
+                if(i != j)
+                {
+                    BSPPoly pj = (*polySet)[j];
+                    BSPLocation location = IsInFront(&pi, &pj);
+                    if(location == Behind || location == Divided)
+                    {
+                        return false;
+                    }
+                }
             }
         }
-
         return true;
     }
 
@@ -134,7 +134,9 @@ namespace fnMath
         int index, front, back;
         int diff = polySet->size();
 
-        srand((unsigned int)polySet * polySet->size());
+        unsigned int* num = (unsigned int*) polySet;
+
+        srand(*num);
 
         for(int j=0; j<5; j++)
         {
@@ -147,6 +149,8 @@ namespace fnMath
                 BSPLocation location = IsInFront(&(*polySet)[i] ,target);
                 if(location == InFront)
                     front++;
+                if(location == Congruent)
+                    back++;
                 if(location == Behind)
                     back++;
             }

@@ -18,6 +18,7 @@
 #define BSP_HPP
 
 #include <vector>
+#include <cmath>
 
 namespace fnMath{
 
@@ -65,7 +66,7 @@ class BSP
     
     int FindCenter(std::vector<BSPPoly>* polySet);
     
-    void DividePoly(BSPPoly* poly,BSPPoly* plane);
+    void DividePoly(BSPPoly* poly,BSPPoly* plane, std::vector<BSPPoly>* front, std::vector<BSPPoly>* back);
     
     bool IsConvexSet(std::vector<BSPPoly>* polySet);
 
