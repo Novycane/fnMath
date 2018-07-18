@@ -13,7 +13,7 @@ COMMON		= ../
 # ----- Targets
 all:	Derivative Integral
 	-@ECHO -n "Creating Calculus.o ."
-	-@ld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
+	-@lld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
 	-@ECHO "...ok"
 
 .PHONY:

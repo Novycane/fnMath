@@ -18,7 +18,7 @@
 #define Tridiagonal_hpp
 
 #include <vector>
-#include "Error.hpp"
+#include "../Error.hpp"
 
 using namespace std;
 

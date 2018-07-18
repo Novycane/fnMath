@@ -1,5 +1,8 @@
+RM = rm
+
 ifeq ($(OS),Windows_NT)
 EXT = .exe
+RM = del
 endif
 
 # ----- Compiler
@@ -23,14 +26,14 @@ all: BSP.o
 .PHONY:
 clean:
 	-@ECHO "Cleaning Files"
-	rm $(TEMP)Factorial.o
+	$(RM) $(TEMP)Factorial.o
 	
 Test: BSP.o
 	-@ECHO "Testing BSP.cpp"
 	-@$(CC) $(CFLAGS) $(TEST)BSP.test.cpp -o $(TEMP)BSP.test.o
 	-@$(CC) $(TEMP)BSP.o $(TEMP)BSP.test.o -o $(TEMP)BSP$(EXT)
 	-@$(TEMP)BSP$(EXT)
-	-@del $(TEMP)BSP$(EXT)
+	$(RM) $(TEMP)BSP$(EXT)
 
 BSP.o: BSP.cpp BSP.hpp
 	-@ECHO -n "Building BSP"
