@@ -1,6 +1,6 @@
 # ----- Compiler
 CC 		= clang++
-CFLAGS		= -g -c -std=c++14	
+CFLAGS		= -g -std=c++14	
 LFLAGS		= -g -lc++
 
 # ----- Directories
