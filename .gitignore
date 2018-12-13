@@ -41,7 +41,7 @@ src/Stats/*
 !/src/Stats/*.hpp
 !/src/Stats/makefile
 
-# ----- Bring in LinAlg
+# ----- Bring in Cryptography
 !/src/Crypto
 src/Crypto/*
 !/src/Crypto/*.cpp
@@ -57,5 +57,5 @@ src/Optimization/*
 
 # ----- Exclude all test files except .cpp
 !/test
-test/*
-!test/*.cpp
+/test/*
+!/test/*.cpp
