@@ -48,7 +48,14 @@ src/Crypto/*
 !/src/Crypto/*.hpp
 !/src/Crypto/makefile
 
-# ----- Excluda all test files except .cpp
+# ----- Bring in Optimization
+!/src/Optimization
+src/Optimization/*
+!/src/Optimization/*.cpp
+!/src/Optimization/*.hpp
+!/src/Optimization/makefile
+
+# ----- Exclude all test files except .cpp
 !/test
 test/*
 !test/*.cpp
