@@ -9,10 +9,11 @@
 #ifndef GRADIENTDESCENT_HPP
 #define GRADIENTDESCENT_HPP
 
+#include "../Function.hpp"
 #include "../LinAlg/LU.hpp"
 
-using namespace fnMath {
-using namespace Optimization {
+namespace fnMath {
+namespace Optimization {
 	
 class GradientDescent
 {	

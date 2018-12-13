@@ -6,10 +6,10 @@
 //  Copyright © 2017 Steven Novak. All rights reserved.
 //
 
-#incldue "LevenbergMarquad.hpp"
+#include "LevenbergMarquad.hpp"
 
-using namespace fnMath {
-using namespace Optimization {
+namespace fnMath {
+namespace Optimization {
 
 
 

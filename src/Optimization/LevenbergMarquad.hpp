@@ -11,8 +11,8 @@
 
 #include "../LinAlg/LU.hpp"
 
-using namespace fnMath {
-using namespace Optimization {
+namespace fnMath {
+namespace Optimization {
 	
 class LevenbergMarquad
 {

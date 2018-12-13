@@ -1,23 +1,41 @@
+ifeq ($(OS),Windows_NT)
+EXT = .exe
+endif
+
 # ----- Compiler
-CC 		= clang++
-CFLAGS		= -g -c -std=c++14	
+CC 			= clang++
+CFLAGS		= -g -Wall -c -std=c++14
+TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
 
 # ----- Directories
+EXT			= .exe
+TEST		= ../../test/
 TEMP		= ../../temp/
 BIN			= ../../bin/
 COMMON		= ../
 
 # ----- Targets
-all:	
+all: GradientDescent.o 
 	-@ECHO -n "Creating Optimization.o ."
-	-@ld -r LevenbergMarquad.o -o $(TEMP)Optimization.o
+	-@ld -r GradientDescent.o -o $(TEMP)Optimization.o
 	-@ECHO "...ok"
+
+test: GradientDescent.o
+	-@ECHO -n "Testing Optimization Library"
+	-@$(CC) $(CFLAGS) $(TEST)Optimization.test.cpp -o $(TEMP)Optimization.test.o
+	-@$(CC) $(TEMP)Optimization.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
+	-@$(TEMP)Optimization$(EXT)
 
 .PHONY:
 clean:
 	-@ECHO "Cleaning Files"
 	#rm $(TEMP)Matrix.o
+
+GradientDescent.o: GradientDescent.cpp GradientDescent.hpp 
+	-@ECHO -n "GradientDescent.cpp"
+	-@$(CC) $(CFLAGS) GradientDescent.cpp -o GradientDescent.o
+	-@ECHO "...ok"
 	
 LevenbergMarquad.o: LevenbergMarquad.cpp LevenbergMarquad.hpp 
 	-@ECHO -n "LevenbergMarquad.cpp"

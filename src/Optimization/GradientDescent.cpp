@@ -8,8 +8,8 @@
 
 #include "GradientDescent.hpp"
 
-using namespace fnMath {
-using namespace Optimization {
+namespace fnMath {
+namespace Optimization {
 
 
 
