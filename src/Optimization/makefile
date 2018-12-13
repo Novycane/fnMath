@@ -18,7 +18,7 @@ COMMON		= ../
 # ----- Targets
 all: GradientDescent.o 
 	-@ECHO -n "Creating Optimization.o ."
-	-@ld -r GradientDescent.o -o $(TEMP)Optimization.o
+	-@ld -r $(TEMP)GradientDescent.o -o $(TEMP)Optimization.o
 	-@ECHO "...ok"
 
 test: GradientDescent.o
@@ -30,11 +30,11 @@ test: GradientDescent.o
 .PHONY:
 clean:
 	-@ECHO "Cleaning Files"
-	#rm $(TEMP)Matrix.o
+	del "$(TEMP)GradientDescent.o"
 
 GradientDescent.o: GradientDescent.cpp GradientDescent.hpp 
 	-@ECHO -n "GradientDescent.cpp"
-	-@$(CC) $(CFLAGS) GradientDescent.cpp -o GradientDescent.o
+	-@$(CC) $(CFLAGS) GradientDescent.cpp -o $(TEMP)GradientDescent.o
 	-@ECHO "...ok"
 	
 LevenbergMarquad.o: LevenbergMarquad.cpp LevenbergMarquad.hpp 
