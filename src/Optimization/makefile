@@ -3,13 +3,12 @@ EXT = .exe
 endif
 
 # ----- Compiler
-CC 			= clang++
-CFLAGS		= -g -Wall -c -std=c++14
+CC 			= clang++ -Xclang -flto-visibility-public-std 
+CFLAGS		= -g -Wall -c 
 TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
 
 # ----- Directories
-EXT			= .exe
 TEST		= ../../test/
 TEMP		= ../../temp/
 BIN			= ../../bin/
@@ -24,7 +23,7 @@ all: GradientDescent.o
 test: GradientDescent.o
 	-@ECHO -n "Testing Optimization Library"
 	-@$(CC) $(CFLAGS) $(TEST)Optimization.test.cpp -o $(TEMP)Optimization.test.o
-	-@$(CC) $(TEMP)Optimization.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
+	-@$(CC) $(TEMP)GradientDescent.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
 	-@$(TEMP)Optimization$(EXT)
 
 .PHONY:

@@ -12,7 +12,6 @@
 #include "../Function.hpp"
 #include "../LinAlg/LU.hpp"
 #include "../Calculus/Derivative.hpp"
-#include <vector>
 
 namespace fnMath {
 namespace Optimization {
