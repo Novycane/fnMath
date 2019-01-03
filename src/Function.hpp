@@ -19,7 +19,7 @@ class Function
 {
 public:
     double virtual Evaluate(double x) = 0;
-    double virtual Evaluate(double x, MatrixD params) = 0;
+    double virtual Evaluate(MatrixD params) = 0;
     
 }; // End function Interface
 
