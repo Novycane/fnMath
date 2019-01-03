@@ -30,6 +30,11 @@ public:
     double D1(double x);
     double D2(double x);
     
+	double D_Forward_Partial(LinAlg::MatrixD params, int index);
+	double D_For_One_Side_Partial(LinAlg::MatrixD params, int index);
+    double D_Backward_Partial(LinAlg::MatrixD params, int index);
+    double D_Back_One_Side_Partial(LinAlg::MatrixD params, int index);
+	
     // -------------------- Accessors
     void setStepSize(double newStepSize);
     void setErrorLimit(double newErrorLimit);

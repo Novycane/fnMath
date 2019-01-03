@@ -27,8 +27,7 @@ double Derivative::D_Forward(double x)
 {
     double yPlus = F->Evaluate(x + stepSize);
     double y = F->Evaluate(x);
-    return (yPlus - y) / stepSize ;
-
+    return (yPlus - y) / stepSize;
 }
 
 double Derivative::D_For_One_Side(double x)
@@ -151,7 +150,48 @@ double Derivative::D2(double x)
     delete lastEvaluation;
     return thisEvaluation[MAXITER];
 }
+
+// ----------------------------------------
+// ----------------------------------------    
+	
+double Derivative::D_Forward_Partial(LinAlg::MatrixD params, int index)
+{
+	MatrixD paramPrime = params;
+	paramPrime[index][0] = paramPrime[index][0] + stepSize;
+	double yPlus = F->Evaluate(paramPrime);
+    double y = F->Evaluate(params);
+    return (yPlus - y) / stepSize ;
+}
+
+double Derivative::D_For_One_Side_Partial(LinAlg::MatrixD params, int index)
+{
+	double y = F->Evaluate(params);
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus2 = F->Evaluate(params);
+	
+    return (4 * yPlus - yPlus2 - 3 * y) / (2 * stepSize);
+}
+
+double Derivative::D_Backward_Partial(LinAlg::MatrixD params, int index)
+{
+	double y = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMin = F->Evaluate(params);
     
+    return (y - yMin) / stepSize;
+}
+
+double Derivative::D_Back_One_Side_Partial(LinAlg::MatrixD params, int index)
+{
+    double y = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus2 = F->Evaluate(params);
+    return ((3 * y - 4 * yMinus + yMinus2) / (2 * stepSize));
+}
     
 #pragma mark Accessors
 // ---------------------------------------- Accessors
