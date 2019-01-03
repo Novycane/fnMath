@@ -191,8 +191,31 @@ double Derivative::D_Back_One_Side_Partial(LinAlg::MatrixD params, int index)
 	params[index][0] = params[index][0] - stepSize;
     double yMinus2 = F->Evaluate(params);
     return ((3 * y - 4 * yMinus + yMinus2) / (2 * stepSize));
+} 
+	
+double Derivative::D_Centered_Partial(LinAlg::MatrixD params, int index)
+{
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - 2 * stepSize;
+    double yMinus = F->Evaluate(params);
+    return (yPlus - yMinus) / (2 * stepSize);
 }
-    
+
+
+double Derivative::D2_Centered_Partial(LinAlg::MatrixD params, int index)
+{
+    double y = F->Evaluate(params);
+	
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus = F->Evaluate(params);
+	
+	params[index][0] = params[index][0] + 2 * stepSize;
+    double yPlus = F->Evaluate(params);
+    return (yPlus - 2 * y + yMinus) / (stepSize * stepSize);
+}
+
+
 #pragma mark Accessors
 // ---------------------------------------- Accessors
 void Derivative::setStepSize(double newStepSize) { stepSize = newStepSize; };

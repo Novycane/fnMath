@@ -31,6 +31,8 @@ bool TestD_Forward_Partial();
 bool TestD_For_One_Side_Partial();
 bool TestD_Backward_Partial();
 bool TestD_Back_One_Side_Partial();
+bool TestD_Centered_Partial();
+bool TestD2_Centered_Partial();
 
 class Exponential : public fnMath::Function
 {
@@ -80,7 +82,7 @@ int main (int argCount, char** args)
     else 
         std::cout << "...Failed!";
 
-    std::cout << "Testing Backaward Derivative";
+    std::cout << "Testing Backward Derivative";
     result = TestD_Backward();
     if(result)
         std::cout << "...ok" << std::endl;
@@ -124,29 +126,43 @@ int main (int argCount, char** args)
 
 	// ----- Partial
 	
-	std::cout << "\nTesting Forward Partial Derivative";
+	std::cout << "Testing Forward Partial Derivative";
     result = TestD_Forward_Partial();
     if(result)
         std::cout << "...ok" << std::endl;
     else 
         std::cout << "...Failed!";
 	
-	std::cout << "\nTesting One Sided Forward Partial Derivative";
+	std::cout << "Testing One Sided Forward Partial Derivative";
     result = TestD_For_One_Side_Partial();
     if(result)
         std::cout << "...ok" << std::endl;
     else 
         std::cout << "...Failed!";
 	
-	std::cout << "\nTesting Backaward Partial Derivative";
+	std::cout << "Testing Backward Partial Derivative";
     result = TestD_Backward_Partial();
     if(result)
         std::cout << "...ok" << std::endl;
     else 
         std::cout << "...Failed!";
 	
-	std::cout << "\nTesting Backward One Side Partial Derivative";
+	std::cout << "Testing Backward One Side Partial Derivative";
     result = TestD_Back_One_Side_Partial();
+    if(result)
+        std::cout << "...ok" << std::endl;
+    else 
+        std::cout << "...Failed!";
+
+	std::cout << "Testing Centered Partial Derivative";
+    result = TestD_Centered_Partial();
+    if(result)
+        std::cout << "...ok" << std::endl;
+    else 
+        std::cout << "...Failed!";
+	
+	std::cout << "Testing Centered Partial Second Derivative";
+    result = TestD2_Centered_Partial();
     if(result)
         std::cout << "...ok" << std::endl;
     else 
@@ -420,6 +436,72 @@ bool TestD_Back_One_Side_Partial()
 		if(pass & pass2)
 			return true;
     }
+    return false;
+}
 
+bool TestD_Centered_Partial()
+{
+    Func2* f = new Func2();
+    Derivative D(f);
+	fnMath::MatrixD params(0, 2, 1);
+	
+    const double actual = 2;
+	const double actual2 = 22026.4657948067169579;
+    double result;
+	double result2;
+	
+	bool pass, pass2;
+	pass = pass2 = false;
+
+	params[0][0] = 10;
+	params[1][0] = 10;
+
+    for(double i=1; i>1e-20; i/=2)
+    {
+        D.setStepSize(i);
+        result = D.D_Centered_Partial(params, 0);
+		result2 = D.D_Centered_Partial(params, 1);
+        if(abs(result - actual) / actual < 1e-5)
+            pass = true;
+		if(abs(result2 - actual2) / actual2 < 1e-5)
+            pass2 = true;
+		
+		if(pass & pass2)
+			return true;
+    }
+    return false;
+}
+
+bool TestD2_Centered_Partial()
+{
+    Func2* f = new Func2();
+    Derivative D(f);
+	fnMath::MatrixD params(0, 2, 1);
+	
+    const double actual = 0;
+	const double actual2 = 22026.4657948067169579;
+    double result;
+	double result2;
+	
+	bool pass, pass2;
+	pass = pass2 = false;
+
+	params[0][0] = 10;
+	params[1][0] = 10;
+
+    for(double i=1; i>1e-20; i/=2)
+    {
+        D.setStepSize(i);
+        result = D.D2_Centered_Partial(params, 0);
+		result2 = D.D2_Centered_Partial(params, 1);
+			
+        if(result == actual)
+            pass = true;
+		if(abs(result2 - actual2) / actual2 < 1e-5)
+            pass2 = true;
+		
+		if(pass & pass2)
+			return true;
+    }
     return false;
 }
