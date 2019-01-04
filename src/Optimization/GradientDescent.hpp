@@ -21,6 +21,8 @@ class GradientDescent
     // ------------------------- Public Method
 	public:
 	
+	void FindMin(std::vector<double> initialConditions);
+	
 	void SetFunction(Function* f);
 	
 	void SetInitialConditions(std::vector<double> initialConditions);
