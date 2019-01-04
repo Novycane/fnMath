@@ -9,6 +9,7 @@
 #ifndef GRADIENTDESCENT_HPP
 #define GRADIENTDESCENT_HPP
 
+#include <memory>
 #include "../Function.hpp"
 #include "../LinAlg/LU.hpp"
 #include "../Calculus/Derivative.hpp"
@@ -18,12 +19,15 @@ namespace Optimization {
 	
 class GradientDescent
 {	
-    // ------------------------- Public Method
-	public:
+    public:
+	// ------------------------- Constructors
+
+	GradientDescent();
 	
-	void FindMin(std::vector<double> initialConditions);
+	// ------------------------- Public Method
+	double FindMin(std::vector<double> initialConditions);
 	
-	void SetFunction(Function* f);
+	void SetFunction(const std::shared_ptr<Function> f);
 	
 	void SetInitialConditions(std::vector<double> initialConditions);
 	
@@ -31,12 +35,16 @@ class GradientDescent
 	
 	// ------------------------- Private Members
 	private:
-	Function* _f;
-	std::vector<double> _initialConditions;
+	int _freeParams;
+	
+	std::shared_ptr<Calculus::Derivative> _differentiator;	
+	std::shared_ptr<Function> _f;
+	std::shared_ptr<vector<double>> _initialConditions; 
+	std::shared_ptr<MatrixD> _jacobian;
 	std::vector<bool> _flags;
 
     // ------------------------- Private Methods
-	void CalculateJacobian();
+	void CalculateJacobian(std::vector<double>* iteration);
 	
 }; 	// End class GradientDescent 
 	
