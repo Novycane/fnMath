@@ -30,7 +30,7 @@ public:
         return exp(x);
     }
 
-    double Evaluate(fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
         return 0.0;
     }

@@ -30,14 +30,14 @@ public:
     double D1(double x);
     double D2(double x);
     
-	double D_Forward_Partial(LinAlg::MatrixD params, int index);
-	double D_For_One_Side_Partial(LinAlg::MatrixD params, int index);
-    double D_Backward_Partial(LinAlg::MatrixD params, int index);
-    double D_Back_One_Side_Partial(LinAlg::MatrixD params, int index);
-	double D_Centered_Partial(LinAlg::MatrixD params, int index);
-    double D2_Centered_Partial(LinAlg::MatrixD params, int index);
-    double D1_Partial(LinAlg::MatrixD params, int index);
-    double D2_Partial(LinAlg::MatrixD params, int index);
+	double D_Forward_Partial(vector<double> params, int index);
+	double D_For_One_Side_Partial(vector<double> params, int index);
+    double D_Backward_Partial(vector<double> params, int index);
+    double D_Back_One_Side_Partial(vector<double> params, int index);
+	double D_Centered_Partial(vector<double> params, int index);
+    double D2_Centered_Partial(vector<double> params, int index);
+    double D1_Partial(vector<double> params, int index);
+    double D2_Partial(vector<double> params, int index);
 	
     // -------------------- Accessors
     void setStepSize(double newStepSize);
