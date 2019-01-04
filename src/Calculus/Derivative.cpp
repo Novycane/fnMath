@@ -27,8 +27,7 @@ double Derivative::D_Forward(double x)
 {
     double yPlus = F->Evaluate(x + stepSize);
     double y = F->Evaluate(x);
-    return (yPlus - y) / stepSize ;
-
+    return (yPlus - y) / stepSize;
 }
 
 double Derivative::D_For_One_Side(double x)
@@ -151,8 +150,170 @@ double Derivative::D2(double x)
     delete lastEvaluation;
     return thisEvaluation[MAXITER];
 }
+
+// ----------------------------------------
+// ----------------------------------------    
+	
+double Derivative::D_Forward_Partial(LinAlg::MatrixD params, int index)
+{
+	MatrixD paramPrime = params;
+	paramPrime[index][0] = paramPrime[index][0] + stepSize;
+	double yPlus = F->Evaluate(paramPrime);
+    double y = F->Evaluate(params);
+    return (yPlus - y) / stepSize ;
+}
+
+double Derivative::D_For_One_Side_Partial(LinAlg::MatrixD params, int index)
+{
+	double y = F->Evaluate(params);
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus2 = F->Evaluate(params);
+	
+    return (4 * yPlus - yPlus2 - 3 * y) / (2 * stepSize);
+}
+
+double Derivative::D_Backward_Partial(LinAlg::MatrixD params, int index)
+{
+	double y = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMin = F->Evaluate(params);
     
+    return (y - yMin) / stepSize;
+}
+
+double Derivative::D_Back_One_Side_Partial(LinAlg::MatrixD params, int index)
+{
+    double y = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus = F->Evaluate(params);
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus2 = F->Evaluate(params);
+    return ((3 * y - 4 * yMinus + yMinus2) / (2 * stepSize));
+} 
+	
+double Derivative::D_Centered_Partial(LinAlg::MatrixD params, int index)
+{
+	params[index][0] = params[index][0] + stepSize;
+    double yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - 2 * stepSize;
+    double yMinus = F->Evaluate(params);
+    return (yPlus - yMinus) / (2 * stepSize);
+}
+
+
+double Derivative::D2_Centered_Partial(LinAlg::MatrixD params, int index)
+{
+    double y = F->Evaluate(params);
+	
+	params[index][0] = params[index][0] - stepSize;
+    double yMinus = F->Evaluate(params);
+	
+	params[index][0] = params[index][0] + 2 * stepSize;
+    double yPlus = F->Evaluate(params);
+    return (yPlus - 2 * y + yMinus) / (stepSize * stepSize);
+}
+
+double Derivative::D1_Partial(LinAlg::MatrixD params, int index)
+{
+    double yPlus;
+    double yMinus;
+    double h = params[index][0]/2;
+    double* thisEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double* lastEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double error;
+
+	params[index][0] = params[index][0] + h;
+    yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - h - h;
+	yMinus = F->Evaluate(params);
+    lastEvaluation[0] = (yPlus - yMinus) / (2 * stepSize);
+    params[index][0] = params[index][0] + h;
+	
+    for(int iterations=1; iterations <= MAXITER; iterations++)
+    {
+        //cout << "Iteration #" << iterations << " Sum= " << lastEvaluation [iterations-1] << endl;
+        h /= 2;
+        //yPlus = F->Evaluate(x + h);
+        //yMinus = F->Evaluate(x - h);
+		params[index][0] = params[index][0] + h;
+		yPlus = F->Evaluate(params);
+		params[index][0] = params[index][0] - h - h;
+		yMinus = F->Evaluate(params);
+		params[index][0] = params[index][0] + h;
+		
+        thisEvaluation[iterations]  = (yPlus - yMinus) / (2 * h);
+        
+        error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1 ;
+        if(error < 0)
+            error *= -1;
+        
+        if(error <= err)
+        {
+            double x = thisEvaluation[iterations];
+            delete thisEvaluation;
+            delete lastEvaluation;
+            return x;
+        }
+        std::swap(lastEvaluation, thisEvaluation);
+    }
     
+    delete thisEvaluation;
+    delete lastEvaluation;
+    return thisEvaluation[MAXITER];
+}
+
+double Derivative::D2_Partial(LinAlg::MatrixD params, int index)
+{
+    double y;
+    double yPlus;
+    double yMinus;
+    double h = params[index][0]/2;
+    double* thisEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double* lastEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double error, lastError=0;
+    
+    y = F->Evaluate(params);
+	params[index][0] = params[index][0] + h;
+    yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - h - h;
+    yMinus = F->Evaluate(params);
+	params[index][0] = params[index][0] + h;
+	
+    lastEvaluation[0] = (yPlus - 2 * y + yMinus) / (h * h);
+    
+    for(int iterations=1; iterations <= MAXITER; iterations++)
+    {
+        h /= 2;
+		params[index][0] = params[index][0] + h;
+        yPlus = F->Evaluate(params);
+		params[index][0] = params[index][0] - h - h;
+		yMinus = F->Evaluate(params);
+		params[index][0] = params[index][0] + h;
+        thisEvaluation[iterations]  = (yPlus - 2 * y + yMinus) / (h * h);
+        
+        error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1 ;
+        if(error < 0)
+            error *= -1;
+                
+        if(error <= err)
+        {
+            double x = thisEvaluation[iterations];
+            delete thisEvaluation;
+            delete lastEvaluation;
+            return x;
+        }
+        
+        lastError = error;
+        std::swap(lastEvaluation, thisEvaluation);
+    }
+    
+    delete thisEvaluation;
+    delete lastEvaluation;
+    return thisEvaluation[MAXITER];
+}
+
 #pragma mark Accessors
 // ---------------------------------------- Accessors
 void Derivative::setStepSize(double newStepSize) { stepSize = newStepSize; };

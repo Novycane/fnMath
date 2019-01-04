@@ -1,5 +1,9 @@
+ifeq ($(OS),Windows_NT)
+EXT = .exe
+endif 
+
 # ----- Compiler
-CC 		= clang++
+CC 		= clang++ -Xclang -flto-visibility-public-std 
 CFLAGS		= -g -Wall -c -std=c++14
 TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
@@ -13,7 +17,7 @@ COMMON		= ../
 # ----- Targets
 all:	Derivative Integral
 	-@ECHO -n "Creating Calculus.o ."
-	-@lld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
+	-@ld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
 	-@ECHO "...ok"
 
 .PHONY:
@@ -35,12 +39,12 @@ Integral: Integral.cpp Integral.hpp $(COMMON)Function.hpp
 
 # ----- Testing Targets
 Test: Integral Derivative
-	-@ECHO -n -------- Integral.cpp --------
+	-@ECHO -n "-------- Integral.cpp --------"
 	-@$(CC) $(CFLAGS) $(TEST)Integral.test.cpp -o $(TEMP)Integral.test.o
-	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral
-	-@$(TEMP)Integral
-	-@ECHO .
-	-@ECHO -n -------- Derivative.cpp ---------
+	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral$(EXT)
+	-@$(TEMP)Integral$(EXT)
+
+	-@ECHO -n "-------- Derivative.cpp ---------"
 	-@$(CC) $(CFLAGS) $(TEST)Derivative.test.cpp -o $(TEMP)Derivative.test.o
-	-@$(CC) $(TEMP)Derivative.o $(TEMP)Derivative.test.o -o $(TEMP)Derivative
-	-@$(TEMP)Derivative
+	-@$(CC) $(TEMP)Derivative.o $(TEMP)Derivative.test.o -o $(TEMP)Derivative$(EXT)
+	-@$(TEMP)Derivative$(EXT)
