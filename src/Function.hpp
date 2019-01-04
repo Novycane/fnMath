@@ -18,11 +18,14 @@ namespace fnMath{
 class Function
 {
 public:
+	virtual ~Function() = 0;
+	
     double virtual Evaluate(double x) = 0;
     double virtual Evaluate(vector<double> params) = 0;
     
 }; // End function Interface
 
+inline Function::~Function() {};
 
 } // End fnMath Namespace
 
