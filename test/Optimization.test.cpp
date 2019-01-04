@@ -33,9 +33,9 @@ public:
         return x * x - 5;
     }
 
-    double Evaluate(fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
-        return params[0][0] * params[0][0] - 5;
+        return params[0] * params[0] - 5;
     }
 };
 
