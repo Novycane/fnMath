@@ -13,7 +13,7 @@ namespace Calculus{
 
 #pragma mark Constructors
 // ---------------------------------------- Constructors
-Derivative::Derivative(Function * Fun)
+Derivative::Derivative(std::shared_ptr<Function> Fun)
 {
     F = Fun;
     stepSize = 1;

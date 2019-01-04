@@ -63,7 +63,7 @@ int main (int argCount, char** args)
 bool TestTrapezoidal()
 {
     Trapezoidal T;
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     const double actual = 19.08553692318766774;
     double result;
 
@@ -71,14 +71,13 @@ bool TestTrapezoidal()
     
     if(abs(result - actual) > 1e-5)
         return false;
-
     return true;
 }
 
 bool TestRhomberg()
 {
     Rhomberg R;
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     const double actual = 19.08553692318766774;
     double result;
 
@@ -86,8 +85,5 @@ bool TestRhomberg()
     
     if(abs(result - actual) > R.getError())
         return false;
-
-    return true;
-
     return true;
 }

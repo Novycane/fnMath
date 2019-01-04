@@ -22,7 +22,7 @@ FiniteDifference::FiniteDifference()
     MAXITER = 20;
 }
     
-FiniteDifference::FiniteDifference(Function & F)
+FiniteDifference::FiniteDifference(std::shared_ptr<Function> F)
 {
     err = 1e-10;
     MAXITER = 20;
@@ -32,7 +32,7 @@ FiniteDifference::FiniteDifference(Function & F)
 #pragma mark Accessors
 // ---------------------------------------- Accessors
 
-void FiniteDifference::SetFunction(Function * & NewFunction) {EvalFunction = NewFunction;}
+void FiniteDifference::SetFunction(std::shared_ptr<Function> NewFunction) {EvalFunction = NewFunction;}
 void FiniteDifference::SetError(double Error) { err = Error;}
 void FiniteDifference::SetMaxIterations(int NewMaxIterations) {MAXITER = NewMaxIterations;}
 double FiniteDifference::GetError() const {return err;}

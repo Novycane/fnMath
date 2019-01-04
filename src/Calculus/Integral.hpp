@@ -19,7 +19,7 @@ class Trapezoidal
 {
 public:
     // -------------------- Public Methods
-    double Integrate(Function* F, double start, double end, int steps);
+    double Integrate(std::shared_ptr<Function> F, double start, double end, int steps);
     
 }; // end trapezoidal
 
@@ -27,7 +27,7 @@ class Rhomberg
 {
 public:
     // -------------------- Public Methods
-    double Integrate(Function* F, double start, double end);
+    double Integrate(std::shared_ptr<Function> F, double start, double end);
     
     // -------------------- Accessors
     void setError(double error);

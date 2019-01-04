@@ -191,7 +191,7 @@ int main (int argCount, char** args)
 
 bool TestD_Forward()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -208,7 +208,7 @@ bool TestD_Forward()
 
 bool TestD_For_One_Side()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -225,7 +225,7 @@ bool TestD_For_One_Side()
 
 bool TestD_Backward()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -242,7 +242,7 @@ bool TestD_Backward()
 
 bool TestD_Back_One_Side()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -259,7 +259,7 @@ bool TestD_Back_One_Side()
 
 bool TestD_Centered()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -276,7 +276,7 @@ bool TestD_Centered()
 
 bool TestD2_Centered()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -293,7 +293,7 @@ bool TestD2_Centered()
 
 bool TestD1()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -307,7 +307,7 @@ bool TestD1()
 
 bool TestD2()
 {
-    Exponential* e = new Exponential();
+    std::shared_ptr<Exponential> e = make_shared<Exponential>();
     Derivative D(e);
     const double actual = 22026.4657948067169579;
     double result;
@@ -321,7 +321,7 @@ bool TestD2()
 
 bool TestD_Forward_Partial()
 {
-    Func2* f = new Func2();
+	std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -355,7 +355,7 @@ bool TestD_Forward_Partial()
 
 bool TestD_For_One_Side_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -389,7 +389,7 @@ bool TestD_For_One_Side_Partial()
 
 bool TestD_Backward_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -424,7 +424,7 @@ bool TestD_Backward_Partial()
 
 bool TestD_Back_One_Side_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -457,7 +457,7 @@ bool TestD_Back_One_Side_Partial()
 
 bool TestD_Centered_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -490,7 +490,7 @@ bool TestD_Centered_Partial()
 
 bool TestD2_Centered_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -524,7 +524,7 @@ bool TestD2_Centered_Partial()
 
 bool TestD1_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	
@@ -554,7 +554,7 @@ bool TestD1_Partial()
 
 bool TestD2_Partial()
 {
-    Func2* f = new Func2();
+    std::shared_ptr<Func2> f = make_shared<Func2>();
     Derivative D(f);
 	vector<double> params;
 	

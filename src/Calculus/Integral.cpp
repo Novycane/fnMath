@@ -15,7 +15,7 @@ namespace Calculus{
 // ----------------------------------------
 // ---------------------------------------- Trapezoidal
 // ----------------------------------------
-double Trapezoidal::Integrate(Function* F, double start, double end, int steps)
+double Trapezoidal::Integrate(std::shared_ptr<Function> F, double start, double end, int steps)
 {
     double x = start;
     double h = (end - start) / steps;
@@ -35,7 +35,7 @@ double Trapezoidal::Integrate(Function* F, double start, double end, int steps)
 // ----------------------------------------
 // ---------------------------------------- Rhomberg
 // ----------------------------------------
-double Rhomberg::Integrate(Function* F, double start, double end)
+double Rhomberg::Integrate(std::shared_ptr<Function> F, double start, double end)
 {
     double x = start;
     double h = (end - start);

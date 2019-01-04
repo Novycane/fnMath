@@ -18,7 +18,7 @@ class Derivative
 {
 public:
     // -------------------- Constructors
-    Derivative(Function * Fun);
+    Derivative(std::shared_ptr<Function> Fun);
     
     // -------------------- Public Methods
     double D_Forward(double x);
@@ -50,7 +50,7 @@ public:
     
 private:
     // -------------------- Private Members
-    Function * F;
+    std::shared_ptr<Function> F;
     int MAXITER;
     double stepSize;
     double err;

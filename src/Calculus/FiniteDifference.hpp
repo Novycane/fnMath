@@ -9,8 +9,8 @@
 #ifndef FiniteDifference_hpp
 #define FiniteDifference_hpp
 
-#include "Function.hpp"
 #include <vector>
+#include "Function.hpp"
 #include "Matrix.hpp"
 
 namespace fnMath {
@@ -21,10 +21,10 @@ class FiniteDifference
 public:
     // -------------------- Constructors
     FiniteDifference();
-    FiniteDifference(Function & F);
+    FiniteDifference(std::shared_ptr<Function> F);
     
     // -------------------- Accessors
-    void SetFunction(Function * & NewFunction);
+    void SetFunction(std::shared_ptr<Function> NewFunction);
     void SetError(double Error);
     void SetMaxIterations(int NewMaxIterations);
     double GetError() const;
@@ -44,7 +44,7 @@ private:
     // -------------------- Private Members
     double err;
     int MAXITER;
-    Function* EvalFunction;
+    std::shared_ptr<Function> EvalFunction;
     
     
     // -------------------- Private Methods
