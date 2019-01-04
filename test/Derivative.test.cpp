@@ -44,7 +44,7 @@ public:
         return exp(x);
     }
 
-    double Evaluate(fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
         return 0.0;
     }
@@ -58,9 +58,9 @@ public:
         return 0;
     }
 
-    double Evaluate(fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
-        return 2 * params[0][0] + exp(params[1][0]);
+        return 2 * params[0] + exp(params[1]);
     }
 };
 
@@ -323,7 +323,7 @@ bool TestD_Forward_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -333,8 +333,8 @@ bool TestD_Forward_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -357,7 +357,7 @@ bool TestD_For_One_Side_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -367,8 +367,8 @@ bool TestD_For_One_Side_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -391,7 +391,7 @@ bool TestD_Backward_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -401,8 +401,8 @@ bool TestD_Backward_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -426,7 +426,7 @@ bool TestD_Back_One_Side_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -436,8 +436,8 @@ bool TestD_Back_One_Side_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -459,7 +459,7 @@ bool TestD_Centered_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -469,8 +469,8 @@ bool TestD_Centered_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -492,7 +492,7 @@ bool TestD2_Centered_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 0;
 	const double actual2 = 22026.4657948067169579;
@@ -502,8 +502,8 @@ bool TestD2_Centered_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     for(double i=1; i>1e-20; i/=2)
     {
@@ -526,7 +526,7 @@ bool TestD1_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 2;
 	const double actual2 = 22026.4657948067169579;
@@ -536,9 +536,9 @@ bool TestD1_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
-
+	params.push_back(10);
+	params.push_back(10);
+	
     result = D.D1_Partial(params, 0);
 	result2 = D.D1_Partial(params, 1);
 		
@@ -556,7 +556,7 @@ bool TestD2_Partial()
 {
     Func2* f = new Func2();
     Derivative D(f);
-	fnMath::MatrixD params(0, 2, 1);
+	vector<double> params;
 	
     const double actual = 0.0;
 	const double actual2 = 22026.4657948067169579;
@@ -566,8 +566,8 @@ bool TestD2_Partial()
 	bool pass, pass2;
 	pass = pass2 = false;
 
-	params[0][0] = 10;
-	params[1][0] = 10;
+	params.push_back(10);
+	params.push_back(10);
 
     result = D.D2_Partial(params, 0);
 	result2 = D.D2_Partial(params, 1);
