@@ -36,6 +36,9 @@ class GradientDescent
 	// ------------------------- Private Members
 	private:
 	int _freeParams;
+	int MAXITER;
+	double ERR;
+	double _damping;
 	
 	std::shared_ptr<Calculus::Derivative> _differentiator;	
 	std::shared_ptr<Function> _f;
@@ -44,7 +47,7 @@ class GradientDescent
 	std::vector<bool> _flags;
 
     // ------------------------- Private Methods
-	void CalculateJacobian(std::vector<double>* iteration);
+	double CalculateDerivative(std::vector<double>* iteration);
 	
 }; 	// End class GradientDescent 
 	

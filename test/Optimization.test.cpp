@@ -29,6 +29,12 @@ class Quadratic : public fnMath::Function
 {
 public:
 	
+	Quadratic()
+	{
+		_x = 76.0535;
+		_y = 0.168;
+	}
+	
     virtual double Evaluate(double x)
     {
         return x * x - 5;
@@ -36,8 +42,10 @@ public:
 
     virtual double Evaluate(vector<double> params)
     {
-        return (params[0] - 5) * (params[0] - 5) + (params[1] - 5) * (params[1] - 5);
+        return (params[0] - _x) * (params[0] - _x) + (params[1] + _y) * (params[1] + _y);
     }
+private:
+	double _x, _y;
 
 };
 
@@ -80,15 +88,15 @@ bool TestGradientDescent()
 	flags.push_back(true);
 	flags.push_back(true);
 	
-	guess.push_back(10.0);
-	guess.push_back(10.0);
+	guess.push_back(100.0);
+	guess.push_back(-512.0);
 	
 	GD.SetFunction(make_shared<Quadratic>());
 	GD.SetFlags(flags);
 	
 	double result = GD.FindMin(guess);
 	
-	cout << result << endl;
+	cout << endl << "Result: " << result << endl;
 	
 	return true;
 }

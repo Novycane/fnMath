@@ -23,7 +23,7 @@ all: GradientDescent.o
 test: GradientDescent.o
 	-@ECHO -n "Testing Optimization Library"
 	-@$(CC) $(CFLAGS) $(TEST)Optimization.test.cpp -o $(TEMP)Optimization.test.o
-	-@$(CC) $(TEMP)GradientDescent.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
+	-@$(CC) $(TEMP)GradientDescent.o $(TEMP)Derivative.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
 	-@$(TEMP)Optimization$(EXT)
 
 .PHONY:
