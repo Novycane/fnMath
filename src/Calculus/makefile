@@ -3,7 +3,7 @@ EXT = .exe
 endif 
 
 # ----- Compiler
-CC 		= clang++
+CC 		= clang++ -Xclang -flto-visibility-public-std 
 CFLAGS		= -g -Wall -c -std=c++14
 TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
@@ -43,7 +43,7 @@ Test: Integral Derivative
 	-@$(CC) $(CFLAGS) $(TEST)Integral.test.cpp -o $(TEMP)Integral.test.o
 	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral$(EXT)
 	-@$(TEMP)Integral$(EXT)
-	-@ECHO .
+
 	-@ECHO -n "-------- Derivative.cpp ---------"
 	-@$(CC) $(CFLAGS) $(TEST)Derivative.test.cpp -o $(TEMP)Derivative.test.o
 	-@$(CC) $(TEMP)Derivative.o $(TEMP)Derivative.test.o -o $(TEMP)Derivative$(EXT)

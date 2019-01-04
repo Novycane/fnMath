@@ -36,6 +36,8 @@ public:
     double D_Back_One_Side_Partial(LinAlg::MatrixD params, int index);
 	double D_Centered_Partial(LinAlg::MatrixD params, int index);
     double D2_Centered_Partial(LinAlg::MatrixD params, int index);
+    double D1_Partial(LinAlg::MatrixD params, int index);
+    double D2_Partial(LinAlg::MatrixD params, int index);
 	
     // -------------------- Accessors
     void setStepSize(double newStepSize);

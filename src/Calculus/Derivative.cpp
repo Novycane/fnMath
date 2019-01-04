@@ -215,6 +215,104 @@ double Derivative::D2_Centered_Partial(LinAlg::MatrixD params, int index)
     return (yPlus - 2 * y + yMinus) / (stepSize * stepSize);
 }
 
+double Derivative::D1_Partial(LinAlg::MatrixD params, int index)
+{
+    double yPlus;
+    double yMinus;
+    double h = params[index][0]/2;
+    double* thisEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double* lastEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double error;
+
+	params[index][0] = params[index][0] + h;
+    yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - h - h;
+	yMinus = F->Evaluate(params);
+    lastEvaluation[0] = (yPlus - yMinus) / (2 * stepSize);
+    params[index][0] = params[index][0] + h;
+	
+    for(int iterations=1; iterations <= MAXITER; iterations++)
+    {
+        //cout << "Iteration #" << iterations << " Sum= " << lastEvaluation [iterations-1] << endl;
+        h /= 2;
+        //yPlus = F->Evaluate(x + h);
+        //yMinus = F->Evaluate(x - h);
+		params[index][0] = params[index][0] + h;
+		yPlus = F->Evaluate(params);
+		params[index][0] = params[index][0] - h - h;
+		yMinus = F->Evaluate(params);
+		params[index][0] = params[index][0] + h;
+		
+        thisEvaluation[iterations]  = (yPlus - yMinus) / (2 * h);
+        
+        error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1 ;
+        if(error < 0)
+            error *= -1;
+        
+        if(error <= err)
+        {
+            double x = thisEvaluation[iterations];
+            delete thisEvaluation;
+            delete lastEvaluation;
+            return x;
+        }
+        std::swap(lastEvaluation, thisEvaluation);
+    }
+    
+    delete thisEvaluation;
+    delete lastEvaluation;
+    return thisEvaluation[MAXITER];
+}
+
+double Derivative::D2_Partial(LinAlg::MatrixD params, int index)
+{
+    double y;
+    double yPlus;
+    double yMinus;
+    double h = params[index][0]/2;
+    double* thisEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double* lastEvaluation = (double*)malloc((MAXITER + 1) * sizeof(double));
+    double error, lastError=0;
+    
+    y = F->Evaluate(params);
+	params[index][0] = params[index][0] + h;
+    yPlus = F->Evaluate(params);
+	params[index][0] = params[index][0] - h - h;
+    yMinus = F->Evaluate(params);
+	params[index][0] = params[index][0] + h;
+	
+    lastEvaluation[0] = (yPlus - 2 * y + yMinus) / (h * h);
+    
+    for(int iterations=1; iterations <= MAXITER; iterations++)
+    {
+        h /= 2;
+		params[index][0] = params[index][0] + h;
+        yPlus = F->Evaluate(params);
+		params[index][0] = params[index][0] - h - h;
+		yMinus = F->Evaluate(params);
+		params[index][0] = params[index][0] + h;
+        thisEvaluation[iterations]  = (yPlus - 2 * y + yMinus) / (h * h);
+        
+        error = thisEvaluation[iterations] / lastEvaluation[iterations-1] - 1 ;
+        if(error < 0)
+            error *= -1;
+                
+        if(error <= err)
+        {
+            double x = thisEvaluation[iterations];
+            delete thisEvaluation;
+            delete lastEvaluation;
+            return x;
+        }
+        
+        lastError = error;
+        std::swap(lastEvaluation, thisEvaluation);
+    }
+    
+    delete thisEvaluation;
+    delete lastEvaluation;
+    return thisEvaluation[MAXITER];
+}
 
 #pragma mark Accessors
 // ---------------------------------------- Accessors
