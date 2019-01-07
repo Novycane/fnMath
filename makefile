@@ -6,6 +6,10 @@
 #        12.04.2017
 # -------------------------
 
+# ----- Variables
+
+MAKE 		= make
+
 # ----- Directories
 TESTPATH 	= test
 HEADPATH	= src
@@ -14,11 +18,16 @@ BINPATH		= bin
 TEMPPATH 	= temp
 
 # ----- Main Targets
-all		    : Make_Dirs Matrix.o
-	-@echo "Building All"
+all	:
+	-@echo ----- Building All -----
+	-@echo .
+	-@echo .
+	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
+	-@$(MAKE) -C ./$(SRCPATH)/Calculus Test
+	-@$(MAKE) -C ./$(SRCPATH)/Optimization Test
 
 test		: 
-	-@make -C ./$(SRCPATH)/Crypto Test
+	-@$(MAKE) -C ./$(SRCPATH)/Crypto Test
 
 # ----- Dependencies
 Matrix.o	: src/Matrix.cpp src/Matrix.hpp
