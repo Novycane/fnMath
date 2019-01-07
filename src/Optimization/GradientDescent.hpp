@@ -25,7 +25,7 @@ class GradientDescent
 	GradientDescent();
 	
 	// ------------------------- Public Method
-	double FindMin(std::vector<double> initialConditions);
+	double FindMin(std::shared_ptr<std::vector<double>> initialConditions);
 	
 	void SetFunction(const std::shared_ptr<Function> f);
 	
@@ -43,11 +43,11 @@ class GradientDescent
 	std::shared_ptr<Calculus::Derivative> _differentiator;	
 	std::shared_ptr<Function> _f;
 	std::shared_ptr<vector<double>> _initialConditions; 
-	std::shared_ptr<MatrixD> _jacobian;
+	std::shared_ptr<vector<double>> _derivative; 
 	std::vector<bool> _flags;
 
     // ------------------------- Private Methods
-	double CalculateDerivative(std::vector<double>* iteration);
+	double CalculateDerivative(std::shared_ptr<std::vector<double>> iteration);
 	
 }; 	// End class GradientDescent 
 	

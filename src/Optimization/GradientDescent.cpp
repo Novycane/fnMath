@@ -25,37 +25,25 @@ namespace Optimization {
     // --------------------------------------------------
     // ----- Public Methods
 
-	double GradientDescent::FindMin(std::vector<double> initialConditions)
+	double GradientDescent::FindMin(std::shared_ptr<std::vector<double>> initialConditions)
 	{
 		double error = 0;
 		double step = 0;
 		double lastStep = DBL_MAX;
-		std::vector<double> iteration = initialConditions;
+		
+		_derivative = make_shared<vector<double>>(initialConditions->size());
 		
 		for(int i=0; i<MAXITER; i++)
 		{			
-			step = CalculateDerivative(&iteration);
-			
-			/*
-			if(step < lastStep)
-				_damping *= 2.0;
-			else
-				_damping /= 2.0;
-			*/
+			step = CalculateDerivative(initialConditions);
 			error = (lastStep - step);
 			lastStep = step;
-			cout << "Step: " << step << "	Error: " << error << endl;
-			
-			for(int j=0; j<iteration.size(); j++)
-				cout << "	" << iteration[j];
-			
-			cout << endl;
 			
 			if(abs(error) < ERR)
 				break;
 		}
 		
-		return 0.0;
+		return error;
 	}
 	
 	void GradientDescent::SetFunction(const std::shared_ptr<Function> f)
@@ -75,28 +63,24 @@ namespace Optimization {
 		for(int i=0; i< flags.size(); i++)
 			if(flags[i])
 				_freeParams++;
-	
-		_jacobian = make_shared<MatrixD>(0.0, _freeParams, _freeParams);
 	}
 
     // --------------------------------------------------
     // ----- Private Methods
 
-	double GradientDescent::CalculateDerivative(std::vector<double>* iteration)
+	double GradientDescent::CalculateDerivative(std::shared_ptr<std::vector<double>> iteration)
 	{
-		std::vector<double> results; 
 		double error = 0;
 		
 		for(int i=0; i<_freeParams; i++)
-			results.push_back(_differentiator->D1_Partial(*iteration, i));
+			(*_derivative)[i] = _differentiator->D1_Partial(*iteration, i);
 
 		for(int i=0; i<_freeParams; i++)
 		{
-			cout << "D: " << results[i] << " I: " << (*iteration)[i] << endl;
-			(*iteration)[i] = (*iteration)[i] - results[i] * _damping;
+			(*iteration)[i] = (*iteration)[i] - (*_derivative)[i] * _damping;
 			error += (*iteration)[i];
 		}
-		cout << endl;
+
 		return sqrt(error);
 	}
 	

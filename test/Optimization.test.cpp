@@ -28,11 +28,12 @@ bool TestGradientDescent();
 class Quadratic : public fnMath::Function
 {
 public:
+	double x, y;
 	
 	Quadratic()
 	{
-		_x = 76.0535;
-		_y = 0.168;
+		x = 76.0535;
+		y = 0.168;
 	}
 	
     virtual double Evaluate(double x)
@@ -42,10 +43,10 @@ public:
 
     virtual double Evaluate(vector<double> params)
     {
-        return (params[0] - _x) * (params[0] - _x) + (params[1] + _y) * (params[1] + _y);
+        return (params[0] - x) * (params[0] - x) + (params[1] - y) * (params[1] - y);
     }
 private:
-	double _x, _y;
+	
 
 };
 
@@ -82,21 +83,30 @@ bool TestGradientDescent()
 {
 	std::cout << "Testing Gradient Descent Functions" << std::endl;
 	vector<bool> flags;
-	vector<double> guess;
+	auto Q = make_shared<Quadratic>();
+	auto guess = make_shared<vector<double>>();
 	GradientDescent GD; 
 	
 	flags.push_back(true);
 	flags.push_back(true);
 	
-	guess.push_back(100.0);
-	guess.push_back(-512.0);
+	guess->push_back(100.0);
+	guess->push_back(-512.0);
 	
-	GD.SetFunction(make_shared<Quadratic>());
+	GD.SetFunction(Q);
 	GD.SetFlags(flags);
 	
 	double result = GD.FindMin(guess);
 	
 	cout << endl << "Result: " << result << endl;
+	cout << "X: " << (*guess)[0] << "	Y: " << (*guess)[1] << endl;
 	
+	Q->x = -129.32;
+	Q->y = 30.06;
+	result = GD.FindMin(guess);
+	
+	
+	cout << endl << "Result: " << result << endl;
+	cout << "X: " << (*guess)[0] << "	Y: " << (*guess)[1] << endl;
 	return true;
 }
