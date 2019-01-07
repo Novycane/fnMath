@@ -17,7 +17,7 @@ all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o
 	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.o
+test: $(TEMP)Matrix.o $(TEST)Matrix.test.cpp
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(CC) $(CFLAGS) $(TEST)Matrix.test.cpp -o $(TEMP)Matrix.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)Matrix.test.o -o $(TEMP)Matrix$(EXT)

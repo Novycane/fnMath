@@ -312,7 +312,7 @@ Numeric Matrix<Numeric>::MaxMag()
             if( absVal > absMax)
             {
                 maxValue = data[i][j];
-                absMax = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+                absMax = absVal;
             }
         }
     return maxValue;
@@ -332,7 +332,7 @@ Numeric Matrix<Numeric>::MinMag()
             if( absVal < absMin)
             {
                 minValue = data[i][j];
-                absMin = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
+                absMin = absVal;
             }
         }
     return minValue;

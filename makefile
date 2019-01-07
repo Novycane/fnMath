@@ -11,11 +11,11 @@
 MAKE 		= make
 
 # ----- Directories
-TESTPATH 	= test
-HEADPATH	= src
-SRCPATH		= src
-BINPATH		= bin
-TEMPPATH 	= temp
+TESTPATH 	= test/
+HEADPATH	= src/
+SRCPATH		= src/
+BINPATH		= bin/
+TEMPPATH 	= temp/
 
 # ----- Main Targets
 all	: Matrix.o
@@ -32,12 +32,12 @@ TestAll :
 # ----- Dependencies
 $(TEMP)Matrix.o	: src/Matrix.cpp src/Matrix.hpp
 	-@echo "Making Matrix Routines..."
-	-@$(MAKE) -C ./$(SRCPATH)/LinAlg
+	-@$(MAKE) -C ./$(SRCPATH)LinAlg
 
 # ----- Dependencies
 Crypto.o	: src/Rijndael.cpp src/Rijndael.hpp
 	-@echo "Making Crypto Routines..."
-	-@${CC} $(CFLAGS) -c src/Rijndael.cpp ${CFLAGS} -o $(TEMPPATH)/Rijndael.o
+	-@${CC} $(CFLAGS) -c src/Rijndael.cpp ${CFLAGS} -o $(TEMPPATH)Rijndael.o
 	-@echo "Done!"
 
 # ----- Utilities

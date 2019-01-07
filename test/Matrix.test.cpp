@@ -35,8 +35,8 @@ bool MCMultiplication();
 bool MCDivision();
 
 bool Accessors();
-
 bool MaxMin();
+bool Identity();
 
 
 // ------------------------- Main
@@ -56,6 +56,10 @@ int main (int argCount, char** args)
 	
 	RunTest(Accessors(), "Object Accessors");
 	RunTest(MaxMin(), "Maxtrix Max-Min and Magnitudes");
+	RunTest(Identity(), "Maxtrix Identity");
+	
+	cout << " ------------ Done Testing Matrix functions  ------------" << endl;
+	cout << endl;
 	
 	
     return 0;
@@ -251,10 +255,28 @@ bool MaxMin()
 	if(A.MinMag() != 0)
 		pass = false;
 	
-	cout << A.MinMag() << endl;
-	
-	A.print();
-	
-	
 	return pass;
 }	
+
+bool Identity()
+{
+	const int n = 10;
+	bool pass = true;
+	
+	auto A = InitSequential(n);
+	
+	A.I();
+	for(int i=0; i<n; i++)
+		for(int j=0; j<n; j++)
+			if(i==j)
+			{
+				if(A[i][j] != 1)
+					pass = false;
+			}
+			else
+			{
+				if(A[i][j] != 0)
+					pass = false;
+			}
+	return pass;
+}
