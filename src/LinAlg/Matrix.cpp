@@ -286,7 +286,7 @@ Numeric Matrix<Numeric>::absMax()
 template <typename Numeric>
 Numeric Matrix<Numeric>::absMin()
 {
-    Numeric minValue = data[0][0];
+    Numeric minValue = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
     Numeric absVal;
     for(int i=0; i<rows; i++)
         for(int j=0; j<columns; j++)
@@ -321,7 +321,7 @@ Numeric Matrix<Numeric>::MaxMag()
 template <typename Numeric>
 Numeric Matrix<Numeric>::MinMag()
 {
-    Numeric maxValue = data[0][0];
+    Numeric minValue = data[0][0];
     Numeric absMin = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
     Numeric absVal;
     
@@ -331,11 +331,11 @@ Numeric Matrix<Numeric>::MinMag()
             absVal = data[i][j] > 0 ? data[i][j] : data[i][j] * -1;
             if( absVal < absMin)
             {
-                maxValue = data[i][j];
+                minValue = data[i][j];
                 absMin = data[0][0] > 0 ? data[0][0] : data[0][0] * -1;
             }
         }
-    return maxValue;
+    return minValue;
 }
     
 template <typename Numeric>

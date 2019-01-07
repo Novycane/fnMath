@@ -34,6 +34,10 @@ bool MCSubtraction();
 bool MCMultiplication();
 bool MCDivision();
 
+bool Accessors();
+
+bool MaxMin();
+
 
 // ------------------------- Main
 
@@ -49,6 +53,10 @@ int main (int argCount, char** args)
 	RunTest(MCSubtraction(), "Maxtrix-Constant Subtraction");
 	RunTest(MCMultiplication(), "Maxtrix-Constant Multiplication");
 	RunTest(MCDivision(), "Maxtrix-Constant Division");
+	
+	RunTest(Accessors(), "Object Accessors");
+	RunTest(MaxMin(), "Maxtrix Max-Min and Magnitudes");
+	
 	
     return 0;
 }
@@ -208,3 +216,45 @@ bool MCDivision()
 	
 	return pass;
 }
+
+bool Accessors()
+{
+	const int n = 10;
+	bool pass = true;
+	
+	auto A = InitSequential(n);
+	
+	if(A.numRows() != n || A.numColumns() != n)
+		pass = false;
+	
+	return pass;
+}
+
+bool MaxMin()
+{
+	const int n = 10;
+	bool pass = true;
+	
+	auto A = InitSequential(n);
+	A = A - 50;
+	
+	if(A.Max() != 49)
+		pass = false;
+	if(A.Min() != -50)
+		pass = false;
+	if(A.absMax() != 50)
+		pass = false;
+	if(A.absMin() != 0)
+		pass = false;
+	if(A.MaxMag() != -50)
+		pass = false;
+	if(A.MinMag() != 0)
+		pass = false;
+	
+	cout << A.MinMag() << endl;
+	
+	A.print();
+	
+	
+	return pass;
+}	

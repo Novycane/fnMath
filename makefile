@@ -30,7 +30,7 @@ TestAll :
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
 
 # ----- Dependencies
-Matrix.o	: src/Matrix.cpp src/Matrix.hpp
+$(TEMP)Matrix.o	: src/Matrix.cpp src/Matrix.hpp
 	-@echo "Making Matrix Routines..."
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg
 
