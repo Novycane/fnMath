@@ -30,6 +30,7 @@ MatrixD InitSequential(int n);
 bool Upper();
 bool Lower();
 bool RecreateA();
+bool Determinate();
 
 // ------------------------- Main
 
@@ -40,6 +41,7 @@ int main (int argCount, char** args)
 	RunTest(Upper(), "Upper Triangular Matrix");
 	RunTest(Lower(), "Lower Triangular Matrix");
 	RunTest(RecreateA(), "A = L * U");
+	RunTest(Determinate(), "Determinate");
 	
 	cout << " -------------- Done Testing LU functions --------------" << endl << endl;
 		
@@ -153,7 +155,7 @@ bool RecreateA()
 	auto A = InitSequential(n);
 	LU<double> lu(A);
 	auto B = lu.Lower() * lu.Upper();
-	
+		
 	for(int i=0; i<n; i++)
 	{
 		for(int j=0; j<n; j++)
@@ -164,4 +166,26 @@ bool RecreateA()
 	}
 	
 	return true;	
+}
+
+bool Determinate()
+{
+	int n = 3;
+	auto A = InitSequential(n);
+	LU<double> lu(A);
+	auto det = lu.Determinate();
+	double actual;
+	
+	actual = A[0][0] * A[1][1] * A[2][2];
+	actual -= A[0][0] * A[1][2] * A[2][1];
+	actual += A[0][1] * A[1][2] * A[2][0];
+	
+	actual -= A[0][1] * A[1][0] * A[2][2];
+	actual += A[0][2] * A[1][0] * A[2][1];
+	actual -= A[0][2] * A[1][1] * A[2][0];
+
+	if(abs(det - actual) < 1e-8)
+		return true;
+	else
+		return false;
 }
