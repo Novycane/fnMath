@@ -1,3 +1,7 @@
+ifeq ($(OS),Windows_NT)
+EXT = .exe
+endif
+
 # ----- Compiler
 CC 		= clang++ -Xclang -flto-visibility-public-std
 CFLAGS		= -g -Wall -c 
@@ -17,11 +21,10 @@ all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o
 	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.o $(TEST)Matrix.test.cpp
+test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
-	-@$(CC) $(CFLAGS) $(TEST)Matrix.test.cpp -o $(TEMP)Matrix.test.o
-	-@$(CC) $(TEMP)Matrix.o $(TEMP)Matrix.test.o -o $(TEMP)Matrix$(EXT)
 	-@$(TEMP)Matrix$(EXT)
+	-@$(TEMP)LU$(EXT)
 
 .PHONY:
 clean:
@@ -37,6 +40,14 @@ $(TEMP)Matrix.o: Matrix.cpp Matrix.hpp $(COMMON)Error.hpp
 	-@$(CC) $(CFLAGS) Matrix.cpp -o $(TEMP)Matrix.o
 	-@ECHO "...ok"
 
+$(TEMP)Matrix.test.o: $(TEST)Matrix.test.cpp $(TEMP)Matrix.o
+	-@$(CC) $(CFLAGS) $(TEST)Matrix.test.cpp -o $(TEMP)Matrix.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)Matrix.test.o -o $(TEMP)Matrix$(EXT)
+
+$(TEMP)LU.test.o: $(TEST)LU.test.cpp $(TEMP)LU.o
+	-@$(CC) $(CFLAGS) $(TEST)LU.test.cpp -o $(TEMP)LU.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)LU.test.o -o $(TEMP)LU$(EXT)
+	
 $(TEMP)LU.o: LU.cpp LU.hpp $(MATRIX)
 	-@ECHO -n "Building LU.cpp..."
 	-@$(CC) $(CFLAGS) LU.cpp -o $(TEMP)LU.o
