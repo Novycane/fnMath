@@ -40,10 +40,7 @@ Matrix<Numeric> LU<Numeric>::Upper()
 
     for(int j=0; j<this->columns; j++)
         for(int i=0; i<=j; i++)
-            if(i==j)
-                C[i][j] = 1;
-            else
-                C[i][j] = this->data[i][j];
+            C[i][j] = this->data[i][j];
     
     return C;
 }
@@ -55,7 +52,10 @@ Matrix<Numeric> LU<Numeric>::Lower()
     
     for(int j=0; j<this->columns; j++)
         for(int i=j; i<this->rows; i++)
-            C[i][j] = this->data[i][j];
+			if(i==j)
+                C[i][j] = 1;
+            else
+				C[i][j] = this->data[i][j];
     
     return C;
 }
@@ -110,33 +110,34 @@ void LU<Numeric>::Decompose(const Matrix<Numeric> &A)
     
     for(int i=0; i<this->rows; i++)
         this->data.resize(this->columns);
-    
-    Numeric tempSum;
-    
-    for(int j=0; j<this->rows; j++)
-    {
-        for(int i=j; i<this->columns; i++)
-        {
-            tempSum = 0;
-            for(int k=0; k<j; k++)
-            {
-                tempSum = tempSum + this->data[i][k] * this->data[k][j];
-            }
-            this->data[i][j] = A[i][j] - tempSum;
-        }
-        
-        for(int i=j; i<this->columns; i++)
-        {
-            tempSum = 0;
-            for(int k=0; k<j; k++)
-            {
-                tempSum = tempSum + this->data[i][k] * this->data[k][i];
-            }
-            
-            if(i != j)
-                this->data[j][i] = (A[j][i] - tempSum) / this->data[j][j];
-        }
-    }
+      
+	Numeric tempSum;  
+	  
+    for(int i=0; i<this->rows; i++)
+	{
+	
+		for(int j=i+1; j<this->rows; j++)	// J is now row variable
+		{
+			tempSum = 0;
+			for(int k=0; k<i; k++)
+			{
+				tempSum =  tempSum + this->data[j][k] * this->data[k][j];
+			}
+			this->data[j][i] = (A[j][i] - tempSum) / this->data[i][i];
+		}
+
+		for(int j=i; j<this->columns; j++)
+		{
+			tempSum = 0;
+			for(int k=0; k<i; k++)
+			{
+				tempSum =  tempSum + this->data[i][k] * this->data[k][j];
+			}
+			this->data[i][j] = A[i][j] - tempSum;
+		}		
+		this->print();
+	}
+	std::cout << std::endl << std::endl;
 }
 
 template <typename Numeric>

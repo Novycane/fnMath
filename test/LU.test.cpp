@@ -36,7 +36,7 @@ int main (int argCount, char** args)
     cout << endl << " ---------------   Testing LU functions   ---------------" << endl;
 
 	RunTest(Upper(), "Upper Triangular Matrix");
-	RunTest(Lower(), "Lower Triangular Matrix");
+	//RunTest(Lower(), "Lower Triangular Matrix");
 	
 	cout << " -------------- Done Testing LU functions --------------" << endl << endl;
 		
@@ -79,6 +79,8 @@ bool Upper()
 {
 	LU<double> A(InitTestMatrix());
 	auto B = A.Upper();
+	B.print();
+	(A.Lower() * A.Upper()).print();
 	
 	if(B[0][0] != 1)
 		return false;
@@ -108,6 +110,8 @@ bool Lower()
 {
 	LU<double> A(InitTestMatrix());
 	auto B = A.Lower();
+	B.print();
+	
 	
 	if(B[0][0] != 1)
 		return false;
