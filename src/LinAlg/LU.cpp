@@ -113,31 +113,23 @@ void LU<Numeric>::Decompose(const Matrix<Numeric> &A)
       
 	Numeric tempSum;  
 	  
-    for(int i=0; i<this->rows; i++)
+    for(int diag=0; diag<this->rows; diag++)
 	{
-	
-		for(int j=i+1; j<this->rows; j++)	// J is now row variable
+		for(int col=diag; col < this->columns; col++)
 		{
 			tempSum = 0;
-			for(int k=0; k<i; k++)
-			{
-				tempSum =  tempSum + this->data[j][k] * this->data[k][j];
-			}
-			this->data[j][i] = (A[j][i] - tempSum) / this->data[i][i];
+			for(int k=0; k < diag; k ++)
+				tempSum = tempSum + this->data[diag][k] * this->data[k][col];
+			this->data[diag][col] = A[diag][col] - tempSum;
 		}
-
-		for(int j=i; j<this->columns; j++)
+		for(int row=diag+1; row < this->rows; row++)
 		{
 			tempSum = 0;
-			for(int k=0; k<i; k++)
-			{
-				tempSum =  tempSum + this->data[i][k] * this->data[k][j];
-			}
-			this->data[i][j] = A[i][j] - tempSum;
-		}		
-		this->print();
+			for(int k=0; k < diag; k++)
+				tempSum = tempSum + this->data[row][k] * this->data[k][diag];
+			this->data[row][diag] = (A[row][diag] - tempSum) / this->data[diag][diag];
+		}
 	}
-	std::cout << std::endl << std::endl;
 }
 
 template <typename Numeric>

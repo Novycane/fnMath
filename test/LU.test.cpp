@@ -25,9 +25,11 @@ using namespace std;
 
 void RunTest(bool pass, const char* testName);
 MatrixD InitTestMatrix();
+MatrixD InitSequential(int n);
 
 bool Upper();
 bool Lower();
+bool RecreateA();
 
 // ------------------------- Main
 
@@ -36,7 +38,8 @@ int main (int argCount, char** args)
     cout << endl << " ---------------   Testing LU functions   ---------------" << endl;
 
 	RunTest(Upper(), "Upper Triangular Matrix");
-	//RunTest(Lower(), "Lower Triangular Matrix");
+	RunTest(Lower(), "Lower Triangular Matrix");
+	RunTest(RecreateA(), "A = L * U");
 	
 	cout << " -------------- Done Testing LU functions --------------" << endl << endl;
 		
@@ -73,14 +76,23 @@ MatrixD InitTestMatrix()
 	return A;
 }
 
+MatrixD InitSequential(int n)
+{
+	MatrixD A(0,n,n);
+	
+	for(int i=0; i<n; i++)
+		for(int j=0; j<n; j++)
+			A[i][j] = rand();
+	
+	return A;
+}
+
 // ------------------------- Tests
 
 bool Upper()
 {
 	LU<double> A(InitTestMatrix());
 	auto B = A.Upper();
-	B.print();
-	(A.Lower() * A.Upper()).print();
 	
 	if(B[0][0] != 1)
 		return false;
@@ -89,20 +101,20 @@ bool Upper()
 	if(B[2][0] != 0)
 		return false;
 	
-	if(B[0][0] != -2)
+	if(B[0][1] != -2)
 		return false;
-	if(B[1][0] != -1)
+	if(B[1][1] != 3)
 		return false;
-	if(B[2][0] != 0)
-		return false;
-	
-	if(B[0][0] != 3)
-		return false;
-	if(B[1][0] != 6)
-		return false;
-	if(B[2][0] != 2)
+	if(B[2][1] != 0)
 		return false;
 	
+	if(B[0][2] != 3)
+		return false;
+	if(B[1][2] != 6)
+		return false;
+	if(B[2][2] != -14)
+		return false;
+
 	return true;
 }
 
@@ -110,8 +122,6 @@ bool Lower()
 {
 	LU<double> A(InitTestMatrix());
 	auto B = A.Lower();
-	B.print();
-	
 	
 	if(B[0][0] != 1)
 		return false;
@@ -120,19 +130,38 @@ bool Lower()
 	if(B[2][0] != 0)
 		return false;
 	
-	if(B[0][0] != 0)
+	if(B[0][1] != 0)
 		return false;
-	if(B[1][0] != 1)
+	if(B[1][1] != 1)
 		return false;
-	if(B[2][0] != -2)
+	if(B[2][1] != 2.0/3.0)
 		return false;
 	
-	if(B[0][0] != 0)
+	if(B[0][2] != 0)
 		return false;
-	if(B[1][0] != 0)
+	if(B[1][2] != 0)
 		return false;
-	if(B[2][0] != 1)
+	if(B[2][2] != 1)
 		return false;
 	
 	return true;
+}
+
+bool RecreateA()
+{
+	int n = 5;
+	auto A = InitSequential(n);
+	LU<double> lu(A);
+	auto B = lu.Lower() * lu.Upper();
+	
+	for(int i=0; i<n; i++)
+	{
+		for(int j=0; j<n; j++)
+		{
+			if(abs(A[i][j] - B[i][j]) > 1e-8)
+				return false;
+		}
+	}
+	
+	return true;	
 }
