@@ -16,15 +16,16 @@ COMMON		= ../
 MATRIX		= $(TEMP)Matrix.o
 
 # ----- Targets
-all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o
+all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o
 	-@ECHO -n "Creating LinAlg.o ."
-	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o -o $(TEMP)LinAlg.o
+	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o
+test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(TEMP)Matrix$(EXT)
 	-@$(TEMP)LU$(EXT)
+	-@$(TEMP)Cholesky$(EXT)
 
 .PHONY:
 clean:
@@ -44,14 +45,23 @@ $(TEMP)Matrix.test.o: $(TEST)Matrix.test.cpp $(TEMP)Matrix.o
 	-@$(CC) $(CFLAGS) $(TEST)Matrix.test.cpp -o $(TEMP)Matrix.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)Matrix.test.o -o $(TEMP)Matrix$(EXT)
 
-$(TEMP)LU.test.o: $(TEST)LU.test.cpp $(TEMP)LU.o
-	-@$(CC) $(CFLAGS) $(TEST)LU.test.cpp -o $(TEMP)LU.test.o
-	-@$(CC) $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)LU.test.o -o $(TEMP)LU$(EXT)
-	
 $(TEMP)LU.o: LU.cpp LU.hpp $(MATRIX)
 	-@ECHO -n "Building LU.cpp..."
 	-@$(CC) $(CFLAGS) LU.cpp -o $(TEMP)LU.o
 	-@ECHO "....ok"
+
+$(TEMP)LU.test.o: $(TEST)LU.test.cpp $(TEMP)LU.o
+	-@$(CC) $(CFLAGS) $(TEST)LU.test.cpp -o $(TEMP)LU.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)LU.test.o -o $(TEMP)LU$(EXT)
+
+$(TEMP)Cholesky.o: Cholesky.cpp Cholesky.hpp $(COMMON)Error.hpp
+	-@ECHO -n "Building Cholesky.cpp."
+	-@$(CC) $(CFLAGS) Cholesky.cpp -o $(TEMP)Cholesky.o
+	-@ECHO "...ok"
+
+$(TEMP)Cholesky.test.o: $(TEST)Cholesky.test.cpp $(TEMP)Cholesky.o
+	-@$(CC) $(CFLAGS) $(TEST)Cholesky.test.cpp -o $(TEMP)Cholesky.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)Cholesky.o $(TEMP)Cholesky.test.o -o $(TEMP)Cholesky$(EXT)
 
 $(TEMP)QR.o: QR.cpp QR.hpp $(MATRIX)
 	-@ECHO -n "Building QR.cpp...."

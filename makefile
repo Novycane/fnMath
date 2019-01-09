@@ -32,6 +32,9 @@ TestAll :
 	
 TestStats : 
 	-@$(MAKE) -C ./$(SRCPATH)/Stats Test
+
+TestLinAlg : 
+	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
 	
 # ----- Dependencies
 $(TEMP)LinAlg.o	: 
