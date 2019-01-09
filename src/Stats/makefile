@@ -3,20 +3,20 @@ EXT = .exe
 endif
 
 # ----- Compiler
-CC 		= clang++
-CFLAGS		= -g -Wall -c -std=c++14
+CC 		= clang++ -Xclang -flto-visibility-public-std
+CFLAGS		= -g -Wall -c 
 TFLAGS		= -g -Wall -std=c++14	
 LFLAGS		= -g -lc++
 
 # ----- Directories
 TEMP		= ../../temp/
-BIN			= ../../bin/
 TEST		= ../../test/
+BIN			= ../../bin/
 COMMON		= ../
 
 # ----- Targets
-all:	$(TMEP)Factorial.o $(TMEP)Gamma.o $(TMEP)Random.o $(TMEP)FisherYates.o $(TMEP)MetropolisHastings.o
-	-@ECHO -n "Creating Sats.o"
+all:	$(TEMP)Factorial.o $(TEMP)Gamma.o $(TEMP)Random.o $(TEMP)FisherYates.o $(TEMP)MetropolisHastings.o
+	-@ECHO "Creating Sats.o"
 	-@ld -r $(TEMP)Factorial.o $(TEMP)Gamma.o $(TEMP)Random.o $(TEMP)MetropolisHastings.o -o $(TEMP)Stats.o
 	-@ECHO "...ok"
 
@@ -28,34 +28,34 @@ clean:
 	rm $(TEMP)Random.o
 	rm $(TEMP)Stats.o
 
-Test: $(TMEP)Random.o
+Test: $(TEMP)Random.o
 	-@ECHO "Testing Random.cpp"
 	-@$(CC) $(CFLAGS) $(TEST)Random.test.cpp -o $(TEMP)Random.test.o
 	-@$(CC) $(CFLAGS) MetropolisHastings.cpp -o $(TEMP)MetropolisHastings.o
 	-@$(CC) $(TEMP)Random.o $(TEMP)Random.test.o $(TEMP)MetropolisHastings.o -o $(TEMP)Random$(EXT)
 	-@$(TEMP)Random$(EXT)
 
-$(TMEP)Factorial.o: Factorial.cpp Factorial.hpp
-	-@ECHO -n "Building Factorial"
+$(TEMP)Factorial.o: Factorial.cpp Factorial.hpp
+	-@ECHO "Building Factorial"
 	-@$(CC) $(CFLAGS) Factorial.cpp -o $(TEMP)Factorial.o
 	-@ECHO "...ok"
 
-$(TMEP)Gamma.o: Gamma.cpp Gamma.hpp 
-	-@ECHO -n "Building Gamma.cpp..."
+$(TEMP)Gamma.o: Gamma.cpp Gamma.hpp 
+	-@ECHO "Building Gamma.cpp..."
 	-@$(CC) $(CFLAGS) Gamma.cpp -o $(TEMP)Gamma.o
 	-@ECHO "....ok"
 
-$(TMEP)Random.o: Random.cpp Random.hpp 
-	-@ECHO -n "Building Random.cpp...."
+$(TEMP)Random.o: Random.cpp Random.hpp 
+	-@ECHO "Building Random.cpp...."
 	-@$(CC) $(CFLAGS) Random.cpp -o $(TEMP)Random.o
 	-@ECHO "...ok"
 
-$(TMEP)FisherYates.o: FisherYates.hpp FisherYates.cpp Random.cpp Random.hpp 
-	-@ECHO -n "Building FisherYates.cpp...."
+$(TEMP)FisherYates.o: FisherYates.hpp FisherYates.cpp Random.cpp Random.hpp 
+	-@ECHO "Building FisherYates.cpp...."
 	-@$(CC) $(CFLAGS) FisherYates.cpp -o $(TEMP)FisherYates.o
 	-@ECHO "...ok"
 
-$(TMEP)MetropolisHastings.o: MetropolisHastings.hpp MetropolisHastings.cpp Random.o
-	-@ECHO -n "Building MetropolisHastings.cpp...."
+$(TEMP)MetropolisHastings.o: MetropolisHastings.hpp MetropolisHastings.cpp Random.o
+	-@ECHO "Building MetropolisHastings.cpp...."
 	-@$(CC) $(CFLAGS) MetropolisHastings.cpp -o $(TEMP)MetropolisHastings.o
 	-@ECHO "...ok"

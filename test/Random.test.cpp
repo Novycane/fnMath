@@ -23,12 +23,15 @@ using namespace fnMath;
 using namespace Stats;
 
 // ------------------------- Declarations
+void RunTest(bool pass, const char* testName);
+
 bool TestHWRandom();
 bool TestRandomBetween();
 bool TestFisherYates();
 bool TestMetropolisHastings();
 bool TestNormals();
 
+// ------------------------- Functions
 class Exponential : public fnMath::Function
 {
 public:
@@ -37,7 +40,7 @@ public:
         return exp(x);
     }
 
-    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
         return 0.0;
     }
@@ -52,7 +55,7 @@ public:
         return b * b;
     }
 
-    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
         return 0.0;
     }
@@ -63,6 +66,7 @@ class Tri : public fnMath::Function
 public:
     double Evaluate(double x)
     {
+		/*
         if(x < 0)
             return 0.0;
         else if(x < 5 )
@@ -75,10 +79,19 @@ public:
             return(5 * x - 15);
         else
             return 0.0;
-        
+        */
+		
+		if(x < -10)
+			return (0.0);
+		else if(x <= 0)
+			return (x + 10) * 5;
+		else if(x <= 10)
+			return (x - 10) * -5;
+		else
+			return 0.0;
     }
 
-    double Evaluate(double x, fnMath::LinAlg::MatrixD params)
+    double Evaluate(vector<double> params)
     {
         return 0.0;
     }
@@ -88,39 +101,30 @@ public:
 
 int main (int argCount, char** args)
 {   
-    TestMetropolisHastings();
+    //TestMetropolisHastings();
     //TestNormals();
 
-    /*
-    if(!TestHWRandom())
-    {
-        std::cout << "Error in HW RNG:\n ";
-        return -1;
-    }
-    else
-        std::cout << "...ok" << std::endl;
-
+   
+    RunTest(TestHWRandom(), "Hardware RNG");  
+    RunTest(TestRandomBetween(), "Random Int between 2 values");
+    RunTest(TestFisherYates(), "Fisher-Yates Shuffle");
     
-    if(!TestRandomBetween())
-    {
-        std::cout << "Error in Random Int Between RNG:\n ";
-        return -1;
-    }
-    else
-        std::cout << "...ok" << std::endl;
-
-    if(!TestFisherYates())
-    {
-        std::cout << "Error in Fisher-Yates Shuffle:\n ";
-        return -1;
-    }
-    else
-        std::cout << "...ok" << std::endl;
-    */
     return 0;
 }
 
-// ------------------------- Definitions
+
+// ------------------------- Utility 
+
+void RunTest(bool pass, const char* testName)
+{
+	cout << testName << " Test" ;
+	if(pass)
+		cout << "...Ok" << endl;
+	else
+		cout << "...Failed!" << endl;
+}
+
+// ------------------------- Tests
 
 bool TestHWRandom()
 {
@@ -200,7 +204,7 @@ bool TestMetropolisHastings()
 
     MH.BurnIn(10000);
 
-    for(int i=0; i<1000000; i++)
+    for(int i=0; i<100000; i++)
         std::cout << MH.GetNext() << std::endl;
     
     return true;

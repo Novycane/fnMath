@@ -18,6 +18,8 @@ BINPATH		= bin/
 TEMPPATH 	= temp/
 
 # ----- Main Targets
+.SILENT:
+
 all	: $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TMEP)Stats.o
 	-@echo ----- Building All -----
 
@@ -26,7 +28,11 @@ TestAll :
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
 	-@$(MAKE) -C ./$(SRCPATH)/Calculus Test
 	-@$(MAKE) -C ./$(SRCPATH)/Optimization Test
-
+	-@$(MAKE) -C ./$(SRCPATH)/Stats Test
+	
+TestStats : 
+	-@$(MAKE) -C ./$(SRCPATH)/Stats Test
+	
 # ----- Dependencies
 $(TEMP)LinAlg.o	: 
 	-@echo "Making Matrix Routines..."
@@ -41,7 +47,7 @@ $(TEMP)Optimization.o:
 	-@$(MAKE) -C ./$(SRCPATH)Optimization
 	
 $(TMEP)Stats.o:
-	-@echo Making Optimization Routines...
+	-@echo "Making Statistics Routines..."
 	-@$(MAKE) -C ./$(SRCPATH)Stats
 
 # ----- Dependencies
