@@ -41,7 +41,7 @@ int main (int argCount, char** args)
 	RunTest(Lower(), "Lower Cholesky Matrix");
 	RunTest(Upper(), "Upper Cholesky Matrix");
 	RunTest(RecreateA(), "Cholesky A = L * U");
-	//RunTest(Solve(), "LU Solve");
+	RunTest(Solve(), "Cholesky Solve");
 	
 	cout << " -------------- Done Testing Cholesky functions --------------" << endl << endl;
 		
@@ -173,16 +173,15 @@ bool RecreateA()
 bool Solve()
 {
 	int n = 3;
-	auto A = InitRandom(n);
-	MatrixD b(0,3,1);
-	Cholesky<double> lu(A);
+	auto A = InitTestMatrix();
+	Cholesky<double> ch(A);
+	MatrixD b(0,n,1);
 	
-	b[0][0] = rand();
-	b[1][0] = rand();
-	b[2][0] = rand();
+	for(int i=0; i<n; i++)
+		b[i][0] = rand();
 	
 	auto y = A * b;
-	auto c = lu.Solve(y);
+	auto c = ch.Solve(y);
 
 	for(int i=0; i<n; i++)
 		if(abs(c[i][0] - b[i][0]) > 1e-8)
