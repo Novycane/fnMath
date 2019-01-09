@@ -18,7 +18,7 @@ BINPATH		= bin/
 TEMPPATH 	= temp/
 
 # ----- Main Targets
-all	: $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o
+all	: $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TMEP)Stats.o
 	-@echo ----- Building All -----
 
 
@@ -39,6 +39,10 @@ $(TEMP)Calculus.o:
 $(TEMP)Optimization.o: 
 	-@echo "Making Optimization Routines..."
 	-@$(MAKE) -C ./$(SRCPATH)Optimization
+	
+$(TMEP)Stats.o:
+	-@echo Making Optimization Routines...
+	-@$(MAKE) -C ./$(SRCPATH)Stats
 
 # ----- Dependencies
 Crypto.o	: src/Rijndael.cpp src/Rijndael.hpp

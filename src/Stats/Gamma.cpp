@@ -22,7 +22,7 @@ double Gamma::Evaluate(double x)
 }
     
     
-double Gamma::Evaluate(double x, MatrixD params)
+double Gamma::Evaluate(vector<double> params)
 {
     return 0;
 }

@@ -18,7 +18,7 @@ class Gamma: public Function
 public:
     // -------------------- Constructors
     double Evaluate(double x);
-    double Evaluate(double x, MatrixD params);
+    double Evaluate(vector<double> params);
     
     // -------------------- Public Methods
     
