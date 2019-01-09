@@ -25,12 +25,13 @@ using namespace std;
 
 void RunTest(bool pass, const char* testName);
 MatrixD InitTestMatrix();
-MatrixD InitSequential(int n);
+MatrixD InitRandom(int n);
 
 bool Upper();
 bool Lower();
 bool RecreateA();
 bool Determinate();
+bool Solve();
 
 // ------------------------- Main
 
@@ -41,7 +42,8 @@ int main (int argCount, char** args)
 	RunTest(Upper(), "Upper Triangular Matrix");
 	RunTest(Lower(), "Lower Triangular Matrix");
 	RunTest(RecreateA(), "A = L * U");
-	RunTest(Determinate(), "Determinate");
+	RunTest(Determinate(), "LU Determinate");
+	RunTest(Solve(), "LU Solve");
 	
 	cout << " -------------- Done Testing LU functions --------------" << endl << endl;
 		
@@ -78,7 +80,7 @@ MatrixD InitTestMatrix()
 	return A;
 }
 
-MatrixD InitSequential(int n)
+MatrixD InitRandom(int n)
 {
 	MatrixD A(0,n,n);
 	
@@ -152,7 +154,7 @@ bool Lower()
 bool RecreateA()
 {
 	int n = 5;
-	auto A = InitSequential(n);
+	auto A = InitRandom(n);
 	LU<double> lu(A);
 	auto B = lu.Lower() * lu.Upper();
 		
@@ -171,7 +173,7 @@ bool RecreateA()
 bool Determinate()
 {
 	int n = 3;
-	auto A = InitSequential(n);
+	auto A = InitRandom(n);
 	LU<double> lu(A);
 	auto det = lu.Determinate();
 	double actual;
@@ -188,4 +190,24 @@ bool Determinate()
 		return true;
 	else
 		return false;
+}
+
+bool Solve()
+{
+	int n = 3;
+	auto A = InitRandom(n);
+	MatrixD b(0,3,1);
+	LU<double> lu(A);
+	
+	b[0][0] = rand();
+	b[1][0] = rand();
+	b[2][0] = rand();
+	
+	auto y = A * b;
+	auto c = lu.Solve(y);
+
+	for(int i=0; i<n; i++)
+		if(abs(c[i][0] - b[i][0]) > 1e-8)
+			return false;
+	return true;
 }

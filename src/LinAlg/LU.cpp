@@ -63,7 +63,6 @@ Matrix<Numeric> LU<Numeric>::Lower()
 template <typename Numeric>
 Matrix<Numeric> LU<Numeric>::Solve(const Matrix<Numeric> & b)
 {
-    
     if(b.numRows() != this-> rows || b.numColumns() != 1)
         throw new DimensionMismatchException();
     
@@ -77,7 +76,6 @@ Matrix<Numeric> LU<Numeric>::Solve(const Matrix<Numeric> & b)
         {
             y[i][0] -= y[j][0] * this->data[i][j];
         }
-        y[i][0] = y[i][0] / this->data[i][i];
     }
     
     for(int i=this->rows - 1; i>=0; i--)
@@ -86,6 +84,7 @@ Matrix<Numeric> LU<Numeric>::Solve(const Matrix<Numeric> & b)
         {
             y[i][0] -= y[j][0] * this->data[i][j];
         }
+		y[i][0] = y[i][0] / this->data[i][i];
     }    
     return y;
 }
