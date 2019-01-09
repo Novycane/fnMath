@@ -18,21 +18,27 @@ BINPATH		= bin/
 TEMPPATH 	= temp/
 
 # ----- Main Targets
-all	: Matrix.o
+all	: $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o
 	-@echo ----- Building All -----
-	-@echo .
-	-@echo .
-	-@$(MAKE) -C ./$(SRCPATH)/LinAlg
-	-@$(MAKE) -C ./$(SRCPATH)/Calculus
-	-@$(MAKE) -C ./$(SRCPATH)/Optimization
+
 
 TestAll : 
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
+	-@$(MAKE) -C ./$(SRCPATH)/Calculus Test
+	-@$(MAKE) -C ./$(SRCPATH)/Optimization Test
 
 # ----- Dependencies
-$(TEMP)Matrix.o	: src/Matrix.cpp src/Matrix.hpp
+$(TEMP)LinAlg.o	: 
 	-@echo "Making Matrix Routines..."
 	-@$(MAKE) -C ./$(SRCPATH)LinAlg
+
+$(TEMP)Calculus.o: 
+	-@echo "Making Calculus Routines..."
+	-@$(MAKE) -C ./$(SRCPATH)Calculus
+
+$(TEMP)Optimization.o: 
+	-@echo "Making Optimization Routines..."
+	-@$(MAKE) -C ./$(SRCPATH)Optimization
 
 # ----- Dependencies
 Crypto.o	: src/Rijndael.cpp src/Rijndael.hpp

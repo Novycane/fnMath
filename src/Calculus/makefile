@@ -15,7 +15,7 @@ TEST		= ../../test/
 COMMON		= ../
 
 # ----- Targets
-all:	Derivative Integral
+all:	$(TMEP)Derivative.o $(TMEP)Integral.o
 	-@ECHO -n "Creating Calculus.o ."
 	-@ld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
 	-@ECHO "...ok"
@@ -27,18 +27,18 @@ clean:
 	rm $(TEMP)Integral.o
 	rm $(TEMP)Calculus.o
 
-Derivative: Derivative.cpp Derivative.hpp $(COMMON)Function.hpp
+$(TMEP)Derivative.o: Derivative.cpp Derivative.hpp $(COMMON)Function.hpp
 	-@ECHO -n "Building Derivative.cpp"
 	-@$(CC) $(CFLAGS) Derivative.cpp -o $(TEMP)Derivative.o
 	-@ECHO "...ok"
 
-Integral: Integral.cpp Integral.hpp $(COMMON)Function.hpp
+$(TMEP)Integral.o: Integral.cpp Integral.hpp $(COMMON)Function.hpp
 	-@ECHO -n "Building Integral.cpp..."
 	-@$(CC) $(CFLAGS) Integral.cpp -o $(TEMP)Integral.o
 	-@ECHO "....ok"
 
 # ----- Testing Targets
-Test: Integral Derivative
+Test: $(TMEP)Integral.o $(TMEP)Derivative.o
 	-@ECHO -n "-------- Integral.cpp --------"
 	-@$(CC) $(CFLAGS) $(TEST)Integral.test.cpp -o $(TEMP)Integral.test.o
 	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral$(EXT)

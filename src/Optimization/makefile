@@ -15,13 +15,13 @@ BIN			= ../../bin/
 COMMON		= ../
 
 # ----- Targets
-all: GradientDescent.o 
+all: $(TMEP)GradientDescent.o 
 	-@ECHO -n "Creating Optimization.o ."
 	-@ld -r $(TEMP)GradientDescent.o -o $(TEMP)Optimization.o
 	-@ECHO "...ok"
 
 test: GradientDescent.o
-	-@ECHO -n "Testing Optimization Library"
+	-@ECHO "Testing Optimization Library"
 	-@$(CC) $(CFLAGS) $(TEST)Optimization.test.cpp -o $(TEMP)Optimization.test.o
 	-@$(CC) $(TEMP)GradientDescent.o $(TEMP)Derivative.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
 	-@$(TEMP)Optimization$(EXT)
@@ -31,12 +31,12 @@ clean:
 	-@ECHO "Cleaning Files"
 	del "$(TEMP)GradientDescent.o"
 
-GradientDescent.o: GradientDescent.cpp GradientDescent.hpp 
-	-@ECHO -n "GradientDescent.cpp"
+$(TMEP)GradientDescent.o: GradientDescent.cpp GradientDescent.hpp 
+	-@ECHO "GradientDescent.cpp"
 	-@$(CC) $(CFLAGS) GradientDescent.cpp -o $(TEMP)GradientDescent.o
 	-@ECHO "...ok"
 	
-LevenbergMarquad.o: LevenbergMarquad.cpp LevenbergMarquad.hpp 
-	-@ECHO -n "LevenbergMarquad.cpp"
+$(TMEP)LevenbergMarquad.o: LevenbergMarquad.cpp LevenbergMarquad.hpp 
+	-@ECHO "LevenbergMarquad.cpp"
 	-@$(CC) $(CFLAGS) LevenbergMarquad.cpp -o LevenbergMarquad.o
 	-@ECHO "...ok"
