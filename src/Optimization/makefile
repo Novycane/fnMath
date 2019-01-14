@@ -26,6 +26,11 @@ test: GradientDescent.o
 	-@$(CC) $(TEMP)GradientDescent.o $(TEMP)Derivative.o $(TEMP)Optimization.test.o -o $(TEMP)Optimization$(EXT)
 	-@$(TEMP)Optimization$(EXT)
 
+Install: 
+	rd C:\fnMath\Optimization /S /Q
+	mkdir C:\fnMath\Optimization
+	copy *.hpp C:\fnMath\Optimization\
+
 .PHONY:
 clean:
 	-@ECHO "Cleaning Files"

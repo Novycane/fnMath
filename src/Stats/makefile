@@ -35,6 +35,11 @@ Test: $(TEMP)Random.o
 	-@$(CC) $(TEMP)Random.o $(TEMP)Random.test.o $(TEMP)MetropolisHastings.o -o $(TEMP)Random$(EXT)
 	-@$(TEMP)Random$(EXT)
 
+Install: 
+	rd C:\fnMath\Stats /S /Q
+	mkdir C:\fnMath\Stats
+	copy *.hpp C:\fnMath\Stats\
+
 $(TEMP)Factorial.o: Factorial.cpp Factorial.hpp
 	-@ECHO "Building Factorial"
 	-@$(CC) $(CFLAGS) Factorial.cpp -o $(TEMP)Factorial.o

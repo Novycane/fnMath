@@ -15,10 +15,15 @@ TEST		= ../../test/
 COMMON		= ../
 
 # ----- Targets
-all:	$(TMEP)Derivative.o $(TMEP)Integral.o
+all:	$(TEMP)Derivative.o $(TEMP)Integral.o
 	-@ECHO -n "Creating Calculus.o ."
 	-@ld -r $(TEMP)Derivative.o $(TEMP)Integral.o -o $(TEMP)Calculus.o
 	-@ECHO "...ok"
+
+Install: 
+	rd C:\fnMath\Calculus /S /Q
+	mkdir C:\fnMath\Calculus
+	copy *.hpp C:\fnMath\Calculus\
 
 .PHONY:
 clean:
@@ -27,18 +32,18 @@ clean:
 	rm $(TEMP)Integral.o
 	rm $(TEMP)Calculus.o
 
-$(TMEP)Derivative.o: Derivative.cpp Derivative.hpp $(COMMON)Function.hpp
+$(TEMP)Derivative.o: Derivative.cpp Derivative.hpp $(COMMON)Function.hpp
 	-@ECHO -n "Building Derivative.cpp"
 	-@$(CC) $(CFLAGS) Derivative.cpp -o $(TEMP)Derivative.o
 	-@ECHO "...ok"
 
-$(TMEP)Integral.o: Integral.cpp Integral.hpp $(COMMON)Function.hpp
+$(TEMP)Integral.o: Integral.cpp Integral.hpp $(COMMON)Function.hpp
 	-@ECHO -n "Building Integral.cpp..."
 	-@$(CC) $(CFLAGS) Integral.cpp -o $(TEMP)Integral.o
 	-@ECHO "....ok"
 
 # ----- Testing Targets
-Test: $(TMEP)Integral.o $(TMEP)Derivative.o
+Test: $(TEMP)Integral.o $(TEMP)Derivative.o
 	-@ECHO -n "-------- Integral.cpp --------"
 	-@$(CC) $(CFLAGS) $(TEST)Integral.test.cpp -o $(TEMP)Integral.test.o
 	-@$(CC) $(TEMP)Integral.o $(TEMP)Integral.test.o -o $(TEMP)Integral$(EXT)

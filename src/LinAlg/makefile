@@ -12,6 +12,7 @@ LFLAGS		= -g -lc++
 TEMP		= ../../temp/
 TEST		= ../../test/
 BIN			= ../../bin/
+INSTALLPATH	= c:\fnMath\LinAlg\
 COMMON		= ../
 MATRIX		= $(TEMP)Matrix.o
 
@@ -26,6 +27,12 @@ test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o
 	-@$(TEMP)Matrix$(EXT)
 	-@$(TEMP)LU$(EXT)
 	-@$(TEMP)Cholesky$(EXT)
+
+Install: 
+	rd C:\fnMath\LinAlg /S /Q
+	mkdir C:\fnMath\LinAlg
+	copy *.*pp C:\fnMath\LinAlg\
+
 
 .PHONY:
 clean:

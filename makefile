@@ -14,15 +14,16 @@ MAKE 		= make
 TESTPATH 	= test/
 HEADPATH	= src/
 SRCPATH		= src/
-BINPATH		= bin/
-TEMPPATH 	= temp/
+BINPATH		= c:\fnMath
+TEMP 	= temp/
+
+ALL = $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TEMP)Stats.o
 
 # ----- Main Targets
 .SILENT:
 
-all	: $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TMEP)Stats.o
+all	: $(ALL)
 	-@echo ----- Building All -----
-
 
 TestAll : 
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
@@ -36,21 +37,43 @@ TestStats :
 TestLinAlg : 
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
 	
+Install: $(ALL)
+	-@echo "--------------------------------------------------"
+	-@echo "Making fnMath Lib..."
+	-@echo "--------------------------------------------------"
+	-@ld -r $(ALL) -o $(TEMP)fnMath.lib
+	-@copy temp\fnMath.lib c:\fnMath /Y
+	-@copy src\*.h c:\fnMath /Y
+	-@copy src\*.hpp c:\fnMath /Y
+	
+	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Install
+	-@$(MAKE) -C ./$(SRCPATH)/Calculus Install
+	-@$(MAKE) -C ./$(SRCPATH)/Optimization Install
+	-@$(MAKE) -C ./$(SRCPATH)/Stats Install
+
 # ----- Dependencies
 $(TEMP)LinAlg.o	: 
+	-@echo "--------------------------------------------------"
 	-@echo "Making Matrix Routines..."
+	-@echo "--------------------------------------------------"
 	-@$(MAKE) -C ./$(SRCPATH)LinAlg
 
 $(TEMP)Calculus.o: 
+	-@echo "--------------------------------------------------"
 	-@echo "Making Calculus Routines..."
+	-@echo "--------------------------------------------------"
 	-@$(MAKE) -C ./$(SRCPATH)Calculus
 
 $(TEMP)Optimization.o: 
+	-@echo "--------------------------------------------------"
 	-@echo "Making Optimization Routines..."
+	-@echo "--------------------------------------------------"
 	-@$(MAKE) -C ./$(SRCPATH)Optimization
 	
-$(TMEP)Stats.o:
+$(TEMP)Stats.o:
+	-@echo "--------------------------------------------------"
 	-@echo "Making Statistics Routines..."
+	-@echo "--------------------------------------------------"
 	-@$(MAKE) -C ./$(SRCPATH)Stats
 
 # ----- Dependencies
