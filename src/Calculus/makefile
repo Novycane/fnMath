@@ -21,9 +21,9 @@ all:	$(TEMP)Derivative.o $(TEMP)Integral.o
 	-@ECHO "...ok"
 
 Install: 
-	rd C:\fnMath\Calculus /S /Q
-	mkdir C:\fnMath\Calculus
-	copy *.hpp C:\fnMath\Calculus\
+	rd c:\Lib\fnMath\Calculus /S /Q
+	mkdir c:\Lib\fnMath\Calculus
+	copy *.hpp c:\Lib\fnMath\Calculus\
 
 .PHONY:
 clean:

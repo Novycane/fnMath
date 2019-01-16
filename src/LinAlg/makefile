@@ -29,9 +29,9 @@ test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o
 	-@$(TEMP)Cholesky$(EXT)
 
 Install: 
-	rd C:\fnMath\LinAlg /S /Q
-	mkdir C:\fnMath\LinAlg
-	copy *.*pp C:\fnMath\LinAlg\
+	rd c:\Lib\fnMath\LinAlg /S /Q
+	mkdir c:\Lib\fnMath\LinAlg
+	copy *.*pp c:\Lib\fnMath\LinAlg\
 
 
 .PHONY:
@@ -43,7 +43,7 @@ clean:
 	rm $(TEMP)Eigen.o
 	rm $(TEMP)LinAlg.o
 
-$(TEMP)Matrix.o: Matrix.cpp Matrix.hpp $(COMMON)Error.hpp
+$(TEMP)Matrix.o: Matrix.cpp Matrix.hpp 
 	-@ECHO -n "Building Matrix.cpp"
 	-@$(CC) $(CFLAGS) Matrix.cpp -o $(TEMP)Matrix.o
 	-@ECHO "...ok"
@@ -61,7 +61,7 @@ $(TEMP)LU.test.o: $(TEST)LU.test.cpp $(TEMP)LU.o
 	-@$(CC) $(CFLAGS) $(TEST)LU.test.cpp -o $(TEMP)LU.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)LU.test.o -o $(TEMP)LU$(EXT)
 
-$(TEMP)Cholesky.o: Cholesky.cpp Cholesky.hpp $(COMMON)Error.hpp
+$(TEMP)Cholesky.o: Cholesky.cpp Cholesky.hpp 
 	-@ECHO -n "Building Cholesky.cpp."
 	-@$(CC) $(CFLAGS) Cholesky.cpp -o $(TEMP)Cholesky.o
 	-@ECHO "...ok"
@@ -75,7 +75,7 @@ $(TEMP)QR.o: QR.cpp QR.hpp $(MATRIX)
 	-@$(CC) $(CFLAGS) QR.cpp -o $(TEMP)QR.o
 	-@ECHO "...ok"
 
-$(TEMP)Eigen.o: $(TEMP)Matrix.o $(COMMON)Error.hpp
+$(TEMP)Eigen.o: $(TEMP)Matrix.o 
 	-@ECHO -n "Building Eigen.cpp."
 	-@$(CC) $(CFLAGS) Eigen.cpp -o $(TEMP)Eigen.o
 	-@ECHO "...ok"

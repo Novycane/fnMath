@@ -27,9 +27,9 @@ test: GradientDescent.o
 	-@$(TEMP)Optimization$(EXT)
 
 Install: 
-	rd C:\fnMath\Optimization /S /Q
-	mkdir C:\fnMath\Optimization
-	copy *.hpp C:\fnMath\Optimization\
+	rd c:\Lib\fnMath\Optimization /S /Q
+	mkdir c:\Lib\fnMath\Optimization
+	copy *.hpp c:\Lib\fnMath\Optimization\
 
 .PHONY:
 clean:

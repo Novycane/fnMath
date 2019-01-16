@@ -19,17 +19,20 @@
 #include "./LinAlg/Eigen.cpp"
 #include "./LinAlg/QR.hpp"
 #include "./LinAlg/QR.cpp"
+#include "./LinAlg/Cholesky.hpp"
+#include "./LinAlg/Cholesky.cpp"
 
 // ------------------------- Data Structure Headers
-#include "./DataStructs/BinaryTree.hpp"
-#include "./DataStructs/BinaryTree.cpp"
+//#include "./DataStructs/BinaryTree.hpp"
+//#include "./DataStructs/BinaryTree.cpp"
 
 // ------------------------- Crypto Headers
-#include "./Crypto/Rijndael.hpp"
+//#include "./Crypto/Rijndael.hpp"
 
 // ------------------------- Calculus Headers
 #include "./Calculus/Integral.hpp"
 #include "./Calculus/Derivative.hpp"
+#include "./Calculus/Derivative.cpp"
 
 // ------------------------- Function / Routines
 #include "Function.hpp"

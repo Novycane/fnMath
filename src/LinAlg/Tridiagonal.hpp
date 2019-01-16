@@ -41,10 +41,10 @@ public:
     const vector<Numeric> & operator[](int i) const;
     vector<Numeric> & operator[](int i);
     
-    /*
+	/*
     Tridiagonal<Numeric> operator+(const Tridiagonal<Numeric> & rhs);
     Tridiagonal<Numeric> operator-(const Tridiagonal<Numeric> & rhs);
-    Tridiagonal<Numeric> operator*(const Tridiagonal<Numeric> & rhs);
+	Tridiagonal<Numeric> operator*(const Tridiagonal<Numeric> & rhs);
     Tridiagonal<Numeric> operator~();
     Tridiagonal<Numeric> operator+(const Numeric & rhs);
     Tridiagonal<Numeric> operator-(const Numeric & rhs);

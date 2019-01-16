@@ -17,12 +17,19 @@ SRCPATH		= src/
 BINPATH		= c:\fnMath
 TEMP 	= temp/
 
-ALL = $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TEMP)Stats.o
+MAIN = $(TEMP)LinAlg.o $(TEMP)Calculus.o $(TEMP)Optimization.o $(TEMP)Stats.o
+
+LINALG = $(TEMP)Matrix.o $(TEMP)QR.o $(TEMP)LU.o $(TEMP)Cholesky.o $(TEMP)Eigen.o
+CALC = $(TEMP)Derivative.o $(TEMP)Integral.o
+STATS = $(TEMP)Factorial.o $(TEMP)FisherYates.o $(TEMP)Gamma.o $(TEMP)MetropolisHastings.o $(TEMP)Random.o
+OPT	= $(TEMP)GradientDescent.o
+
+ALL = $(LINALG) $(CALC) $(STATS) $(OPT)
 
 # ----- Main Targets
 .SILENT:
 
-all	: $(ALL)
+all	: $(MAIN)
 	-@echo ----- Building All -----
 
 TestAll : 
@@ -37,14 +44,10 @@ TestStats :
 TestLinAlg : 
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Test
 	
-Install: $(ALL)
-	-@echo "--------------------------------------------------"
-	-@echo "Making fnMath Lib..."
-	-@echo "--------------------------------------------------"
-	-@ld -r $(ALL) -o $(TEMP)fnMath.lib
-	-@copy temp\fnMath.lib c:\fnMath /Y
-	-@copy src\*.h c:\fnMath /Y
-	-@copy src\*.hpp c:\fnMath /Y
+Install: $(TEMP)fnMath.lib
+	-@copy temp\fnMath.lib c:\Lib\fnMath /Y
+	-@copy src\*.h c:\Lib\fnMath /Y
+	-@copy src\*.hpp c:\Lib\fnMath /Y
 	
 	-@$(MAKE) -C ./$(SRCPATH)/LinAlg Install
 	-@$(MAKE) -C ./$(SRCPATH)/Calculus Install
@@ -52,6 +55,12 @@ Install: $(ALL)
 	-@$(MAKE) -C ./$(SRCPATH)/Stats Install
 
 # ----- Dependencies
+$(TEMP)fnMath.lib: $(MAIN)
+	-@echo "--------------------------------------------------"
+	-@echo "Making fnMath Lib..."
+	-@echo "--------------------------------------------------"
+	-@ld -r $(ALL) -o $(TEMP)fnMath.lib
+
 $(TEMP)LinAlg.o	: 
 	-@echo "--------------------------------------------------"
 	-@echo "Making Matrix Routines..."

@@ -36,9 +36,9 @@ Test: $(TEMP)Random.o
 	-@$(TEMP)Random$(EXT)
 
 Install: 
-	rd C:\fnMath\Stats /S /Q
-	mkdir C:\fnMath\Stats
-	copy *.hpp C:\fnMath\Stats\
+	rd c:\Lib\fnMath\Stats /S /Q
+	mkdir c:\Lib\fnMath\Stats
+	copy *.hpp c:\Lib\fnMath\Stats\
 
 $(TEMP)Factorial.o: Factorial.cpp Factorial.hpp
 	-@ECHO "Building Factorial"
