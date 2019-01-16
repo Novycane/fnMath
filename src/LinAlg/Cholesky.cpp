@@ -5,8 +5,7 @@
 //  Created by Steven Novak on 1/8/19.
 //  Copyright © 2019 Steven Novak. All rights reserved.
 //
-//  Class representing a matrix decomposed into Lower (L)
-//  and upper (U) usint CROUT factorization
+//  Class representing a matrix decomposed using Cholesky factorization
 //
 //
 
