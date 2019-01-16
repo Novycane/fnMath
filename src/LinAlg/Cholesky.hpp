@@ -33,7 +33,7 @@ private:
     // -------------------- Methods
     void Decompose(const Matrix<Numeric>& A);
     
-}; // End LU Class
+}; // End Cholesky Class
 
 } // End LinAlg Namespace
 } // End fnMath Namespace
