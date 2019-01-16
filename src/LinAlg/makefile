@@ -22,11 +22,16 @@ all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o
 	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o
+test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(TEMP)Matrix$(EXT)
 	-@$(TEMP)LU$(EXT)
 	-@$(TEMP)Cholesky$(EXT)
+	-@$(TEMP)GaussSeidel$(EXT)
+
+TestGaussSeidel: $(TEMP)GaussSeidel.test.o
+	-@ECHO -n "Testing GaussSeidel Functions"
+	-@$(TEMP)GaussSeidel$(EXT)
 
 Install: 
 	rd c:\Lib\fnMath\LinAlg /S /Q
@@ -69,6 +74,15 @@ $(TEMP)Cholesky.o: Cholesky.cpp Cholesky.hpp
 $(TEMP)Cholesky.test.o: $(TEST)Cholesky.test.cpp $(TEMP)Cholesky.o
 	-@$(CC) $(CFLAGS) $(TEST)Cholesky.test.cpp -o $(TEMP)Cholesky.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)Cholesky.o $(TEMP)Cholesky.test.o -o $(TEMP)Cholesky$(EXT)
+
+$(TEMP)GaussSeidel.o: GaussSeidel.cpp GaussSeidel.hpp 
+	-@ECHO -n "Building GaussSeidel.cpp."
+	-@$(CC) $(CFLAGS) GaussSeidel.cpp -o $(TEMP)GaussSeidel.o
+	-@ECHO "...ok"
+
+$(TEMP)GaussSeidel.test.o: $(TEST)GaussSeidel.test.cpp $(TEMP)GaussSeidel.o
+	-@$(CC) $(CFLAGS) $(TEST)GaussSeidel.test.cpp -o $(TEMP)GaussSeidel.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)GaussSeidel.o $(TEMP)GaussSeidel.test.o -o $(TEMP)GaussSeidel$(EXT)
 
 $(TEMP)QR.o: QR.cpp QR.hpp $(MATRIX)
 	-@ECHO -n "Building QR.cpp...."
