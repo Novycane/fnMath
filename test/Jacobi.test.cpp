@@ -1,8 +1,8 @@
 //
-//  GaussSeidel.test.cpp
+//  Jacobi.test.cpp
 //  
 //
-//  Created by Steven Novak on 12/16/17.
+//  Created by Steven Novak on 12/17/17.
 //
 // --------------------------------------------------
 //
@@ -15,8 +15,8 @@
 #include "../src/LinAlg/Matrix.hpp"
 #include "../src/LinAlg/Matrix.cpp"
 
-#include "../src/LinAlg/GaussSeidel.hpp"
-#include "../src/LinAlg/GaussSeidel.cpp"
+#include "../src/LinAlg/Jacobi.hpp"
+#include "../src/LinAlg/Jacobi.cpp"
 
 using namespace fnMath::LinAlg;
 using namespace std;
@@ -40,13 +40,13 @@ MatrixD InitRandom(int n);
 
 int main (int argCount, char** args)
 {
-    cout << endl << " ---------------   Testing Gauss-Seidel functions   ---------------" << endl;
+    cout << endl << " ---------------   Testing Jacobi functions   ---------------" << endl;
 
 	RunTest(Solve(), "Matrix Solve"); 
 	RunTest(SolveWithIterations(), "Solve With Various Iterations"); 
 	RunTest(DiagonallyDominant(), "Diagonally Dominance"); 
 	
-	cout << " -------------- Done Testing Gauss-Seidel functions --------------" << endl << endl;
+	cout << " -------------- Done Testing Jacobi functions --------------" << endl << endl;
 		
     return 0;
 }
@@ -103,10 +103,10 @@ MatrixD InitRandom(int n)
 bool Solve()
 {
 	auto A = InitTestMatrix();
-	GaussSeidel<double> GS(A);
+	Jacobi<double> J(A);
 	vector<double> y = {409,572,-1108};
 	
-	auto b = GS.Solve(y);
+	auto b = J.Solve(y);
 	
 	if(b[0] - 4.0 > 1e-5 || b[1] - 6.0 > 1e-5 || b[2] - 7.0 > 1e-5 )
 		return false;
@@ -119,14 +119,14 @@ bool SolveWithIterations()
 	auto A = InitTestMatrix();
 	int iteration, lastIteration = 0;
 	double err = 1;
-	GaussSeidel<double> GS(A);
+	Jacobi<double> J(A);
 	vector<double> y = {409,572,-1108};
 	
 	for(int i=0; i<10; i++)
 	{
-		GS.SetMaxError(err);
-		GS.Solve(y);
-		iteration = GS.Iterations();
+		J.SetMaxError(err);
+		J.Solve(y);
+		iteration = J.Iterations();
 		if(iteration < lastIteration)
 			return false;
 		lastIteration = iteration;
@@ -144,11 +144,11 @@ bool DiagonallyDominant()
 	for(int i=0; i<B.numRows(); i++)
 		B[i][i]=1e-200;
 	
-	GaussSeidel<double> GS(A);
-	if(GS.IsDiagonallyDominant() == false)
+	Jacobi<double> J(A);
+	if(J.IsDiagonallyDominant() == false)
 		return false;
 	
-	if(GS.IsDiagonallyDominant(make_shared<MatrixD>(B)) == true)
+	if(J.IsDiagonallyDominant(make_shared<MatrixD>(B)) == true)
 		return false;
 	
 	return true;

@@ -1,18 +1,18 @@
 //
-//  GaussSeidel.cpp
+//  Jacobi.cpp
 //  fnMath
 //
-//  Created by Steven Novak on 1/16/19.
+//  Created by Steven Novak on 1/17/19.
 //  Copyright © 2019 Steven Novak. All rights reserved.
 //
 //	Class performs Gauss-Seidel iterative loving of matricies
 //
 //
 
-#ifndef GAUSS_SEIDEL_CPP
-#define GAUSS_SEIDEL_CPP
+#ifndef JACOBI_CPP
+#define JACOBI_CPP
 
-#include "GaussSeidel.hpp"
+#include "Jacobi.hpp"
 
 namespace fnMath{
 namespace LinAlg{
@@ -20,7 +20,7 @@ namespace LinAlg{
 #pragma mark Constructors
 // ---------------------------------------- Constructors
 template <typename Numeric>
-GaussSeidel<Numeric>::GaussSeidel(const Matrix<Numeric>& A)
+Jacobi<Numeric>::Jacobi(const Matrix<Numeric>& A)
 {
 	_MAXITERATIONS = 100;
 	_MAXERROR = 1e-5;
@@ -28,15 +28,17 @@ GaussSeidel<Numeric>::GaussSeidel(const Matrix<Numeric>& A)
 	_data = make_shared<Matrix<Numeric>>(A);
 }
     
+#pragma mark Public Methods
+// ---------------------------------------- Public Methods
 template <typename Numeric>
-vector<Numeric> GaussSeidel<Numeric>::Solve(vector<Numeric> y)
+vector<Numeric> Jacobi<Numeric>::Solve(vector<Numeric> y)
 {
 	int n = _data->numRows();
-	Numeric sum;
 	if(y.size() != n)
 		throw new DimensionMismatchException();
 	
 	vector<Numeric> x = y;
+	vector<Numeric> newX = x;
 	_error = std::numeric_limits<double>::max();
 	
 	for(int i=0; i<y.size(); i++)
@@ -44,20 +46,24 @@ vector<Numeric> GaussSeidel<Numeric>::Solve(vector<Numeric> y)
 	
 	for(_iterations =0; _iterations < _MAXITERATIONS; _iterations++)
 	{
-		_error = 0;
 		for(int i=0; i<n; i++)	// rows
 		{
-			sum = 0;
+			newX[i] = 0;
 			for(int j=0; j<n; j++) // Columns
 			{
 				if(i != j)
-					sum = sum + (*_data)[i][j] * x[j];
+					newX[i] = newX[i] + (*_data)[i][j] * x[j];
 			}
-			sum = (y[i] - sum) / (*_data)[i][i];
-			_error = _error + abs(sum - x[i]);
-			x[i] = sum;
+			newX[i] = (y[i] - newX[i]) / (*_data)[i][i];
 		}
-			
+		
+		_error = 0;
+		for(int i=0; i<n; i++)
+		{
+			_error = _error + newX[i] - x[i];
+			x[i] = newX[i];
+		}
+	
 		if(abs(_error) < _MAXERROR)
 			break;
 	}
@@ -66,13 +72,13 @@ vector<Numeric> GaussSeidel<Numeric>::Solve(vector<Numeric> y)
 }
 
 template <typename Numeric>
-bool GaussSeidel<Numeric>::IsDiagonallyDominant()
+bool Jacobi<Numeric>::IsDiagonallyDominant()
 {
 	return IsDiagonallyDominant(_data);
 }
 
 template <typename Numeric>
-bool GaussSeidel<Numeric>::IsDiagonallyDominant(std::shared_ptr<Matrix<Numeric>> A)
+bool Jacobi<Numeric>::IsDiagonallyDominant(std::shared_ptr<Matrix<Numeric>> A)
 {
 	Numeric sum = 0;
 	
@@ -88,7 +94,9 @@ bool GaussSeidel<Numeric>::IsDiagonallyDominant(std::shared_ptr<Matrix<Numeric>>
 				if(abs((*A)[i][j]) < sum)
 					return false;
 	return true;
-}      
+}
+
+       
 #pragma mark Private Methods
 // ---------------------------------------- Private Methods
    

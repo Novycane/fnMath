@@ -17,21 +17,27 @@ COMMON		= ../
 MATRIX		= $(TEMP)Matrix.o
 
 # ----- Targets
-all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o
+all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o $(TEMP)Jacobi.o $(TEMP)GaussSeidel.o
 	-@ECHO -n "Creating LinAlg.o ."
 	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o
+test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o $(TEMP)Jacobi.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(TEMP)Matrix$(EXT)
 	-@$(TEMP)LU$(EXT)
 	-@$(TEMP)Cholesky$(EXT)
 	-@$(TEMP)GaussSeidel$(EXT)
+	-@$(TEMP)Jacobi$(EXT)
+	
 
 TestGaussSeidel: $(TEMP)GaussSeidel.test.o
 	-@ECHO -n "Testing GaussSeidel Functions"
 	-@$(TEMP)GaussSeidel$(EXT)
+
+TestJacobi: $(TEMP)Jacobi.test.o
+	-@ECHO -n "Testing Jacobi Functions"
+	-@$(TEMP)Jacobi$(EXT)
 
 Install: 
 	rd c:\Lib\fnMath\LinAlg /S /Q
@@ -47,6 +53,8 @@ clean:
 	rm $(TEMP)QR.o
 	rm $(TEMP)Eigen.o
 	rm $(TEMP)LinAlg.o
+	rm $(TEMP)GaussSeidel.o
+	rm $(TEMP)Jacobi.o
 
 $(TEMP)Matrix.o: Matrix.cpp Matrix.hpp 
 	-@ECHO -n "Building Matrix.cpp"
@@ -74,6 +82,16 @@ $(TEMP)Cholesky.o: Cholesky.cpp Cholesky.hpp
 $(TEMP)Cholesky.test.o: $(TEST)Cholesky.test.cpp $(TEMP)Cholesky.o
 	-@$(CC) $(CFLAGS) $(TEST)Cholesky.test.cpp -o $(TEMP)Cholesky.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)Cholesky.o $(TEMP)Cholesky.test.o -o $(TEMP)Cholesky$(EXT)
+
+$(TEMP)Jacobi.o: Jacobi.cpp Jacobi.hpp 
+	-@ECHO -n "Building Jacobi.cpp."
+	-@$(CC) $(CFLAGS) Jacobi.cpp -o $(TEMP)Jacobi.o
+	-@ECHO "...ok"
+
+$(TEMP)Jacobi.test.o: $(TEST)Jacobi.test.cpp $(TEMP)Jacobi.o
+	-@$(CC) $(CFLAGS) $(TEST)Jacobi.test.cpp -o $(TEMP)Jacobi.test.o
+	-@$(CC) $(TEMP)Matrix.o $(TEMP)Jacobi.o $(TEMP)Jacobi.test.o -o $(TEMP)Jacobi$(EXT)
+
 
 $(TEMP)GaussSeidel.o: GaussSeidel.cpp GaussSeidel.hpp 
 	-@ECHO -n "Building GaussSeidel.cpp."

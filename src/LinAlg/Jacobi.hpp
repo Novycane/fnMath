@@ -1,17 +1,20 @@
 //
-//  GaussSeidel.hpp
+//  Jacobi.hpp
 //  fnMath
 //
-//  Created by Steven Novak on 1/16/19.
+//  Created by Steven Novak on 1/17/19.
 //  Copyright © 2019 Steven Novak. All rights reserved.
 //
 //	Class performs Gauss-Seidel iterative loving of matricies
 //
 //
 
-#ifndef GAUSS_SEIDEL_HPP
-#define GAUSS_SEIDEL_HPP
+#ifndef JACOBI_HPP
+#define JACOBI_HPP
 
+#include <memory>
+
+#include "../Error.hpp"
 #include "Matrix.hpp"
 #include "Matrix.cpp"
 
@@ -19,12 +22,13 @@ namespace fnMath {
 namespace LinAlg {
 
 template <typename Numeric>
-class GaussSeidel 
+class Jacobi 
 {
 public:
     // -------------------- Constructors
-    GaussSeidel(const Matrix<Numeric>& A);
+    Jacobi(const Matrix<Numeric>& A);
 
+    
     // -------------------- Public Methods
 	vector<Numeric> Solve(vector<Numeric> y);
 	
@@ -51,8 +55,9 @@ private:
 	
     // -------------------- Private Methods
     
-}; // End GaussSeidel Class
+    
+}; // End Jacobi Class
 
 } // End LinAlg Namespace
 } // End fnMath Namespace
-#endif /* GAUSS_SEIDEL_HPP */
+#endif /* JACOBI_HPP */
