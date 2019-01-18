@@ -5,7 +5,7 @@
 //  Created by Steven Novak on 1/16/19.
 //  Copyright © 2019 Steven Novak. All rights reserved.
 //
-//	Class performs Gauss-Seidel iterative loving of matricies
+//	Class performs Gauss-Seidel iterative solving of matricies
 //
 //
 

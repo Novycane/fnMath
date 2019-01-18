@@ -17,14 +17,15 @@ COMMON		= ../
 MATRIX		= $(TEMP)Matrix.o
 
 # ----- Targets
-all: $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o $(TEMP)Jacobi.o $(TEMP)GaussSeidel.o
+all: $(TEMP)Matrix.o $(TEMP)Tridiagonal.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o $(TEMP)Jacobi.o $(TEMP)GaussSeidel.o
 	-@ECHO -n "Creating LinAlg.o ."
-	-@ld -r $(TEMP)Matrix.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
+	-@ld -r $(TEMP)Matrix.o $(TEMP)Tridiagonal.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o $(TEMP)Jacobi.test.o
+test: $(TEMP)Matrix.test.o $(TEMP)Tridiagonal.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o $(TEMP)Jacobi.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(TEMP)Matrix$(EXT)
+	-@$(TEMP)Tridiagonal$(EXT)
 	-@$(TEMP)LU$(EXT)
 	-@$(TEMP)Cholesky$(EXT)
 	-@$(TEMP)GaussSeidel$(EXT)
@@ -64,6 +65,15 @@ $(TEMP)Matrix.o: Matrix.cpp Matrix.hpp
 $(TEMP)Matrix.test.o: $(TEST)Matrix.test.cpp $(TEMP)Matrix.o
 	-@$(CC) $(CFLAGS) $(TEST)Matrix.test.cpp -o $(TEMP)Matrix.test.o
 	-@$(CC) $(TEMP)Matrix.o $(TEMP)Matrix.test.o -o $(TEMP)Matrix$(EXT)
+
+$(TEMP)Tridiagonal.o: Tridiagonal.cpp Tridiagonal.hpp 
+	-@ECHO -n "Building Tridiagonal.cpp"
+	-@$(CC) $(CFLAGS) Tridiagonal.cpp -o $(TEMP)Tridiagonal.o
+	-@ECHO "...ok"
+
+$(TEMP)Tridiagonal.test.o: $(TEST)Tridiagonal.test.cpp $(TEMP)Tridiagonal.o
+	-@$(CC) $(CFLAGS) $(TEST)Tridiagonal.test.cpp -o $(TEMP)Tridiagonal.test.o
+	-@$(CC) $(TEMP)Tridiagonal.o $(TEMP)Tridiagonal.test.o -o $(TEMP)Tridiagonal$(EXT)
 
 $(TEMP)LU.o: LU.cpp LU.hpp $(MATRIX)
 	-@ECHO -n "Building LU.cpp..."

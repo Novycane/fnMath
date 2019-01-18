@@ -32,6 +32,7 @@ public:
     // -------------------- Constructors
     Tridiagonal();
     Tridiagonal(Numeric Value, int Rows);
+	Tridiagonal(int Rows, Numeric Diagonal, Numeric Super, Numeric Sub);
     Tridiagonal(const Tridiagonal<Numeric> & rhs);
     Tridiagonal(Tridiagonal<Numeric> && rhs);
     
@@ -41,9 +42,10 @@ public:
     const vector<Numeric> & operator[](int i) const;
     vector<Numeric> & operator[](int i);
     
-	/*
+	
     Tridiagonal<Numeric> operator+(const Tridiagonal<Numeric> & rhs);
     Tridiagonal<Numeric> operator-(const Tridiagonal<Numeric> & rhs);
+	/*
 	Tridiagonal<Numeric> operator*(const Tridiagonal<Numeric> & rhs);
     Tridiagonal<Numeric> operator~();
     Tridiagonal<Numeric> operator+(const Numeric & rhs);
@@ -55,15 +57,16 @@ public:
     // -------------------- Methods
     void SetupMatrix(int Rows, Numeric Diagonal, Numeric Super, Numeric Sub);
     vector<Numeric> Solve(vector<Numeric> b);
-    int numRows() const;
-    int numColumns() const;
+    int NumRows() const;
+    int NumColumns() const;
     
     // -------------------- Utility
-    void print();
+    void Print();
+    void PrintCompact();
     
 protected:
-    vector<vector<Numeric>> data;
-    int rows, columns;
+    vector<vector<Numeric>> _data;
+    int _rows, _columns;
     
 }; // End Tridiagonal
     

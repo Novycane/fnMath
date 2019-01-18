@@ -29,6 +29,7 @@ int PassedTests = 0;
 
 bool Solve();
 bool SolveWithIterations();
+bool SolveTri();
 bool DiagonallyDominant();
 
 void RunTest(bool pass, const char* testName);
@@ -44,6 +45,7 @@ int main (int argCount, char** args)
 
 	RunTest(Solve(), "Matrix Solve"); 
 	RunTest(SolveWithIterations(), "Solve With Various Iterations"); 
+	RunTest(SolveTri(), "Sole Tri-Diagional Matrix");
 	RunTest(DiagonallyDominant(), "Diagonally Dominance"); 
 	
 	cout << " -------------- Done Testing Jacobi functions --------------" << endl << endl;
@@ -134,6 +136,13 @@ bool SolveWithIterations()
 	}
 	
 	return true;
+}
+
+bool SolveTri()
+{
+	
+	
+	return false;
 }
 
 bool DiagonallyDominant()

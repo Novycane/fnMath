@@ -27,42 +27,49 @@ typedef Tridiagonal<int> TridiagonalI;
 template <typename Numeric>
 Tridiagonal<Numeric>::Tridiagonal()
 {
-    rows = 0;
-    columns = 3;
+    _rows = 0;
+    _columns = 3;
 }
     
 template <typename Numeric>
 Tridiagonal<Numeric>::Tridiagonal(Numeric Value, int Rows)
 {
-    rows = Rows;
-    columns = 3;
-    
-    
-    data.resize(rows);
-    for(int i=0; i<rows; i++)
+    _rows = Rows;
+    _columns = 3;
+        
+    _data.resize(_rows);
+    for(int i=0; i<_rows; i++)
     {
-        data[i].resize(3);
+        _data[i].resize(3);
         for(int j=0; j<3; j++)
-            data[i][j] = Value;
+            _data[i][j] = Value;
     }
+	
+	_data[0][0] = 0.0;
+	_data[Rows-1][2] = 0.0;
 
 }
 
+template <typename Numeric>
+Tridiagonal<Numeric>::Tridiagonal(int Rows, Numeric Diagonal, Numeric Super, Numeric Sub)
+{
+	SetupMatrix(Rows, Diagonal, Super, Sub);
+}
 
 template <typename Numeric>
 Tridiagonal<Numeric>::Tridiagonal(const Tridiagonal<Numeric> & rhs)
 {
     
-    rows = rhs.rows;
-    columns = rhs.columns;
+    _rows = rhs.rows;
+    _columns = rhs.columns;
     
     
-    data.resize(rows);
-    for(int i=0; i<rows; i++)
+    _data.resize(_rows);
+    for(int i=0; i<_rows; i++)
     {
-        data[i].resize(3);
-        for(int j=0; j<columns; j++)
-            data[i][j] = rhs[i][j];
+        _data[i].resize(3);
+        for(int j=0; j<_columns; j++)
+            _data[i][j] = rhs[i][j];
     }
 }
 
@@ -70,9 +77,9 @@ template <typename Numeric>
 Tridiagonal<Numeric>::Tridiagonal(Tridiagonal<Numeric> && rhs)
 {
     
-    rows = rhs.rows;
-    columns = rhs.columns;
-    data = std::move(rhs.data);
+    _rows = rhs.rows;
+    _columns = rhs.columns;
+    _data = std::move(rhs.data);
 }
 
 
@@ -82,9 +89,9 @@ Tridiagonal<Numeric>::Tridiagonal(Tridiagonal<Numeric> && rhs)
 template <typename Numeric>
 Tridiagonal<Numeric> & Tridiagonal<Numeric>::operator=(const Tridiagonal<Numeric> & rhs)
 {
-    rows = rhs.rows;
-    columns = rhs.columns;
-    data = rhs.data;
+    _rows = rhs.rows;
+    _columns = rhs.columns;
+    _data = rhs.data;
     
     return *this;
 }
@@ -92,10 +99,10 @@ Tridiagonal<Numeric> & Tridiagonal<Numeric>::operator=(const Tridiagonal<Numeric
 template <typename Numeric>
 Tridiagonal<Numeric> & Tridiagonal<Numeric>::operator=(Tridiagonal<Numeric> && rhs)
 {
-    rows = rhs.rows;
-    columns = rhs.columns;
+    _rows = rhs.rows;
+    _columns = rhs.columns;
     
-    data = std::move(rhs.data);
+    _data = std::move(rhs.data);
     
     return *this;
 }
@@ -103,13 +110,25 @@ Tridiagonal<Numeric> & Tridiagonal<Numeric>::operator=(Tridiagonal<Numeric> && r
 template<typename Numeric>
 const vector<Numeric>& Tridiagonal<Numeric>::operator[](int i) const
 {
-    return data[i];
+    return _data[i];
 }
 
 template<typename Numeric>
 vector<Numeric>& Tridiagonal<Numeric>::operator[](int i)
 {
-    return data[i];
+    return _data[i];
+}
+
+template<typename Numeric>
+Tridiagonal<Numeric> Tridiagonal<Numeric>::operator+(const Tridiagonal<Numeric> & rhs)
+{
+	for(int i=0; i< 
+}
+
+template<typename Numeric>
+Tridiagonal<Numeric> Tridiagonal<Numeric>::operator-(const Tridiagonal<Numeric> & rhs)
+{
+	
 }
 
 
@@ -118,25 +137,25 @@ vector<Numeric>& Tridiagonal<Numeric>::operator[](int i)
 template <typename Numeric>
 void Tridiagonal<Numeric>::SetupMatrix(int Rows, Numeric Diagonal, Numeric Super, Numeric Sub)
 {
-    rows = Rows;
-    columns = 3;
-    data.resize(Rows);
-    data[0].resize(3);
-    data[0][0] = 0;
-    data[0][1] = Diagonal;
-    data[0][2] = Super;
+    _rows = Rows;
+    _columns = 3;
+    _data.resize(Rows);
+    _data[0].resize(3);
+    _data[0][0] = 0;
+    _data[0][1] = Diagonal;
+    _data[0][2] = Super;
     
-    for(int i=1; i<rows-1; i++)
+    for(int i=1; i<_rows-1; i++)
     {
-        data[i].resize(3);
-        data[i][0] = Sub;
-        data[i][1] = Diagonal;
-        data[i][2] = Super;
+        _data[i].resize(3);
+        _data[i][0] = Sub;
+        _data[i][1] = Diagonal;
+        _data[i][2] = Super;
     }
-    data[rows-1].resize(3);
-    data[rows-1][0] = Sub;
-    data[rows-1][1] = Diagonal;
-    data[rows-1][2] = 0;
+    _data[_rows-1].resize(3);
+    _data[_rows-1][0] = Sub;
+    _data[_rows-1][1] = Diagonal;
+    _data[_rows-1][2] = 0;
     
     return;
 }
@@ -144,27 +163,27 @@ void Tridiagonal<Numeric>::SetupMatrix(int Rows, Numeric Diagonal, Numeric Super
 template <typename Numeric>
 vector<Numeric> Tridiagonal<Numeric>::Solve(vector<Numeric> b)
 {
-    if(b.size() != rows)
+    if(b.size() != _rows)
         throw new DimensionMismatchException();
     
     vector<Numeric> x;
     vector<Numeric> v;
-    Numeric w = data[0][1];
+    Numeric w = _data[0][1];
 
-    x.resize(rows);
-    v.resize(rows);
+    x.resize(_rows);
+    v.resize(_rows);
     
     // Begin Routine
     x[0] = b[0] / w;
     
-    for(int i=1; i < rows; i++)
+    for(int i=1; i < _rows; i++)
     {
-        v[i] = data[i - 1][2] / w;
-        w = data[i][1] - (data[i][0] * v[i]);
-        x[i] = (b[i] - (data[i][0] * x[i - 1])) / w;
+        v[i] = _data[i - 1][2] / w;
+        w = _data[i][1] - (_data[i][0] * v[i]);
+        x[i] = (b[i] - (_data[i][0] * x[i - 1])) / w;
     }
     
-    for(int i = rows - 2; i >= 0; i--)
+    for(int i = _rows - 2; i >= 0; i--)
     {
         x[i] = x[i] - v[i+1] * x[i+1];
     }
@@ -173,10 +192,10 @@ vector<Numeric> Tridiagonal<Numeric>::Solve(vector<Numeric> b)
 }
     
 template <typename Numeric>
-int Tridiagonal<Numeric>::numRows() const { return rows; }
+int Tridiagonal<Numeric>::NumRows() const { return _rows; }
 
 template <typename Numeric>
-int Tridiagonal<Numeric>::numColumns() const { return columns; }
+int Tridiagonal<Numeric>::NumColumns() const { return _columns; }
 
 
 
@@ -184,12 +203,28 @@ int Tridiagonal<Numeric>::numColumns() const { return columns; }
 // ---------------------------------------- Utility Functions
 
 template<typename Numeric>
-void Tridiagonal<Numeric>::print()
+void Tridiagonal<Numeric>::Print()
 {
-    for(int i=0; i < rows; i++)
+    for(int i=0; i < _rows; i++)
     {
-        for(int j=0; j < columns; j++)
-            cout << data[i][j] << "\t\t";
+        for(int j=0; j < _rows; j++)
+			if( j - i > -2 && j - i < 2)
+				cout << _data[i][j - i+1] << "\t\t";
+			else
+				cout << "0.0\t\t";
+        cout << endl;
+    }
+    cout << endl;
+}
+
+
+template<typename Numeric>
+void Tridiagonal<Numeric>::PrintCompact()
+{
+    for(int i=0; i < _rows; i++)
+    {
+        for(int j=0; j < _columns; j++)
+            cout << _data[i][j] << "\t\t";
         cout << endl;
     }
     cout << endl;
