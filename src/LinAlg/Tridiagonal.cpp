@@ -119,6 +119,7 @@ vector<Numeric>& Tridiagonal<Numeric>::operator[](int i)
     return _data[i];
 }
 
+/*
 template<typename Numeric>
 Tridiagonal<Numeric> Tridiagonal<Numeric>::operator+(const Tridiagonal<Numeric> & rhs)
 {
@@ -130,7 +131,7 @@ Tridiagonal<Numeric> Tridiagonal<Numeric>::operator-(const Tridiagonal<Numeric> 
 {
 	
 }
-
+*/
 
 #pragma mark Public Methods
 // ---------------------------------------- Public Methods
