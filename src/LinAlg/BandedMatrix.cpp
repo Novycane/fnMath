@@ -169,7 +169,6 @@ vector<Numeric> BandedMatrix<Numeric>::SolveCG(vector<Numeric> & b)
         
         if(err < 1e-4)
         {
-            cout << "Converged! " << err << " " << i << "\n";
             return out;
         }
         
@@ -178,7 +177,6 @@ vector<Numeric> BandedMatrix<Numeric>::SolveCG(vector<Numeric> & b)
         for(int j=0; j<n; j++)
             d[j] = r[j] + beta * d[j];
     }
-    cout << "no convergy.... :( " << err << "\n";
     return out;
 }
     
