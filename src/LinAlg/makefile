@@ -22,10 +22,11 @@ all: $(TEMP)Matrix.o $(TEMP)Tridiagonal.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o
 	-@ld -r $(TEMP)Matrix.o $(TEMP)Tridiagonal.o $(TEMP)LU.o $(TEMP)QR.o $(TEMP)Eigen.o $(TEMP)Cholesky.o -o $(TEMP)LinAlg.o
 	-@ECHO "...ok"
 
-test: $(TEMP)Matrix.test.o $(TEMP)Tridiagonal.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o $(TEMP)Jacobi.test.o
+test: $(TEMP)Matrix.test.o $(TEMP)Tridiagonal.test.o $(TEMP)LU.test.o $(TEMP)Cholesky.test.o $(TEMP)GaussSeidel.test.o $(TEMP)Jacobi.test.o $(TEMP)BandedMatrix.test.o
 	-@ECHO -n "Testing LinearAlgebra Library"
 	-@$(TEMP)Matrix$(EXT)
 	-@$(TEMP)Tridiagonal$(EXT)
+	-@$(TEMP)BandedMatrix$(EXT)
 	-@$(TEMP)LU$(EXT)
 	-@$(TEMP)Cholesky$(EXT)
 	-@$(TEMP)GaussSeidel$(EXT)
@@ -56,6 +57,8 @@ clean:
 	rm $(TEMP)LinAlg.o
 	rm $(TEMP)GaussSeidel.o
 	rm $(TEMP)Jacobi.o
+	rm $(TEMP)Tridiagonal.o
+	rm $(TEMP)BandedMatrix.o
 
 $(TEMP)Matrix.o: Matrix.cpp Matrix.hpp 
 	-@ECHO -n "Building Matrix.cpp"
@@ -74,6 +77,15 @@ $(TEMP)Tridiagonal.o: Tridiagonal.cpp Tridiagonal.hpp
 $(TEMP)Tridiagonal.test.o: $(TEST)Tridiagonal.test.cpp $(TEMP)Tridiagonal.o
 	-@$(CC) $(CFLAGS) $(TEST)Tridiagonal.test.cpp -o $(TEMP)Tridiagonal.test.o
 	-@$(CC) $(TEMP)Tridiagonal.o $(TEMP)Tridiagonal.test.o -o $(TEMP)Tridiagonal$(EXT)
+
+$(TEMP)BandedMatrix.o: BandedMatrix.cpp BandedMatrix.hpp 
+	-@ECHO -n "Building BandedMatrix.cpp"
+	-@$(CC) $(CFLAGS) BandedMatrix.cpp -o $(TEMP)BandedMatrix.o
+	-@ECHO "...ok"
+
+$(TEMP)BandedMatrix.test.o: $(TEST)BandedMatrix.test.cpp $(TEMP)BandedMatrix.o
+	-@$(CC) $(CFLAGS) $(TEST)BandedMatrix.test.cpp -o $(TEMP)BandedMatrix.test.o
+	-@$(CC) $(TEMP)BandedMatrix.o $(TEMP)BandedMatrix.test.o -o $(TEMP)BandedMatrix$(EXT)
 
 $(TEMP)LU.o: LU.cpp LU.hpp $(MATRIX)
 	-@ECHO -n "Building LU.cpp..."
